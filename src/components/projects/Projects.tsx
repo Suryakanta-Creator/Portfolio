@@ -5,7 +5,7 @@ import { portfolioConfig, ProjectItem } from "@/data/portfolio.config";
 import { usePortfolioMotion } from "@/context/MotionContext";
 import { ProjectVisual } from "./ProjectVisuals";
 import { ProjectModal } from "./ProjectModal";
-import { ArrowUpRight, Github, Layers3 } from "lucide-react";
+import { ArrowUpRight, Github, Layers } from "lucide-react";
 
 export function Projects() {
   const { reduceMotion } = usePortfolioMotion();

@@ -5,6 +5,7 @@ export interface ProjectItem {
   category: string;
   tagline: string;
   description: string;
+  repositoryUrl: string;
   expandedDetails: {
     overview: string;
     highlights: string[];
@@ -42,6 +43,7 @@ export interface PortfolioConfig {
     degree: string;
     location: string;
     status: string;
+    githubUsername: string;
   };
   navigation: {
     label: string;
@@ -57,6 +59,7 @@ export interface PortfolioConfig {
   contact: {
     heading: string;
     subheading: string;
+    email: string;
     emailPlaceholder: string;
     isEmailVerified: boolean;
     location: string;
@@ -75,71 +78,74 @@ export const portfolioConfig: PortfolioConfig = {
     fullName: "Suryakanta Bala",
     shortName: "Surya",
     monogram: "SB",
-    role: "Full-stack development · AI-powered applications",
-    headline: "Turning ideas into interactive experiences.",
+    role: "Full-Stack Developer · AI Builder",
+    headline: "Building useful software with code, AI, and curiosity.",
     shortIntro:
-      "B.Tech student at DRIEMS University, passionate about crafting high-performance full-stack web platforms and exploring practical, user-centric AI applications.",
+      "B.Tech student at DRIEMS University building full-stack products, AI-assisted workflows, and interactive web experiences.",
     university: "DRIEMS University",
-    degree: "B.Tech in Computer Science / Engineering",
-    location: "India",
-    status: "Open to Collaborations & Projects",
+    degree: "B.Tech",
+    location: "Odisha, India",
+    status: "Open to internships, collaborations & projects",
+    githubUsername: "Suryakanta-Creator",
   },
   navigation: [
     { label: "About", href: "#about" },
     { label: "Journey", href: "#journey" },
-    { label: "Projects", href: "#projects" },
     { label: "Skills", href: "#skills" },
+    { label: "Projects", href: "#projects" },
+    { label: "GitHub", href: "#github" },
+    { label: "Playground", href: "#playground" },
     { label: "Contact", href: "#contact" },
   ],
   about: {
     paragraphs: [
-      "I am a curious software enthusiast currently pursuing my B.Tech degree at DRIEMS University. My focus lies at the intersection of modern full-stack web engineering and intelligent, AI-augmented digital tools.",
-      "Rather than treating theory in isolation, I build directly — testing component architectures, refining motion and accessibility, and integrating generative models to solve practical workflow bottlenecks.",
-      "I believe in clean visual hierarchies, intentional micro-interactions, robust typing, and systems that feel effortless on every screen.",
+      "I am a B.Tech student at DRIEMS University who learns by building. My work spans full-stack web development, AI-assisted applications, and interactive user experiences.",
+      "I enjoy taking an idea from a rough problem statement to a working prototype: designing the interface, structuring the application, connecting data and APIs, and iterating until the experience feels clear and useful.",
+      "My goal is to keep improving as a software engineer while building products that combine strong engineering fundamentals with thoughtful design.",
     ],
     quickStats: [
-      { label: "Education", value: "B.Tech Undergrad" },
+      { label: "Education", value: "B.Tech Student" },
       { label: "Institution", value: "DRIEMS University" },
       { label: "Core Focus", value: "Full-Stack + AI" },
-      { label: "Design Ethos", value: "Precision & Speed" },
+      { label: "Approach", value: "Learn by Building" },
     ],
   },
   journey: [
     {
       number: "/ 01 /",
       period: "Current",
-      title: "B.Tech in Engineering & Computing",
+      title: "B.Tech & Computer Science Foundations",
       institution: "DRIEMS University",
       description:
-        "Building foundational depth in data structures, algorithms, computational logic, and software engineering principles while maintaining active hands-on development.",
-      focusAreas: ["Core CS Fundamentals", "Database Systems", "Software Architecture"],
+        "Strengthening core concepts across data structures, algorithms, operating systems, networking, databases, software engineering, cloud computing, and AI/ML.",
+      focusAreas: ["Computer Science Fundamentals", "Problem Solving", "Software Engineering"],
     },
     {
       number: "/ 02 /",
       period: "Ongoing",
-      title: "Full-Stack Web Foundations & Tooling",
-      institution: "Independent Exploration",
+      title: "Full-Stack Product Development",
+      institution: "Independent Projects",
       description:
-        "Developing complete responsive web applications using TypeScript, React, Next.js, Tailwind CSS, and scalable component design systems with an emphasis on user experience.",
-      focusAreas: ["Next.js App Router", "TypeScript", "Modern CSS & Motion"],
+        "Building responsive applications with React, Next.js, TypeScript, Tailwind CSS, Supabase, REST APIs, authentication, storage, and production deployment workflows.",
+      focusAreas: ["Next.js", "TypeScript", "Supabase"],
     },
     {
       number: "/ 03 /",
       period: "Ongoing",
-      title: "AI-Powered Application Engineering",
-      institution: "Applied Project Research",
+      title: "Applied AI Engineering",
+      institution: "Project-Based Learning",
       description:
-        "Exploring practical integration of LLM endpoints, structured prompts, computer vision models, and contextual assistant pipelines into production-ready web interfaces.",
-      focusAreas: ["LLM Integrations", "Intelligent Workflows", "Contextual Assistants"],
+        "Integrating LLMs, multimodal models, OCR pipelines, retrieval workflows, and structured AI outputs into real applications rather than isolated demos.",
+      focusAreas: ["Gemini", "RAG", "OCR & Multimodal AI"],
     },
     {
       number: "/ 04 /",
       period: "Next",
-      title: "Scalable Systems & Product Deployment",
-      institution: "Future Trajectory",
+      title: "Production Systems & Open Source",
+      institution: "Future Direction",
       description:
-        "Aiming to engineer high-throughput, accessible, and maintainable software products that bridge complex machine intelligence with seamless everyday user interfaces.",
-      focusAreas: ["Distributed Systems", "Cloud Deployments", "Open Source"],
+        "Deepening backend architecture, cloud deployment, observability, performance, and open-source contribution while continuing to ship complete products.",
+      focusAreas: ["Scalable Systems", "Cloud", "Open Source"],
     },
   ],
   projects: [
@@ -147,21 +153,30 @@ export const portfolioConfig: PortfolioConfig = {
       id: "krushi-seva",
       number: "/ 01 /",
       title: "Krushi Seva",
-      category: "AgriTech & Full-Stack Platform",
-      tagline: "Empowering agriculture through real-time advisory and resource access",
+      category: "AgriTech · AI · Full Stack",
+      tagline: "AI-assisted crop diagnosis, risk intelligence, and official advisory workflows",
       description:
-        "An agricultural assistance prototype concept structured to bridge farmers with regional crop advisories, seasonal market data, and weather alerts in an accessible, multi-lingual format.",
+        "A mobile-first agricultural platform for crop disease and pest diagnosis, weather-assisted risk estimation, farmer follow-up, and extension-officer validation.",
+      repositoryUrl: "https://github.com/Suryakanta-Creator/Krushi-seva",
       expandedDetails: {
         overview:
-          "Krushi Seva is conceived as an intuitive platform for farmers and agricultural communities. It explores lightweight mobile-first UI architecture to deliver vital farming advisories, soil management suggestions, and market pricing insights even under bandwidth-constrained environments.",
+          "Krushi Seva is an SIH 2026 prototype built around two connected experiences: farmers can submit crop images for AI-assisted diagnosis and follow-up, while agricultural officials can review high-risk cases, validate reports, inspect regional risk information, and publish advisories.",
         highlights: [
-          "Mobile-first responsive architecture designed for clean legibility in outdoor lighting",
-          "Structured advisory modules for localized crop cycles and disease prevention",
-          "Weather analytics integration concept with contextual seasonal reminders",
-          "Modular component hierarchy prepared for multi-dialect localisation",
+          "Gemini-powered crop image diagnosis with structured confidence and recommendations",
+          "Open-Meteo microclimate inputs for transparent environmental risk estimation",
+          "Supabase authentication, PostgreSQL data, storage, SSR integration, and row-level security",
+          "Official validation queue, regional advisories, follow-up monitoring, and multilingual UX",
         ],
-        techStack: ["Next.js", "TypeScript", "Tailwind CSS", "RESTful APIs", "Lucide Icons"],
-        status: "Conceptual Prototype / Verification Pending",
+        techStack: [
+          "Next.js",
+          "TypeScript",
+          "Tailwind CSS",
+          "Supabase",
+          "Google Gemini",
+          "Open-Meteo",
+          "Leaflet",
+        ],
+        status: "SIH 2026 Working Prototype",
         accentColor: "emerald",
       },
       placeholderType: "agritech",
@@ -170,21 +185,30 @@ export const portfolioConfig: PortfolioConfig = {
       id: "ai-study-assistant",
       number: "/ 02 /",
       title: "AI Study Assistant",
-      category: "AI & Productivity System",
-      tagline: "Contextual study synthesis, active recall, and topic breakdown",
+      category: "AI · RAG · Education",
+      tagline: "Study from your own notes with grounded chat, flashcards, and quizzes",
       description:
-        "An intelligent academic companion concept designed to ingest learning materials, produce structured conceptual summaries, and generate adaptive recall flashcards for students.",
+        "A personal study workspace where students organize subjects and documents, process uploaded PDFs, ask grounded questions, generate flashcards, and take AI-created quizzes.",
+      repositoryUrl: "https://github.com/Suryakanta-Creator/AI-Study-Asistant",
       expandedDetails: {
         overview:
-          "Designed to address academic cognitive overload, the AI Study Assistant prototype demonstrates how large language models can act as interactive tutors. It breaks down complex textbook chapters into bite-sized learning nodes with automated question generation.",
+          "AI Study Assistant combines document processing and retrieval with a student-focused workspace. Uploaded material is extracted, chunked, embedded, and retrieved to ground conversations and generated study material in the student's own notes.",
         highlights: [
-          "Dynamic question generation and automated active-recall query builder",
-          "Hierarchical concept breakdown with progressive disclosure UI",
-          "Customizable study session timers and progress tracking components",
-          "Clean distraction-free dark interface with high typography legibility",
+          "Private subject and document workspace backed by Supabase Auth, Database, and Storage",
+          "PDF extraction, chunking, vector embeddings, and retrieval for grounded study chat",
+          "Streaming AI answers with citations and persistent conversations",
+          "AI-generated flashcards, quizzes, scoring, and attempt history",
         ],
-        techStack: ["React", "TypeScript", "Tailwind CSS", "LLM Integration Concept", "Framer Motion"],
-        status: "Active Prototype / Under Development",
+        techStack: [
+          "Next.js",
+          "TypeScript",
+          "Tailwind CSS",
+          "Supabase",
+          "Vercel AI SDK",
+          "Google Gemini",
+          "Vector Embeddings",
+        ],
+        status: "Working Full-Stack Project",
         accentColor: "aqua",
       },
       placeholderType: "ai-study",
@@ -193,21 +217,32 @@ export const portfolioConfig: PortfolioConfig = {
       id: "packcheck-ai",
       number: "/ 03 /",
       title: "PackCheck AI",
-      category: "Computer Vision & Verification",
-      tagline: "Automated checklist and baggage validation with visual verification",
+      category: "OCR · Compliance · Full Stack",
+      tagline: "AI-assisted packaged-commodity compliance checking for Legal Metrology workflows",
       description:
-        "A travel and luggage verification prototype designed to cross-reference packed gear against trip-specific checklists using visual detection and structured status tagging.",
+        "An SIH 2026 system that scans packaged-product labels, extracts declarations with OCR, evaluates rule compliance, highlights evidence, and supports human review.",
+      repositoryUrl: "https://github.com/Suryakanta-Creator/PackCheck-AI",
       expandedDetails: {
         overview:
-          "PackCheck AI explores automated travel readiness. By combining custom item checklists with visual scanning verification prompts, the interface ensures essentials are accounted for before departure while flagging missing critical gear.",
+          "PackCheck AI is a decision-support prototype for preliminary compliance assessment under the Legal Metrology (Packaged Commodities) Rules, 2011. It combines a React interface, a Spring Boot domain/API layer, and a Python OCR service.",
         highlights: [
-          "Dynamic checklist categories with customizable luggage weighting",
-          "Computer vision verification flow concept with bounding-box feedback",
-          "Instant status indicators (Verified, Missing, Optional) with audio-visual cues",
-          "Offline-first local state storage for airport and travel reliability",
+          "OCR and image-processing pipeline using Python, FastAPI, OpenCV, and Tesseract",
+          "Structured declaration extraction and version-aware compliance rule evaluation",
+          "Spring Boot REST backend with review workflows, scan history, and role-based access",
+          "Human-verification workflow with evidence highlighting before any official action",
         ],
-        techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Client State Management", "Motion"],
-        status: "Experimental Concept / Verification Pending",
+        techStack: [
+          "React",
+          "Vite",
+          "Tailwind CSS",
+          "Java 17",
+          "Spring Boot 3",
+          "FastAPI",
+          "OpenCV",
+          "Tesseract OCR",
+          "MySQL",
+        ],
+        status: "SIH 2026 Prototype",
         accentColor: "violet",
       },
       placeholderType: "packcheck",
@@ -215,22 +250,30 @@ export const portfolioConfig: PortfolioConfig = {
     {
       id: "cosmos-world",
       number: "/ 04 /",
-      title: "Cosmos World",
-      category: "Interactive 3D & Astronomical Data",
-      tagline: "Exploring celestial physics and planetary orbits in an interactive canvas",
+      title: "Cosmic World",
+      category: "3D Web · AI · Interactive Experience",
+      tagline: "A futuristic space-exploration experience with interactive 3D scenes",
       description:
-        "An educational astronomical visualizer prototype featuring interactive orbital mechanics, planetary data exploration, and dimensional visual effects.",
+        "An interactive space experience built with React, TypeScript, Framer Motion, and React Three Fiber, with a server-side Gemini chat route.",
+      repositoryUrl: "https://github.com/Suryakanta-Creator/cosmic_world",
       expandedDetails: {
         overview:
-          "Cosmos World combines scientific curiosity with frontend graphical experimentation. It provides an interactive solar and stellar simulation interface where users can manipulate orbital speeds, inspect planetary mass metrics, and study celestial bodies.",
+          "Cosmic World explores immersive web interaction through animated 3D scenes, space-themed UI, and an AI chat experience while keeping sensitive Gemini credentials on the server.",
         highlights: [
-          "Interactive orbital coordinate calculation and scaled visual representation",
-          "Planetary metric explorer with high-contrast data callouts and telemetry",
-          "Multi-axis viewpoint controls with smooth mathematical camera interpolation",
-          "Optimized GPU canvas rendering designed for 60fps performance across devices",
+          "Interactive 3D scenes using React Three Fiber",
+          "Motion-driven futuristic interface and responsive exploration flows",
+          "Server-side Gemini API route so the API key is not bundled into the browser",
+          "NASA near-Earth-object data screens using the public DEMO_KEY",
         ],
-        techStack: ["TypeScript", "HTML5 Canvas / WebGL Concept", "Tailwind CSS", "Motion"],
-        status: "Interactive Showcase / In Progress",
+        techStack: [
+          "React",
+          "Vite",
+          "TypeScript",
+          "Framer Motion",
+          "React Three Fiber",
+          "Gemini API",
+        ],
+        status: "Interactive Web Project",
         accentColor: "aqua",
       },
       placeholderType: "cosmos",
@@ -238,76 +281,78 @@ export const portfolioConfig: PortfolioConfig = {
   ],
   skillCategories: [
     {
-      title: "Frontend & UI Engineering",
-      badge: "Core Stack",
+      title: "Languages & Fundamentals",
+      badge: "Core",
       skills: [
+        "Java",
+        "JavaScript",
         "TypeScript",
-        "React.js",
-        "Next.js (App Router)",
+        "Python",
+        "SQL",
+        "Data Structures & Algorithms",
+        "Object-Oriented Programming",
+      ],
+    },
+    {
+      title: "Frontend & Full-Stack",
+      badge: "Build",
+      skills: [
+        "React",
+        "Next.js App Router",
+        "Vite",
         "Tailwind CSS",
-        "Motion (Framer Motion)",
-        "Semantic HTML5 & Modern CSS",
-        "Responsive & Adaptive Layouts",
+        "Framer Motion",
+        "Responsive UI",
+        "REST APIs",
       ],
     },
     {
-      title: "Backend & Systems",
-      badge: "Architecture",
+      title: "Backend, Data & Cloud",
+      badge: "Systems",
       skills: [
-        "Node.js Basics",
-        "RESTful API Integration",
-        "JSON Data Modeling",
-        "Git & Version Control",
-        "Database Concepts (SQL/NoSQL)",
-        "Modular Component Architecture",
+        "Supabase",
+        "PostgreSQL",
+        "MySQL",
+        "Spring Boot",
+        "FastAPI",
+        "Authentication & RLS",
+        "Vercel Deployment",
       ],
     },
     {
-      title: "AI & Emerging Technologies",
-      badge: "Focus Area",
+      title: "AI & Interactive Tech",
+      badge: "Explore",
       skills: [
-        "LLM API Integrations",
-        "Prompt Engineering Patterns",
-        "Multimodal AI Interface Design",
-        "Conversational UI Flows",
-        "Automated Extraction Pipelines",
-      ],
-    },
-    {
-      title: "Engineering Best Practices",
-      badge: "Methodology",
-      skills: [
-        "Web Accessibility (WCAG / a11y)",
-        "Keyboard Navigation & Focus Management",
-        "Performance Optimization",
-        "Reduced-Motion Conformance",
-        "Clean, Typed Codebases",
+        "Google Gemini",
+        "RAG Workflows",
+        "Vector Embeddings",
+        "OCR Pipelines",
+        "OpenCV",
+        "React Three Fiber",
+        "Prompt & Structured Output Design",
       ],
     },
   ],
   contact: {
-    heading: "Let's connect and build something remarkable.",
+    heading: "Let's build something useful.",
     subheading:
-      "I am always open to discussing frontend engineering, AI integrations, student hackathons, or software opportunities.",
-    emailPlaceholder: "surya.contact@example.com (Verification Pending)",
+      "Open to internships, collaborations, hackathons, project discussions, and conversations about software and AI.",
+    email: "",
+    emailPlaceholder: "Email will be configured before launch",
     isEmailVerified: false,
-    location: "DRIEMS University, Odisha, India",
+    location: "Odisha, India",
     statusNotice:
-      "Personal contact endpoints and social handles are currently kept configurable. You can configure verified links directly in portfolio.config.ts.",
+      "The GitHub link is live. Direct email and LinkedIn should be configured with your verified details before the production launch.",
     socials: [
       {
         platform: "GitHub",
-        label: "GitHub Profile",
-        isConfigured: false,
+        label: "@Suryakanta-Creator",
+        url: "https://github.com/Suryakanta-Creator",
+        isConfigured: true,
       },
       {
         platform: "LinkedIn",
-        label: "LinkedIn Profile",
-        isConfigured: false,
-      },
-      {
-        platform: "Twitter / X",
-        label: "Twitter Profile",
+        label: "LinkedIn",
         isConfigured: false,
       },
     ],

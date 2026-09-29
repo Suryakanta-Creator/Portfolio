@@ -1,6 +1,6 @@
 import React from "react";
 import { portfolioConfig } from "@/data/portfolio.config";
-import { ArrowUpRight, Code2, GitBranch, Github, GitCommitHorizontal } from "lucide-react";
+import { ArrowUpRight, Code2, GitBranch, Github } from "lucide-react";
 
 export function GitHubSection() {
   return (
@@ -72,7 +72,7 @@ export function GitHubSection() {
                         source
                       </span>
                       <span className="inline-flex items-center gap-1">
-                        <GitCommitHorizontal className="h-3 w-3 text-violet-400" />
+                        <Code2 className="h-3 w-3 text-violet-400" />
                         history
                       </span>
                     </div>

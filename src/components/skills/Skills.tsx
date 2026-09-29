@@ -27,7 +27,7 @@ export function Skills() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="flex flex-col items-start space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-charcoal-850 border border-white/10 text-xs font-mono text-emerald-400">
-              <span>/ 04 /</span>
+              <span>/ 03 /</span>
               <span>TECHNICAL DOMAINS &amp; TOOLING</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-warmWhite tracking-tight">

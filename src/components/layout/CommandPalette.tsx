@@ -2,27 +2,27 @@
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
-  BriefcaseBusiness,
+  Layers,
   Code2,
-  Contact,
+  Mail,
   Github,
   GraduationCap,
   Keyboard,
   Search,
   Sparkles,
-  UserRound,
+  User,
   Wrench,
   X,
 } from "lucide-react";
 
 const items = [
-  { label: "About me", hint: "about", target: "#about", icon: UserRound },
+  { label: "About me", hint: "about", target: "#about", icon: User },
   { label: "Journey", hint: "journey", target: "#journey", icon: GraduationCap },
   { label: "Skills", hint: "skills", target: "#skills", icon: Wrench },
-  { label: "Projects", hint: "projects", target: "#projects", icon: BriefcaseBusiness },
+  { label: "Projects", hint: "projects", target: "#projects", icon: Layers },
   { label: "GitHub", hint: "github", target: "#github", icon: Github },
   { label: "Developer Playground", hint: "play", target: "#playground", icon: Code2 },
-  { label: "Contact", hint: "contact", target: "#contact", icon: Contact },
+  { label: "Contact", hint: "contact", target: "#contact", icon: Mail },
 ];
 
 export function CommandPalette() {

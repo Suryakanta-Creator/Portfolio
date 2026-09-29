@@ -3,14 +3,14 @@
 import React, { useState } from "react";
 import {
   Sprout,
-  CloudSun,
+  Sun,
   ShieldCheck,
   Brain,
-  BookOpenCheck,
-  Database,
-  ScanLine,
-  FileCheck2,
-  AlertTriangle,
+  Sparkles,
+  Globe,
+  Zap,
+  CheckCircle2,
+  AlertCircle,
   Orbit,
   Sparkles,
 } from "lucide-react";
@@ -92,7 +92,7 @@ function AgritechVisual() {
                 : "border-white/10 bg-white/[0.02]"
             }`}
           >
-            <CloudSun className="mb-2 h-4 w-4 text-cyan-400" />
+            <Sun className="mb-2 h-4 w-4 text-cyan-400" />
             <p className="text-[11px] font-semibold text-warmWhite">Risk context</p>
             <p className="mt-1 text-[9px] text-mutedWhite">Microclimate-assisted scoring</p>
           </button>
@@ -124,7 +124,7 @@ function StudyVisual() {
               <p className="font-mono text-[10px] text-cyan-400">GROUND YOUR STUDY</p>
             </div>
           </div>
-          <Database className="h-4 w-4 text-violet-400" />
+          <Globe className="h-4 w-4 text-violet-400" />
         </div>
 
         <div className="grid grid-cols-3 gap-2">
@@ -144,7 +144,7 @@ function StudyVisual() {
         </div>
 
         <div className="rounded-xl border border-white/10 bg-charcoal-900/80 p-3">
-          <BookOpenCheck className="mb-2 h-4 w-4 text-cyan-400" />
+          <Sparkles className="mb-2 h-4 w-4 text-cyan-400" />
           <p className="text-[11px] font-semibold text-warmWhite">
             {active === "chat"
               ? "Ask questions grounded in uploaded notes."
@@ -168,7 +168,7 @@ function PackCheckVisual() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="rounded-lg border border-violet-500/30 bg-violet-500/10 p-2">
-              <ScanLine className="h-4 w-4 text-violet-400" />
+              <Zap className="h-4 w-4 text-violet-400" />
             </div>
             <div>
               <p className="text-xs font-bold text-warmWhite">PackCheck AI</p>
@@ -180,12 +180,12 @@ function PackCheckVisual() {
 
         <div className="grid grid-cols-2 gap-2">
           <div className="rounded-lg border border-white/10 bg-white/[0.02] p-3">
-            <FileCheck2 className="mb-2 h-4 w-4 text-emerald-400" />
+            <CheckCircle2 className="mb-2 h-4 w-4 text-emerald-400" />
             <p className="text-[10px] text-warmWhite">MRP declaration</p>
             <p className="mt-1 font-mono text-[9px] text-emerald-400">DETECTED</p>
           </div>
           <div className="rounded-lg border border-white/10 bg-white/[0.02] p-3">
-            <AlertTriangle className="mb-2 h-4 w-4 text-amber-400" />
+            <AlertCircle className="mb-2 h-4 w-4 text-amber-400" />
             <p className="text-[10px] text-warmWhite">Net quantity</p>
             <p className="mt-1 font-mono text-[9px] text-amber-400">MANUAL REVIEW</p>
           </div>

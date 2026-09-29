@@ -12,7 +12,6 @@ import {
   CheckCircle2,
   AlertCircle,
   Orbit,
-  Sparkles,
 } from "lucide-react";
 
 interface VisualProps {

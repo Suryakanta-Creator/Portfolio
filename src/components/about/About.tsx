@@ -42,7 +42,7 @@ export function About() {
 
             <a
               href="#journey"
-              className="mt-9 inline-flex items-center gap-2 text-sm font-semibold theme-text transition hover:theme-accent"
+              className="mt-9 inline-flex items-center gap-2 text-sm font-semibold theme-text transition hover:text-[var(--accent)]"
             >
               Follow my learning journey
               <ArrowUpRight className="h-4 w-4" />

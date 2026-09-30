@@ -1,204 +1,166 @@
 "use client";
 
 import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { ArrowUpRight, Github, Mail, Send } from "lucide-react";
 import { portfolioConfig } from "@/data/portfolio.config";
-import {
-  ArrowUpRight,
-  Github,
-  Linkedin,
-  Mail,
-  MapPin,
-  Send,
-  ShieldCheck,
-} from "lucide-react";
+import { usePortfolioMotion } from "@/context/MotionContext";
 
 export function Contact() {
   const [status, setStatus] = useState("");
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
+  const { reduceMotion } = usePortfolioMotion();
 
   const submit = (event: React.FormEvent) => {
     event.preventDefault();
 
     if (!portfolioConfig.contact.email) {
-      setStatus("Direct email is not configured yet. Please use the GitHub link for now.");
+      setStatus("Direct email is not configured yet. GitHub is available right now.");
       return;
     }
 
     const body = [
-      `Name: ${formData.name}`,
-      `Reply-to: ${formData.email}`,
+      "Name: " + formData.name,
+      "Reply-to: " + formData.email,
       "",
       formData.message,
     ].join("\n");
 
-    const href = `mailto:${portfolioConfig.contact.email}?subject=${encodeURIComponent(
-      formData.subject
-    )}&body=${encodeURIComponent(body)}`;
+    const href =
+      "mailto:" +
+      portfolioConfig.contact.email +
+      "?subject=" +
+      encodeURIComponent(formData.subject) +
+      "&body=" +
+      encodeURIComponent(body);
 
     setStatus("Opening your email app…");
     window.location.href = href;
   };
 
-  const iconFor = (platform: string) =>
-    platform.toLowerCase().includes("github") ? (
-      <Github className="h-4 w-4" />
-    ) : (
-      <Linkedin className="h-4 w-4" />
-    );
-
   return (
-    <section id="contact" className="relative overflow-hidden py-24" aria-label="Contact and connect">
-      <div className="pointer-events-none absolute bottom-0 right-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-cyan-600/5 blur-[140px]" />
+    <section id="contact" className="relative overflow-hidden pb-20 pt-24" aria-label="Contact and connect">
+      <motion.div
+        initial={reduceMotion ? { opacity: 1 } : { opacity: 0, scale: 0.9, y: 100 }}
+        whileInView={{ opacity: 1, scale: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.2 }}
+        transition={{ duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
+        className="relative mx-3 min-h-[92vh] overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-[#6435df] via-[#5523d0] to-[#2f146f] sm:mx-6 sm:rounded-[4rem] lg:mx-8"
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_54%,rgba(99,240,255,0.23),transparent_24%),radial-gradient(circle_at_16%_22%,rgba(255,255,255,0.10),transparent_20%)]" />
+        <div className="absolute -right-16 top-1/2 h-80 w-80 -translate-y-1/2 rounded-full border border-white/15" />
+        <div className="absolute -right-5 top-1/2 h-56 w-56 -translate-y-1/2 rounded-full border border-cyan-200/20" />
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-12">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-charcoal-850 px-3 py-1 font-mono text-xs text-cyan-400">
-            <span>/ 07 /</span>
-            <span>GET IN TOUCH</span>
-          </div>
-          <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-warmWhite sm:text-4xl">
-            {portfolioConfig.contact.heading}
-          </h2>
-          <p className="mt-3 max-w-2xl text-sm text-mutedWhite sm:text-base">
-            {portfolioConfig.contact.subheading}
+        <div className="relative flex min-h-[92vh] flex-col items-center justify-center px-6 py-20 text-center">
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/55">
+            / 07 / final transmission
           </p>
+          <h2 className="mt-6 max-w-6xl text-[15vw] font-black uppercase leading-[0.78] tracking-[-0.075em] text-white sm:text-[11vw] lg:text-[8vw]">
+            Ready to
+            <span className="block text-cyan-200">build something?</span>
+          </h2>
+          <p className="mt-8 max-w-xl text-sm leading-6 text-white/65 sm:text-base">
+            Internships, collaborations, hackathons, product ideas, or a conversation about software and AI.
+          </p>
+
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <a
+              href={"https://github.com/" + portfolioConfig.personal.githubUsername}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] text-[#35117d] transition hover:scale-[1.03]"
+            >
+              <Github className="h-4 w-4" />
+              GitHub
+              <ArrowUpRight className="h-4 w-4" />
+            </a>
+
+            <a
+              href="#contact-form"
+              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.06] px-5 py-3 text-xs font-semibold text-white backdrop-blur-md transition hover:bg-white/[0.12]"
+            >
+              <Mail className="h-4 w-4" />
+              Send a message
+            </a>
+          </div>
         </div>
+      </motion.div>
 
-        <div className="grid gap-8 lg:grid-cols-12">
-          <div className="space-y-5 lg:col-span-5">
-            <div className="rounded-2xl border border-white/10 bg-charcoal-900/80 p-6">
-              <div className="flex items-center gap-2 font-mono text-xs text-cyan-400">
-                <Mail className="h-4 w-4" />
-                DIRECT CONTACT
-              </div>
+      <div id="contact-form" className="mx-auto max-w-5xl px-5 pb-10 pt-28 sm:px-8 lg:px-10">
+        <div className="grid gap-10 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-cyan-300">
+              direct channel
+            </p>
+            <h3 className="mt-4 text-4xl font-black tracking-[-0.045em] text-white">
+              Say hello.
+            </h3>
+            <p className="mt-4 text-sm leading-6 text-white/50">
+              {portfolioConfig.contact.email || portfolioConfig.contact.emailPlaceholder}
+            </p>
+            <p className="mt-3 text-xs leading-6 text-white/35">
+              {portfolioConfig.contact.statusNotice}
+            </p>
+          </div>
 
-              <p className="mt-4 text-sm text-warmWhite">
-                {portfolioConfig.contact.email || portfolioConfig.contact.emailPlaceholder}
-              </p>
+          <form onSubmit={submit} className="grid gap-4 lg:col-span-8 sm:grid-cols-2">
+            <input
+              required
+              value={formData.name}
+              onChange={(event) => setFormData({ ...formData, name: event.target.value })}
+              placeholder="Your name"
+              className="rounded-2xl border border-white/10 bg-black/25 px-4 py-4 text-sm text-white outline-none backdrop-blur-md transition placeholder:text-white/25 focus:border-cyan-300/40"
+            />
+            <input
+              required
+              type="email"
+              value={formData.email}
+              onChange={(event) => setFormData({ ...formData, email: event.target.value })}
+              placeholder="Your email"
+              className="rounded-2xl border border-white/10 bg-black/25 px-4 py-4 text-sm text-white outline-none backdrop-blur-md transition placeholder:text-white/25 focus:border-cyan-300/40"
+            />
+            <input
+              required
+              value={formData.subject}
+              onChange={(event) => setFormData({ ...formData, subject: event.target.value })}
+              placeholder="Subject"
+              className="rounded-2xl border border-white/10 bg-black/25 px-4 py-4 text-sm text-white outline-none backdrop-blur-md transition placeholder:text-white/25 focus:border-cyan-300/40 sm:col-span-2"
+            />
+            <textarea
+              required
+              rows={5}
+              value={formData.message}
+              onChange={(event) => setFormData({ ...formData, message: event.target.value })}
+              placeholder="Tell me what you would like to build or discuss…"
+              className="resize-none rounded-2xl border border-white/10 bg-black/25 px-4 py-4 text-sm text-white outline-none backdrop-blur-md transition placeholder:text-white/25 focus:border-cyan-300/40 sm:col-span-2"
+            />
 
-              <div className="mt-4 flex items-center gap-2 text-xs text-mutedWhite">
-                <MapPin className="h-4 w-4 text-cyan-400" />
-                {portfolioConfig.contact.location}
-              </div>
-            </div>
+            <button
+              type="submit"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-cyan-300 px-5 py-3.5 text-xs font-bold uppercase tracking-[0.1em] text-[#031014] sm:col-span-2"
+            >
+              <Send className="h-4 w-4" />
+              Open message
+            </button>
 
-            <div className="rounded-2xl border border-white/10 bg-charcoal-900/60 p-5">
-              <div className="flex items-center gap-2 text-xs font-semibold text-warmWhite">
-                <ShieldCheck className="h-4 w-4 text-emerald-400" />
-                Honest contact status
-              </div>
-              <p className="mt-2 text-xs leading-relaxed text-mutedWhite">
-                {portfolioConfig.contact.statusNotice}
-              </p>
-            </div>
-
-            <div className="grid gap-3 sm:grid-cols-2">
-              {portfolioConfig.contact.socials.map((social) =>
-                social.isConfigured && social.url ? (
+            {status && (
+              <div className="rounded-xl border border-cyan-300/20 bg-cyan-300/[0.07] p-4 text-xs text-cyan-100 sm:col-span-2">
+                <p>{status}</p>
+                {!portfolioConfig.contact.email && (
                   <a
-                    key={social.platform}
-                    href={social.url}
+                    href={"https://github.com/" + portfolioConfig.personal.githubUsername}
                     target="_blank"
                     rel="noreferrer"
-                    className="group rounded-xl border border-white/10 bg-charcoal-900/70 p-4 transition hover:border-cyan-400/35"
+                    className="mt-2 inline-flex items-center gap-1.5 font-semibold text-white underline underline-offset-4"
                   >
-                    <div className="flex items-center justify-between">
-                      <span className="text-cyan-400">{iconFor(social.platform)}</span>
-                      <ArrowUpRight className="h-4 w-4 text-mutedWhite group-hover:text-cyan-400" />
-                    </div>
-                    <p className="mt-3 text-sm font-bold text-warmWhite">{social.platform}</p>
-                    <p className="mt-1 font-mono text-[10px] text-mutedWhite">{social.label}</p>
+                    <Github className="h-3.5 w-3.5" />
+                    Contact via GitHub
+                    <ArrowUpRight className="h-3 w-3" />
                   </a>
-                ) : null
-              )}
-            </div>
-          </div>
-
-          <div className="lg:col-span-7">
-            <form
-              onSubmit={submit}
-              className="rounded-2xl border border-white/10 bg-charcoal-900/85 p-6 shadow-2xl shadow-black/30 sm:p-8"
-            >
-              <div className="grid gap-4 sm:grid-cols-2">
-                <label className="font-mono text-xs text-mutedWhite">
-                  Your name
-                  <input
-                    required
-                    value={formData.name}
-                    onChange={(event) => setFormData({ ...formData, name: event.target.value })}
-                    className="mt-2 w-full rounded-xl border border-white/10 bg-charcoal-950 px-4 py-3 text-sm text-warmWhite outline-none transition focus:border-cyan-400/50"
-                    placeholder="Your name"
-                  />
-                </label>
-
-                <label className="font-mono text-xs text-mutedWhite">
-                  Your email
-                  <input
-                    required
-                    type="email"
-                    value={formData.email}
-                    onChange={(event) => setFormData({ ...formData, email: event.target.value })}
-                    className="mt-2 w-full rounded-xl border border-white/10 bg-charcoal-950 px-4 py-3 text-sm text-warmWhite outline-none transition focus:border-cyan-400/50"
-                    placeholder="you@example.com"
-                  />
-                </label>
+                )}
               </div>
-
-              <label className="mt-4 block font-mono text-xs text-mutedWhite">
-                Subject
-                <input
-                  required
-                  value={formData.subject}
-                  onChange={(event) => setFormData({ ...formData, subject: event.target.value })}
-                  className="mt-2 w-full rounded-xl border border-white/10 bg-charcoal-950 px-4 py-3 text-sm text-warmWhite outline-none transition focus:border-cyan-400/50"
-                  placeholder="Internship / collaboration / project"
-                />
-              </label>
-
-              <label className="mt-4 block font-mono text-xs text-mutedWhite">
-                Message
-                <textarea
-                  required
-                  rows={5}
-                  value={formData.message}
-                  onChange={(event) => setFormData({ ...formData, message: event.target.value })}
-                  className="mt-2 w-full resize-none rounded-xl border border-white/10 bg-charcoal-950 px-4 py-3 text-sm text-warmWhite outline-none transition focus:border-cyan-400/50"
-                  placeholder="Tell me what you would like to build or discuss…"
-                />
-              </label>
-
-              <button
-                type="submit"
-                className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-aqua-400 px-5 py-3.5 text-sm font-semibold text-charcoal-950 transition hover:opacity-90"
-              >
-                <Send className="h-4 w-4" />
-                Open message
-              </button>
-
-              {status && (
-                <div className="mt-4 rounded-xl border border-cyan-500/25 bg-cyan-500/10 p-3.5 font-mono text-xs text-cyan-200">
-                  <p>{status}</p>
-                  {!portfolioConfig.contact.email && (
-                    <a
-                      href={`https://github.com/${portfolioConfig.personal.githubUsername}`}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-warmWhite hover:text-cyan-300 underline underline-offset-2"
-                    >
-                      <Github className="h-3.5 w-3.5" />
-                      Contact via GitHub (@{portfolioConfig.personal.githubUsername})
-                      <ArrowUpRight className="h-3 w-3" />
-                    </a>
-                  )}
-                </div>
-              )}
-            </form>
-          </div>
+            )}
+          </form>
         </div>
       </div>
     </section>

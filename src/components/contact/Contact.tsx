@@ -89,16 +89,16 @@ export function Contact() {
       <div id="contact-form" className="mx-auto max-w-5xl px-5 pb-10 pt-28 sm:px-8 lg:px-10">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-cyan-300">
+            <p className="font-mono text-[10px] uppercase tracking-[0.25em] theme-accent">
               direct channel
             </p>
-            <h3 className="mt-4 text-4xl font-black tracking-[-0.045em] text-white">
+            <h3 className="mt-4 text-4xl font-semibold tracking-[-0.045em] theme-text">
               Say hello.
             </h3>
-            <p className="mt-4 text-sm leading-6 text-white/50">
+            <p className="mt-4 text-sm leading-6 theme-muted">
               {portfolioConfig.contact.email || portfolioConfig.contact.emailPlaceholder}
             </p>
-            <p className="mt-3 text-xs leading-6 text-white/35">
+            <p className="mt-3 text-xs leading-6 theme-muted">
               {portfolioConfig.contact.statusNotice}
             </p>
           </div>
@@ -109,7 +109,7 @@ export function Contact() {
               value={formData.name}
               onChange={(event) => setFormData({ ...formData, name: event.target.value })}
               placeholder="Your name"
-              className="rounded-2xl border border-white/10 bg-black/25 px-4 py-4 text-sm text-white outline-none backdrop-blur-md transition placeholder:text-white/25 focus:border-cyan-300/40"
+              className="rounded-2xl border theme-border theme-panel px-4 py-4 text-sm theme-text outline-none transition placeholder:text-[var(--muted)] focus:border-violet-400/40"
             />
             <input
               required
@@ -117,14 +117,14 @@ export function Contact() {
               value={formData.email}
               onChange={(event) => setFormData({ ...formData, email: event.target.value })}
               placeholder="Your email"
-              className="rounded-2xl border border-white/10 bg-black/25 px-4 py-4 text-sm text-white outline-none backdrop-blur-md transition placeholder:text-white/25 focus:border-cyan-300/40"
+              className="rounded-2xl border theme-border theme-panel px-4 py-4 text-sm theme-text outline-none transition placeholder:text-[var(--muted)] focus:border-violet-400/40"
             />
             <input
               required
               value={formData.subject}
               onChange={(event) => setFormData({ ...formData, subject: event.target.value })}
               placeholder="Subject"
-              className="rounded-2xl border border-white/10 bg-black/25 px-4 py-4 text-sm text-white outline-none backdrop-blur-md transition placeholder:text-white/25 focus:border-cyan-300/40 sm:col-span-2"
+              className="rounded-2xl border theme-border theme-panel px-4 py-4 text-sm theme-text outline-none transition placeholder:text-[var(--muted)] focus:border-violet-400/40 sm:col-span-2"
             />
             <textarea
               required
@@ -132,26 +132,26 @@ export function Contact() {
               value={formData.message}
               onChange={(event) => setFormData({ ...formData, message: event.target.value })}
               placeholder="Tell me what you would like to build or discuss…"
-              className="resize-none rounded-2xl border border-white/10 bg-black/25 px-4 py-4 text-sm text-white outline-none backdrop-blur-md transition placeholder:text-white/25 focus:border-cyan-300/40 sm:col-span-2"
+              className="resize-none rounded-2xl border theme-border theme-panel px-4 py-4 text-sm theme-text outline-none transition placeholder:text-[var(--muted)] focus:border-violet-400/40 sm:col-span-2"
             />
 
             <button
               type="submit"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-cyan-300 px-5 py-3.5 text-xs font-bold uppercase tracking-[0.1em] text-[#031014] sm:col-span-2"
+              className="inline-flex items-center justify-center gap-2 rounded-full theme-accent-bg px-5 py-3.5 text-xs font-bold uppercase tracking-[0.1em] sm:col-span-2"
             >
               <Send className="h-4 w-4" />
               Open message
             </button>
 
             {status && (
-              <div className="rounded-xl border border-cyan-300/20 bg-cyan-300/[0.07] p-4 text-xs text-cyan-100 sm:col-span-2">
+              <div className="rounded-xl border theme-border theme-panel p-4 text-xs theme-muted sm:col-span-2">
                 <p>{status}</p>
                 {!portfolioConfig.contact.email && (
                   <a
                     href={"https://github.com/" + portfolioConfig.personal.githubUsername}
                     target="_blank"
                     rel="noreferrer"
-                    className="mt-2 inline-flex items-center gap-1.5 font-semibold text-white underline underline-offset-4"
+                    className="mt-2 inline-flex items-center gap-1.5 font-semibold theme-text underline underline-offset-4"
                   >
                     <Github className="h-3.5 w-3.5" />
                     Contact via GitHub

@@ -1,107 +1,78 @@
 "use client";
 
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 import { ArrowUpRight, MapPin } from "lucide-react";
 import { portfolioConfig } from "@/data/portfolio.config";
 import { usePortfolioMotion } from "@/context/MotionContext";
 
 export function Journey() {
-  const ref = useRef<HTMLElement>(null);
   const { reduceMotion } = usePortfolioMotion();
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-
-  const titleX = useTransform(
-    scrollYProgress,
-    [0.05, 0.34],
-    reduceMotion ? ["0%", "0%"] : ["7%", "-18%"]
-  );
-  const titleY = useTransform(
-    scrollYProgress,
-    [0.05, 0.34],
-    reduceMotion ? [0, 0] : [120, -40]
-  );
-  const titleOpacity = useTransform(scrollYProgress, [0.05, 0.18, 0.35], [0, 1, 0.16]);
 
   return (
-    <section ref={ref} id="journey" className="relative overflow-hidden pb-28" aria-label="Academic and technical journey">
-      <div className="relative h-[125vh]">
-        <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-          <motion.div style={{ x: titleX, y: titleY, opacity: titleOpacity }} className="whitespace-nowrap">
-            <p className="pl-[7vw] font-mono text-[10px] uppercase tracking-[0.32em] text-violet-300">
-              / 02 / trajectory
+    <section id="journey" className="relative mx-3 my-20 overflow-hidden rounded-[2.8rem] bg-[#181819] py-28 text-white sm:mx-6 sm:rounded-[4rem] lg:mx-8 lg:py-36" aria-label="Academic and technical journey">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_22%,rgba(164,255,98,0.08),transparent_24%),radial-gradient(circle_at_18%_78%,rgba(111,54,231,0.13),transparent_28%)]" />
+
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+        <div className="mb-20 grid gap-10 lg:grid-cols-12 lg:items-end">
+          <div className="lg:col-span-8">
+            <p className="font-mono text-[9px] uppercase tracking-[0.26em] text-[#b8ff6b]">
+              / 02 / choose your track
             </p>
-            <h2 className="mt-3 text-[21vw] font-black uppercase leading-[0.72] tracking-[-0.08em] text-violet-300 sm:text-[16vw] lg:text-[13vw]">
-              How I Learn
+            <h2 className="mt-5 text-[13vw] font-semibold uppercase leading-[0.8] tracking-[-0.065em] sm:text-[9vw] lg:text-[7vw]">
+              How I
+              <span className="block text-[#b8ff6b]">learn & build.</span>
             </h2>
-          </motion.div>
-
-          <div className="absolute bottom-[13vh] right-[7vw] max-w-sm text-right">
-            <p className="font-mono text-[9px] uppercase tracking-[0.28em] text-white/35">
-              Scroll chapter
-            </p>
-            <p className="mt-3 text-sm leading-6 text-white/55">
-              Each stage adds another layer: fundamentals, product building, applied AI, then production systems.
-            </p>
           </div>
+          <p className="max-w-sm text-sm leading-6 text-white/52 lg:col-span-4">
+            Fundamentals first, then product building, applied AI, and finally production-ready systems.
+          </p>
         </div>
-      </div>
 
-      <div className="relative mx-auto -mt-[28vh] max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="space-y-24 md:space-y-36">
-          {portfolioConfig.journey.map((item, index) => {
-            const fromLeft = index % 2 === 0;
-            return (
-              <motion.article
-                key={item.number}
-                initial={reduceMotion ? { opacity: 1 } : { opacity: 0, x: fromLeft ? -110 : 110, scale: 0.94 }}
-                whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                viewport={{ once: false, amount: 0.35 }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className={"grid min-h-[46vh] items-center gap-8 md:grid-cols-12 " + (fromLeft ? "" : "md:[&>*:first-child]:order-2")}
-              >
-                <div className="md:col-span-5">
-                  <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-black/30 p-8 backdrop-blur-xl sm:p-10">
-                    <div className="absolute -right-10 -top-14 text-[9rem] font-black leading-none text-white/[0.035]">
-                      {String(index + 1).padStart(2, "0")}
-                    </div>
-                    <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-cyan-300/80">
-                      {item.period}
-                    </p>
-                    <h3 className="mt-4 text-3xl font-bold leading-tight tracking-[-0.04em] text-white sm:text-4xl">
-                      {item.title}
-                    </h3>
-                    <div className="mt-5 flex items-center gap-2 text-xs text-white/45">
-                      <MapPin className="h-3.5 w-3.5 text-violet-300" />
-                      {item.institution}
-                    </div>
-                  </div>
-                </div>
+        <div className="space-y-5">
+          {portfolioConfig.journey.map((item, index) => (
+            <motion.article
+              key={item.number}
+              initial={reduceMotion ? { opacity: 1 } : { opacity: 0, y: 70, scale: 0.97 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: false, amount: 0.32 }}
+              transition={{ duration: 0.72, delay: index * 0.04, ease: [0.16, 1, 0.3, 1] }}
+              className="grid gap-5 rounded-[1.8rem] border border-white/10 bg-white/[0.035] p-5 sm:p-7 md:grid-cols-12 md:items-center"
+            >
+              <div className="md:col-span-1">
+                <span className="font-mono text-[9px] text-white/30">/{String(index + 1).padStart(2, "0")}/</span>
+              </div>
 
-                <div className="md:col-span-7">
-                  <p className="max-w-2xl text-lg leading-8 text-white/64 sm:text-xl">
-                    {item.description}
-                  </p>
-                  <div className="mt-7 flex flex-wrap gap-2.5">
-                    {item.focusAreas.map((area) => (
-                      <span
-                        key={area}
-                        className="rounded-full border border-white/10 bg-white/[0.035] px-4 py-2 font-mono text-[10px] uppercase tracking-[0.14em] text-white/65 backdrop-blur-md"
-                      >
-                        {area}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="mt-8 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-cyan-300/65">
-                    Continue trajectory <ArrowUpRight className="h-3.5 w-3.5" />
-                  </div>
+              <div className="md:col-span-4">
+                <p className="font-mono text-[8px] uppercase tracking-[0.17em] text-[#b8ff6b]/70">{item.period}</p>
+                <h3 className="mt-2 text-2xl font-semibold tracking-[-0.035em] text-white">{item.title}</h3>
+                <div className="mt-3 flex items-center gap-2 text-xs text-white/38">
+                  <MapPin className="h-3.5 w-3.5 text-violet-300" />
+                  {item.institution}
                 </div>
-              </motion.article>
-            );
-          })}
+              </div>
+
+              <div className="md:col-span-5">
+                <p className="text-sm leading-6 text-white/55">{item.description}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {item.focusAreas.map((area) => (
+                    <span
+                      key={area}
+                      className="rounded-full border border-white/10 bg-black/10 px-3 py-1.5 font-mono text-[8px] uppercase tracking-[0.11em] text-white/48"
+                    >
+                      {area}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="md:col-span-2 md:text-right">
+                <span className="inline-flex items-center gap-2 font-mono text-[8px] uppercase tracking-[0.14em] text-white/35">
+                  continue <ArrowUpRight className="h-3.5 w-3.5" />
+                </span>
+              </div>
+            </motion.article>
+          ))}
         </div>
       </div>
     </section>

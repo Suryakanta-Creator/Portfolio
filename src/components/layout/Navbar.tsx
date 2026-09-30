@@ -46,7 +46,7 @@ export function Navbar() {
             <a
               key={item.label}
               href={item.href}
-              className="rounded-full px-3 py-2 text-[11px] font-medium theme-muted transition hover:bg-black/[0.04] hover:theme-text dark:hover:bg-white/[0.05]"
+              className="rounded-full px-3 py-2 text-[11px] font-medium theme-muted transition hover:bg-black/[0.04] hover:text-[var(--text)] dark:hover:bg-white/[0.05]"
             >
               {item.label}
             </a>
@@ -57,7 +57,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={toggleReduceMotion}
-            className="hidden items-center gap-2 rounded-full border theme-border px-3 py-2 font-mono text-[9px] uppercase tracking-[0.12em] theme-muted transition hover:theme-text sm:flex"
+            className="hidden items-center gap-2 rounded-full border theme-border px-3 py-2 font-mono text-[9px] uppercase tracking-[0.12em] theme-muted transition hover:text-[var(--text)] sm:flex"
             aria-label={reduceMotion ? "Enable full animations" : "Reduce motion"}
             title={reduceMotion ? "Enable full animations" : "Reduce motion"}
           >
@@ -99,7 +99,7 @@ export function Navbar() {
                 key={item.label}
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="rounded-xl px-4 py-3 text-sm theme-muted transition hover:bg-black/[0.04] hover:theme-text dark:hover:bg-white/[0.05]"
+                className="rounded-xl px-4 py-3 text-sm theme-muted transition hover:bg-black/[0.04] hover:text-[var(--text)] dark:hover:bg-white/[0.05]"
               >
                 {item.label}
               </a>

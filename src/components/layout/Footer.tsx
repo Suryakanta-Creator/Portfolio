@@ -1,9 +1,8 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
+import { ArrowUp } from "lucide-react";
 import { portfolioConfig } from "@/data/portfolio.config";
-import { ArrowUp, Heart, Sparkles, Terminal } from "lucide-react";
 
 export function Footer() {
   const scrollToTop = () => {
@@ -11,57 +10,45 @@ export function Footer() {
   };
 
   return (
-    <footer className="border-t border-white/10 bg-charcoal-950/90 py-12 relative overflow-hidden" aria-label="Site Footer">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8 pb-8 border-b border-white/10">
-          {/* Brand Info */}
+    <footer className="relative overflow-hidden border-t theme-border theme-page py-10" aria-label="Site footer">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+        <div className="flex flex-col gap-7 border-b theme-border pb-7 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-charcoal-850 border border-white/15 flex items-center justify-center font-mono font-bold text-sm text-cyan-400">
+            <div className="flex h-9 w-9 items-center justify-center rounded-full border theme-border theme-accent-soft font-mono text-[10px] font-black theme-accent">
               {portfolioConfig.personal.monogram}
             </div>
             <div>
-              <span className="block text-sm font-semibold text-warmWhite">
-                {portfolioConfig.personal.fullName}
-              </span>
-              <span className="block text-xs font-mono text-mutedWhite">
+              <span className="block text-sm font-semibold theme-text">{portfolioConfig.personal.fullName}</span>
+              <span className="block font-mono text-[8px] uppercase tracking-[0.12em] theme-muted">
                 {portfolioConfig.personal.role}
               </span>
             </div>
           </div>
 
-          {/* Quick Nav Links */}
-          <nav className="flex flex-wrap items-center justify-center gap-6" aria-label="Footer Navigation">
+          <nav className="flex flex-wrap items-center gap-x-5 gap-y-2" aria-label="Footer navigation">
             {portfolioConfig.navigation.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className="text-xs font-mono text-mutedWhite hover:text-cyan-400 transition-colors"
+                className="font-mono text-[8px] uppercase tracking-[0.12em] theme-muted transition hover:text-[var(--accent)]"
               >
                 {item.label}
               </a>
             ))}
           </nav>
 
-          {/* Back to top button */}
           <button
             onClick={scrollToTop}
-            className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-charcoal-900 border border-white/10 text-xs font-mono text-mutedWhite hover:text-warmWhite hover:border-white/20 transition-all focus:outline-none focus:ring-2 focus:ring-aqua-400"
-            aria-label="Back to Top"
+            className="inline-flex w-fit items-center gap-2 rounded-full border theme-border theme-panel px-4 py-2.5 font-mono text-[8px] uppercase tracking-[0.12em] theme-muted transition hover:text-[var(--text)]"
+            aria-label="Back to top"
           >
-            <span>Top</span>
-            <ArrowUp className="w-3.5 h-3.5 text-cyan-400" />
+            Top <ArrowUp className="h-3.5 w-3.5 theme-accent" />
           </button>
         </div>
 
-        {/* Bottom meta row */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-mutedWhite/70">
-          <p>
-            © {new Date().getFullYear()} {portfolioConfig.personal.fullName}. Designed &amp; engineered with precision.
-          </p>
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span>Built with Next.js, TypeScript &amp; Tailwind CSS</span>
-          </div>
+        <div className="flex flex-col gap-3 pt-7 font-mono text-[8px] uppercase tracking-[0.1em] theme-muted sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} {portfolioConfig.personal.fullName}</p>
+          <p>Next.js · TypeScript · Motion · R3F</p>
         </div>
       </div>
     </footer>

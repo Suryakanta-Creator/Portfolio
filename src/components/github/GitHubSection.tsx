@@ -30,19 +30,15 @@ function FloatingRepo({
   const rotate = useTransform(progress, [0.06, 0.48], reduceMotion ? [0, 0] : [index % 2 ? 5 : -5, 0]);
   const scale = useTransform(progress, [0.04, 0.16, 0.50], reduceMotion ? [1, 1, 1] : [0.78, 1, 0.88]);
   const opacity = useTransform(progress, [0.02, 0.12, 0.50, 0.60], [0, 1, 1, 0]);
+  const leftPct = useTransform(left, (value) => value + "%");
+  const topPct = useTransform(top, (value) => value + "%");
 
   return (
     <motion.a
       href={project.repositoryUrl}
       target="_blank"
       rel="noreferrer"
-      style={{
-        left: useTransform(left, (value) => value + "%"),
-        top: useTransform(top, (value) => value + "%"),
-        rotate,
-        scale,
-        opacity,
-      }}
+      style={{ left: leftPct, top: topPct, rotate, scale, opacity }}
       className="absolute w-[150px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl border theme-border theme-panel editorial-shadow sm:w-[190px]"
     >
       <div className="h-28 overflow-hidden sm:h-36">

@@ -64,7 +64,7 @@ export function Skills() {
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
               placeholder="Filter stack..."
-              className="w-full rounded-full border theme-border theme-panel py-3 pl-11 pr-4 text-sm theme-text outline-none transition placeholder:theme-muted focus:border-violet-500/40"
+              className="w-full rounded-full border theme-border theme-panel py-3 pl-11 pr-4 text-sm theme-text outline-none transition placeholder:text-[var(--muted)] focus:border-violet-500/40"
             />
           </label>
         </div>
@@ -95,7 +95,7 @@ export function Skills() {
                     {category.skills.map((skill) => (
                       <span
                         key={skill}
-                        className="rounded-full border theme-border theme-panel px-4 py-2 text-sm font-medium theme-text transition hover:-translate-y-0.5 hover:border-violet-400/40 hover:theme-accent"
+                        className="rounded-full border theme-border theme-panel px-4 py-2 text-sm font-medium theme-text transition hover:-translate-y-0.5 hover:border-violet-400/40 hover:text-[var(--accent)]"
                       >
                         {skill}
                       </span>

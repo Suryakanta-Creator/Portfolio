@@ -41,7 +41,7 @@ function Shell({
       : "border-cyan-500/25";
 
   return (
-    <div className={`relative h-56 sm:h-64 overflow-hidden rounded-xl border ${border} bg-charcoal-950/95 p-4`}>
+    <div className={`relative h-[340px] sm:h-[430px] overflow-hidden rounded-xl border ${border} bg-charcoal-950/95 p-4`}>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(56,225,255,0.08),transparent_35%)]" />
       <div className="relative z-10 h-full">{children}</div>
     </div>

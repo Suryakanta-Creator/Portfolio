@@ -23,12 +23,12 @@ export default function Home() {
       <main className="relative z-10" id="main-content">
         <Hero />
         <SceneSection accent="cyan" index={0}><About /></SceneSection>
-        <SceneSection accent="violet" index={1}><Journey /></SceneSection>
-        <SceneSection accent="emerald" index={2}><Skills /></SceneSection>
-        <SceneSection accent="cyan" index={3}><Projects /></SceneSection>
-        <SceneSection accent="violet" index={4}><GitHubSection /></SceneSection>
-        <SceneSection accent="amber" index={5}><Playground /></SceneSection>
-        <SceneSection accent="cyan" index={6}><Contact /></SceneSection>
+        <Journey />
+        <SceneSection accent="violet" index={1}><Skills /></SceneSection>
+        <Projects />
+        <GitHubSection />
+        <SceneSection accent="amber" index={2}><Playground /></SceneSection>
+        <Contact />
       </main>
 
       <div className="relative z-10">

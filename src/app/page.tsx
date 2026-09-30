@@ -1,6 +1,8 @@
 import React from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { CommandPalette } from "@/components/layout/CommandPalette";
+import { CinematicBackground } from "@/components/scene/CinematicBackground";
+import { SceneSection } from "@/components/scene/SceneSection";
 import { Hero } from "@/components/hero/Hero";
 import { About } from "@/components/about/About";
 import { Journey } from "@/components/journey/Journey";
@@ -13,22 +15,25 @@ import { Footer } from "@/components/layout/Footer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-charcoal-950 text-warmWhite selection:bg-cyan-500/20 selection:text-white">
+    <div className="relative min-h-screen overflow-clip bg-[#02050a] text-warmWhite selection:bg-cyan-500/20 selection:text-white">
+      <CinematicBackground />
       <Navbar />
       <CommandPalette />
 
-      <main className="flex-1" id="main-content">
+      <main className="relative z-10" id="main-content">
         <Hero />
-        <About />
-        <Journey />
-        <Skills />
-        <Projects />
-        <GitHubSection />
-        <Playground />
-        <Contact />
+        <SceneSection accent="cyan" index={0}><About /></SceneSection>
+        <SceneSection accent="violet" index={1}><Journey /></SceneSection>
+        <SceneSection accent="emerald" index={2}><Skills /></SceneSection>
+        <SceneSection accent="cyan" index={3}><Projects /></SceneSection>
+        <SceneSection accent="violet" index={4}><GitHubSection /></SceneSection>
+        <SceneSection accent="amber" index={5}><Playground /></SceneSection>
+        <SceneSection accent="cyan" index={6}><Contact /></SceneSection>
       </main>
 
-      <Footer />
+      <div className="relative z-10">
+        <Footer />
+      </div>
     </div>
   );
 }

@@ -73,39 +73,39 @@ export function Playground() {
       <div className="pointer-events-none absolute inset-0 hidden md:block">
         <motion.div
           style={{ x: leftTopX, y: leftTopY, rotate: -7 }}
-          className="absolute left-[7%] top-[14%] w-56 rounded-2xl border border-cyan-300/15 bg-[#07131b]/70 p-4 shadow-2xl shadow-black/40 backdrop-blur-xl"
+          className="absolute left-[7%] top-[14%] w-56 rounded-2xl border theme-border theme-panel p-4 editorial-shadow"
         >
           <Code2 className="h-4 w-4 text-cyan-300" />
-          <p className="mt-4 font-mono text-[10px] text-white/55">const curiosity = true;</p>
-          <p className="mt-1 font-mono text-[10px] text-violet-300">ship(iterate(build()));</p>
+          <p className="mt-4 font-mono text-[10px] theme-muted">const curiosity = true;</p>
+          <p className="mt-1 font-mono text-[10px] theme-accent">ship(iterate(build()));</p>
         </motion.div>
 
         <motion.div
           style={{ x: rightTopX, y: rightTopY, rotate: 8 }}
-          className="absolute right-[8%] top-[19%] w-48 rounded-2xl border border-violet-300/15 bg-[#120b22]/70 p-4 shadow-2xl shadow-black/40 backdrop-blur-xl"
+          className="absolute right-[8%] top-[19%] w-48 rounded-2xl border theme-border theme-panel p-4 editorial-shadow"
         >
-          <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-violet-300">runtime</p>
-          <p className="mt-3 text-3xl font-black text-white">60 FPS</p>
-          <p className="mt-1 text-[10px] text-white/35">motion target</p>
+          <p className="font-mono text-[9px] uppercase tracking-[0.18em] theme-accent">runtime</p>
+          <p className="mt-3 text-3xl font-semibold theme-text">60 FPS</p>
+          <p className="mt-1 text-[10px] theme-muted">motion target</p>
         </motion.div>
 
         <motion.div
           style={{ x: lowerX, y: lowerY, rotate: -4 }}
-          className="absolute bottom-[14%] left-[14%] w-52 rounded-2xl border border-emerald-300/15 bg-[#071712]/70 p-4 shadow-2xl shadow-black/40 backdrop-blur-xl"
+          className="absolute bottom-[14%] left-[14%] w-52 rounded-2xl border theme-border theme-panel p-4 editorial-shadow"
         >
           <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-emerald-300">status</p>
-          <p className="mt-3 text-sm font-bold text-white">BUILD → TEST → DEPLOY</p>
+          <p className="mt-3 text-sm font-semibold theme-text">BUILD → TEST → DEPLOY</p>
         </motion.div>
       </div>
 
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
         <div className="mb-20 text-center">
-          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-cyan-300">
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] theme-accent">
             / 06 / developer playground
           </p>
-          <h2 className="mx-auto mt-5 max-w-5xl text-[14vw] font-black uppercase leading-[0.78] tracking-[-0.075em] text-white sm:text-[10vw] lg:text-[7.5vw]">
+          <h2 className="mx-auto mt-5 max-w-5xl text-[14vw] font-semibold uppercase leading-[0.78] tracking-[-0.07em] theme-text sm:text-[10vw] lg:text-[7.5vw]">
             Debug
-            <span className="block text-transparent [-webkit-text-stroke:1px_rgba(103,232,249,0.72)]">
+            <span className="block theme-accent">
               the system.
             </span>
           </h2>

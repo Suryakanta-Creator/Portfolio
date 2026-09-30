@@ -1,125 +1,107 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowUpRight, MapPin } from "lucide-react";
 import { portfolioConfig } from "@/data/portfolio.config";
-import { Milestone, Calendar, MapPin, Sparkles, CheckCircle, ArrowRight } from "lucide-react";
+import { usePortfolioMotion } from "@/context/MotionContext";
 
 export function Journey() {
+  const ref = useRef<HTMLElement>(null);
+  const { reduceMotion } = usePortfolioMotion();
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const titleX = useTransform(
+    scrollYProgress,
+    [0.05, 0.34],
+    reduceMotion ? ["0%", "0%"] : ["7%", "-18%"]
+  );
+  const titleY = useTransform(
+    scrollYProgress,
+    [0.05, 0.34],
+    reduceMotion ? [0, 0] : [120, -40]
+  );
+  const titleOpacity = useTransform(scrollYProgress, [0.05, 0.18, 0.35], [0, 1, 0.16]);
+
   return (
-    <section id="journey" className="py-24 relative overflow-hidden" aria-label="Academic and Technical Journey">
-      {/* Background ambient lighting */}
-      <div
-        className="absolute top-1/3 right-0 w-96 h-96 bg-violet-600/5 rounded-full blur-3xl pointer-events-none -z-10"
-        aria-hidden="true"
-      />
+    <section ref={ref} id="journey" className="relative overflow-hidden pb-28" aria-label="Academic and technical journey">
+      <div className="relative h-[125vh]">
+        <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+          <motion.div style={{ x: titleX, y: titleY, opacity: titleOpacity }} className="whitespace-nowrap">
+            <p className="pl-[7vw] font-mono text-[10px] uppercase tracking-[0.32em] text-violet-300">
+              / 02 / trajectory
+            </p>
+            <h2 className="mt-3 text-[21vw] font-black uppercase leading-[0.72] tracking-[-0.08em] text-violet-300 sm:text-[16vw] lg:text-[13vw]">
+              How I Learn
+            </h2>
+          </motion.div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="flex flex-col items-start space-y-2 mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-charcoal-850 border border-white/10 text-xs font-mono text-violet-400">
-            <span>/ 02 /</span>
-            <span>TRAJECTORY & MILESTONES</span>
+          <div className="absolute bottom-[13vh] right-[7vw] max-w-sm text-right">
+            <p className="font-mono text-[9px] uppercase tracking-[0.28em] text-white/35">
+              Scroll chapter
+            </p>
+            <p className="mt-3 text-sm leading-6 text-white/55">
+              Each stage adds another layer: fundamentals, product building, applied AI, then production systems.
+            </p>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-warmWhite tracking-tight">
-            The learning arc & technical progression.
-          </h2>
-          <p className="text-mutedWhite text-sm sm:text-base max-w-xl">
-            A chronological timeline of academic milestones, self-driven research, and future technical objectives.
-          </p>
         </div>
+      </div>
 
-        {/* Timeline Container */}
-        <div className="relative">
-          {/* Vertical Glowing Connector Line (Desktop) */}
-          <div
-            className="hidden md:block absolute left-8 top-4 bottom-4 w-0.5 bg-gradient-to-b from-cyan-500 via-violet-500 to-emerald-500 opacity-30"
-            aria-hidden="true"
-          />
-
-          <div className="space-y-8 md:space-y-12">
-            {portfolioConfig.journey.map((item, index) => {
-              const isCurrent = item.period === "Current";
-              const isOngoing = item.period === "Ongoing";
-              const isNext = item.period === "Next";
-
-              const badgeColor = isCurrent
-                ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/30"
-                : isOngoing
-                ? "bg-violet-500/10 text-violet-400 border-violet-500/30"
-                : "bg-emerald-500/10 text-emerald-400 border-emerald-500/30";
-
-              const nodeColor = isCurrent
-                ? "border-cyan-400 bg-cyan-950 text-cyan-300 ring-cyan-500/20"
-                : isOngoing
-                ? "border-violet-400 bg-violet-950 text-violet-300 ring-violet-500/20"
-                : "border-emerald-400 bg-emerald-950 text-emerald-300 ring-emerald-500/20";
-
-              return (
-                <div
-                  key={item.number}
-                  className="relative md:pl-20 group"
-                >
-                  {/* Timeline Node on the connector line (Desktop) */}
-                  <div
-                    className={`hidden md:flex absolute left-5 top-6 -translate-x-1/2 w-6 h-6 rounded-full border-2 items-center justify-center text-[10px] font-mono font-bold shadow-lg ring-4 transition-all duration-300 group-hover:scale-110 ${nodeColor}`}
-                    aria-hidden="true"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-current" />
-                  </div>
-
-                  {/* Card Body */}
-                  <div className="p-6 sm:p-8 rounded-2xl bg-charcoal-900/80 border border-white/10 backdrop-blur-md hover:border-white/20 transition-all duration-300 hover:shadow-2xl hover:shadow-black/40 group-hover:-translate-y-0.5">
-                    {/* Card Header */}
-                    <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-4 border-b border-white/10">
-                      <div className="flex items-center gap-3">
-                        <span className="font-mono text-sm font-bold text-mutedWhite/80 group-hover:text-cyan-400 transition-colors">
-                          {item.number}
-                        </span>
-                        <h3 className="text-lg sm:text-xl font-bold text-warmWhite">
-                          {item.title}
-                        </h3>
-                      </div>
-
-                      <div className="flex items-center gap-2">
-                        <span className={`px-2.5 py-1 rounded-full text-xs font-mono font-medium border ${badgeColor}`}>
-                          {item.period}
-                        </span>
-                      </div>
+      <div className="relative mx-auto -mt-[28vh] max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="space-y-24 md:space-y-36">
+          {portfolioConfig.journey.map((item, index) => {
+            const fromLeft = index % 2 === 0;
+            return (
+              <motion.article
+                key={item.number}
+                initial={reduceMotion ? { opacity: 1 } : { opacity: 0, x: fromLeft ? -110 : 110, scale: 0.94 }}
+                whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                viewport={{ once: false, amount: 0.35 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className={"grid min-h-[46vh] items-center gap-8 md:grid-cols-12 " + (fromLeft ? "" : "md:[&>*:first-child]:order-2")}
+              >
+                <div className="md:col-span-5">
+                  <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-black/30 p-8 backdrop-blur-xl sm:p-10">
+                    <div className="absolute -right-10 -top-14 text-[9rem] font-black leading-none text-white/[0.035]">
+                      {String(index + 1).padStart(2, "0")}
                     </div>
-
-                    {/* Institution tag */}
-                    <div className="flex items-center gap-2 text-xs font-mono text-mutedWhite mb-3">
-                      <MapPin className="w-3.5 h-3.5 text-cyan-400" />
-                      <span>{item.institution}</span>
-                    </div>
-
-                    {/* Description narrative */}
-                    <p className="text-sm sm:text-base text-neutral-300 leading-relaxed mb-6">
-                      {item.description}
+                    <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-cyan-300/80">
+                      {item.period}
                     </p>
-
-                    {/* Focus Areas Chips */}
-                    <div className="space-y-2">
-                      <span className="text-xs font-mono uppercase tracking-wider text-mutedWhite block">
-                        Core Competencies &amp; Focus:
-                      </span>
-                      <div className="flex flex-wrap gap-2">
-                        {item.focusAreas.map((area) => (
-                          <span
-                            key={area}
-                            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-charcoal-800/90 border border-white/10 text-xs font-mono text-neutral-200 group-hover:border-white/20 transition-colors"
-                          >
-                            <span className="w-1 h-1 rounded-full bg-cyan-400" />
-                            {area}
-                          </span>
-                        ))}
-                      </div>
+                    <h3 className="mt-4 text-3xl font-bold leading-tight tracking-[-0.04em] text-white sm:text-4xl">
+                      {item.title}
+                    </h3>
+                    <div className="mt-5 flex items-center gap-2 text-xs text-white/45">
+                      <MapPin className="h-3.5 w-3.5 text-violet-300" />
+                      {item.institution}
                     </div>
                   </div>
                 </div>
-              );
-            })}
-          </div>
+
+                <div className="md:col-span-7">
+                  <p className="max-w-2xl text-lg leading-8 text-white/64 sm:text-xl">
+                    {item.description}
+                  </p>
+                  <div className="mt-7 flex flex-wrap gap-2.5">
+                    {item.focusAreas.map((area) => (
+                      <span
+                        key={area}
+                        className="rounded-full border border-white/10 bg-white/[0.035] px-4 py-2 font-mono text-[10px] uppercase tracking-[0.14em] text-white/65 backdrop-blur-md"
+                      >
+                        {area}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="mt-8 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-cyan-300/65">
+                    Continue trajectory <ArrowUpRight className="h-3.5 w-3.5" />
+                  </div>
+                </div>
+              </motion.article>
+            );
+          })}
         </div>
       </div>
     </section>

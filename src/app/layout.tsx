@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { MotionProvider } from "@/context/MotionContext";
+import { ThemeProvider } from "@/context/ThemeContext";
 import { portfolioConfig } from "@/data/portfolio.config";
 
 const inter = Inter({
@@ -17,14 +18,17 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#07090c",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f4f3ef" },
+    { media: "(prefers-color-scheme: dark)", color: "#111114" },
+  ],
   width: "device-width",
   initialScale: 1,
 };
 
 export const metadata: Metadata = {
   title: `${portfolioConfig.personal.fullName} — ${portfolioConfig.personal.role}`,
-  description: `${portfolioConfig.personal.shortIntro} Explore projects in AgriTech, AI Study synthesis, Computer Vision verification, and Interactive Physics.`,
+  description: `${portfolioConfig.personal.shortIntro} Explore full-stack, AI, and interactive projects.`,
   keywords: [
     "Suryakanta Bala",
     "Surya Bala",
@@ -51,10 +55,7 @@ export const metadata: Metadata = {
     title: `${portfolioConfig.personal.fullName} — Portfolio`,
     description: portfolioConfig.personal.shortIntro,
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
@@ -63,11 +64,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} dark scroll-smooth`}>
-      <body className="bg-charcoal-950 text-warmWhite font-sans antialiased min-h-screen flex flex-col selection:bg-aqua-400/20 selection:text-white">
-        <MotionProvider>
-          {children}
-        </MotionProvider>
+    <html
+      lang="en"
+      data-theme="light"
+      suppressHydrationWarning
+      className={`${inter.variable} ${jetbrainsMono.variable} scroll-smooth`}
+    >
+      <body className="min-h-screen overflow-x-hidden font-sans antialiased">
+        <ThemeProvider>
+          <MotionProvider>{children}</MotionProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

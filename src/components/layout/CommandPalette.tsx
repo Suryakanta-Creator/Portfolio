@@ -70,16 +70,16 @@ export function CommandPalette() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="fixed bottom-5 right-5 z-40 hidden items-center gap-2 rounded-full border border-white/10 bg-charcoal-900/85 px-3 py-2 font-mono text-[10px] text-mutedWhite shadow-xl shadow-black/40 backdrop-blur-xl transition hover:border-cyan-400/35 hover:text-cyan-300 sm:flex"
+        className="fixed bottom-5 right-5 z-40 hidden items-center gap-2 rounded-full border theme-border theme-panel px-3 py-2 font-mono text-[9px] uppercase tracking-[0.11em] theme-muted editorial-shadow transition hover:text-[var(--accent)] sm:flex"
         aria-label="Open command palette"
       >
         <Keyboard className="h-3.5 w-3.5" />
-        CTRL K
+        Ctrl K
       </button>
 
       {open && (
         <div
-          className="fixed inset-0 z-[100] flex items-start justify-center bg-black/65 px-4 pt-[14vh] backdrop-blur-sm"
+          className="fixed inset-0 z-[100] flex items-start justify-center bg-black/35 px-4 pt-[14vh] backdrop-blur-sm"
           role="dialog"
           aria-modal="true"
           aria-label="Portfolio command palette"
@@ -87,20 +87,20 @@ export function CommandPalette() {
             if (event.currentTarget === event.target) setOpen(false);
           }}
         >
-          <div className="w-full max-w-xl overflow-hidden rounded-2xl border border-cyan-500/20 bg-[#080b10] shadow-2xl shadow-black/70">
-            <div className="flex items-center gap-3 border-b border-white/10 px-4 py-3">
-              <Search className="h-4 w-4 text-cyan-400" />
+          <div className="w-full max-w-xl overflow-hidden rounded-[1.7rem] border theme-border theme-panel-strong editorial-shadow">
+            <div className="flex items-center gap-3 border-b theme-border px-4 py-3">
+              <Search className="h-4 w-4 theme-accent" />
               <input
                 ref={inputRef}
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder="Jump to a section..."
-                className="flex-1 bg-transparent text-sm text-warmWhite outline-none placeholder:text-mutedWhite/60"
+                className="flex-1 bg-transparent text-sm theme-text outline-none placeholder:text-[var(--muted)]"
               />
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="rounded-lg p-1.5 text-mutedWhite hover:bg-white/5 hover:text-warmWhite"
+                className="rounded-lg p-1.5 theme-muted transition hover:bg-black/[0.04] hover:text-[var(--text)] dark:hover:bg-white/[0.05]"
                 aria-label="Close command palette"
               >
                 <X className="h-4 w-4" />
@@ -115,32 +115,30 @@ export function CommandPalette() {
                     key={item.target}
                     type="button"
                     onClick={() => go(item.target)}
-                    className="flex w-full items-center justify-between rounded-xl px-3 py-3 text-left transition hover:bg-white/[0.05]"
+                    className="flex w-full items-center justify-between rounded-xl px-3 py-3 text-left transition hover:bg-black/[0.04] dark:hover:bg-white/[0.05]"
                   >
                     <span className="flex items-center gap-3">
-                      <span className="rounded-lg border border-white/10 bg-charcoal-900 p-2 text-cyan-400">
+                      <span className="rounded-lg border theme-border theme-accent-soft p-2 theme-accent">
                         <Icon className="h-4 w-4" />
                       </span>
-                      <span className="text-sm font-medium text-warmWhite">{item.label}</span>
+                      <span className="text-sm font-medium theme-text">{item.label}</span>
                     </span>
-                    <span className="font-mono text-[10px] text-mutedWhite">/{item.hint}</span>
+                    <span className="font-mono text-[9px] theme-muted">/{item.hint}</span>
                   </button>
                 );
               })}
 
               {filtered.length === 0 && (
-                <div className="px-4 py-10 text-center text-sm text-mutedWhite">
-                  No command found.
-                </div>
+                <div className="px-4 py-10 text-center text-sm theme-muted">No command found.</div>
               )}
             </div>
 
-            <div className="flex items-center justify-between border-t border-white/10 px-4 py-3 font-mono text-[9px] text-mutedWhite">
+            <div className="flex items-center justify-between border-t theme-border px-4 py-3 font-mono text-[8px] uppercase tracking-[0.12em] theme-muted">
               <span className="inline-flex items-center gap-1">
-                <Sparkles className="h-3 w-3 text-violet-400" />
-                SURYA_COMMAND_CENTER
+                <Sparkles className="h-3 w-3 theme-accent" />
+                Surya command center
               </span>
-              <span>ESC to close</span>
+              <span>Esc to close</span>
             </div>
           </div>
         </div>

@@ -1,7 +1,9 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
-import { Check, RotateCcw, Terminal, X } from "lucide-react";
+import React, { useMemo, useRef, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Check, Code2, RotateCcw, Terminal, X } from "lucide-react";
+import { usePortfolioMotion } from "@/context/MotionContext";
 
 const challenges = [
   {
@@ -22,9 +24,23 @@ const challenges = [
 ];
 
 export function Playground() {
+  const ref = useRef<HTMLElement>(null);
   const [step, setStep] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
   const [score, setScore] = useState(0);
+  const { reduceMotion } = usePortfolioMotion();
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const leftTopX = useTransform(scrollYProgress, [0, 0.5, 1], reduceMotion ? [0, 0, 0] : [-160, 0, 120]);
+  const leftTopY = useTransform(scrollYProgress, [0, 0.5, 1], reduceMotion ? [0, 0, 0] : [90, -40, -130]);
+  const rightTopX = useTransform(scrollYProgress, [0, 0.5, 1], reduceMotion ? [0, 0, 0] : [160, 0, -130]);
+  const rightTopY = useTransform(scrollYProgress, [0, 0.5, 1], reduceMotion ? [0, 0, 0] : [70, -55, -120]);
+  const lowerX = useTransform(scrollYProgress, [0, 0.5, 1], reduceMotion ? [0, 0, 0] : [-100, 40, 150]);
+  const lowerY = useTransform(scrollYProgress, [0, 0.5, 1], reduceMotion ? [0, 0, 0] : [-80, 35, 120]);
 
   const complete = step >= challenges.length;
   const current = challenges[Math.min(step, challenges.length - 1)];
@@ -53,101 +69,129 @@ export function Playground() {
   };
 
   return (
-    <section id="playground" className="relative overflow-hidden py-24" aria-label="Developer playground">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
-          <div className="lg:col-span-5">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-charcoal-850 px-3 py-1 font-mono text-xs text-cyan-400">
-              <span>/ 06 /</span>
-              <span>DEVELOPER PLAYGROUND</span>
+    <section ref={ref} id="playground" className="relative min-h-[120vh] overflow-hidden py-32" aria-label="Developer playground">
+      <div className="pointer-events-none absolute inset-0 hidden md:block">
+        <motion.div
+          style={{ x: leftTopX, y: leftTopY, rotate: -7 }}
+          className="absolute left-[7%] top-[14%] w-56 rounded-2xl border border-cyan-300/15 bg-[#07131b]/70 p-4 shadow-2xl shadow-black/40 backdrop-blur-xl"
+        >
+          <Code2 className="h-4 w-4 text-cyan-300" />
+          <p className="mt-4 font-mono text-[10px] text-white/55">const curiosity = true;</p>
+          <p className="mt-1 font-mono text-[10px] text-violet-300">ship(iterate(build()));</p>
+        </motion.div>
+
+        <motion.div
+          style={{ x: rightTopX, y: rightTopY, rotate: 8 }}
+          className="absolute right-[8%] top-[19%] w-48 rounded-2xl border border-violet-300/15 bg-[#120b22]/70 p-4 shadow-2xl shadow-black/40 backdrop-blur-xl"
+        >
+          <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-violet-300">runtime</p>
+          <p className="mt-3 text-3xl font-black text-white">60 FPS</p>
+          <p className="mt-1 text-[10px] text-white/35">motion target</p>
+        </motion.div>
+
+        <motion.div
+          style={{ x: lowerX, y: lowerY, rotate: -4 }}
+          className="absolute bottom-[14%] left-[14%] w-52 rounded-2xl border border-emerald-300/15 bg-[#071712]/70 p-4 shadow-2xl shadow-black/40 backdrop-blur-xl"
+        >
+          <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-emerald-300">status</p>
+          <p className="mt-3 text-sm font-bold text-white">BUILD → TEST → DEPLOY</p>
+        </motion.div>
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+        <div className="mb-20 text-center">
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-cyan-300">
+            / 06 / developer playground
+          </p>
+          <h2 className="mx-auto mt-5 max-w-5xl text-[14vw] font-black uppercase leading-[0.78] tracking-[-0.075em] text-white sm:text-[10vw] lg:text-[7.5vw]">
+            Debug
+            <span className="block text-transparent [-webkit-text-stroke:1px_rgba(103,232,249,0.72)]">
+              the system.
+            </span>
+          </h2>
+        </div>
+
+        <motion.div
+          initial={reduceMotion ? { opacity: 1 } : { opacity: 0, scale: 0.88, y: 90 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.25 }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          className="mx-auto max-w-3xl overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-[#03070b]/90 shadow-2xl shadow-black/60 backdrop-blur-xl"
+        >
+          <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
+            <div className="flex items-center gap-2 font-mono text-xs text-white/45">
+              <Terminal className="h-4 w-4 text-cyan-300" />
+              debug_protocol.exe
             </div>
-            <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-warmWhite sm:text-4xl">
-              Don&apos;t just scroll. Debug something.
-            </h2>
-            <p className="mt-4 max-w-xl text-sm leading-relaxed text-mutedWhite">
-              A tiny browser-only debugging challenge hidden inside the portfolio. No login,
-              no score tracking, no backend — just a small interactive Easter egg for curious visitors.
-            </p>
+            <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-cyan-300">
+              {systemState}
+            </span>
           </div>
 
-          <div className="lg:col-span-7">
-            <div className="overflow-hidden rounded-2xl border border-cyan-500/20 bg-[#05070a] shadow-2xl shadow-black/50">
-              <div className="flex items-center justify-between border-b border-white/10 bg-charcoal-900/90 px-4 py-3">
-                <div className="flex items-center gap-2 font-mono text-xs text-mutedWhite">
-                  <Terminal className="h-4 w-4 text-cyan-400" />
-                  debug_protocol.exe
+          <div className="p-6 sm:p-9">
+            {complete ? (
+              <div className="py-8 text-center">
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10">
+                  <Check className="h-7 w-7 text-emerald-300" />
                 </div>
-                <span className="font-mono text-[10px] text-cyan-300">{systemState}</span>
+                <h3 className="mt-5 text-3xl font-black tracking-[-0.04em] text-white">{systemState}</h3>
+                <p className="mt-2 font-mono text-xs text-cyan-300">score: {score}/{challenges.length}</p>
+                <button
+                  onClick={reset}
+                  className="mt-7 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-5 py-3 text-xs font-semibold text-white transition hover:border-cyan-300/35"
+                >
+                  <RotateCcw className="h-4 w-4" />
+                  Run again
+                </button>
               </div>
+            ) : (
+              <>
+                <div className="mb-6 flex items-center justify-between font-mono text-[9px] uppercase tracking-[0.16em] text-white/35">
+                  <span>patch {step + 1}/{challenges.length}</span>
+                  <span>score {score}</span>
+                </div>
 
-              <div className="p-5 sm:p-7">
-                {complete ? (
-                  <div className="py-6 text-center">
-                    <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-emerald-500/30 bg-emerald-500/10">
-                      <Check className="h-6 w-6 text-emerald-400" />
-                    </div>
-                    <h3 className="mt-4 text-2xl font-bold text-warmWhite">{systemState}</h3>
-                    <p className="mt-2 font-mono text-sm text-cyan-300">
-                      score: {score}/{challenges.length}
-                    </p>
+                <p className="text-xl font-bold leading-8 tracking-[-0.025em] text-white">{current.prompt}</p>
+
+                <div className="mt-6 grid gap-3">
+                  {current.options.map((option, index) => {
+                    const answered = selected !== null;
+                    const correct = index === current.answer;
+                    const picked = selected === index;
+
+                    let stateClass = "border-white/10 bg-white/[0.025] hover:border-cyan-300/35";
+                    if (answered && correct) stateClass = "border-emerald-400/40 bg-emerald-400/10";
+                    if (answered && picked && !correct) stateClass = "border-red-400/40 bg-red-400/10";
+
+                    return (
+                      <button
+                        key={option}
+                        onClick={() => choose(index)}
+                        disabled={answered}
+                        className={"flex items-center justify-between rounded-xl border p-4 text-left text-sm text-white/72 transition " + stateClass}
+                      >
+                        <span>{option}</span>
+                        {answered && correct && <Check className="h-4 w-4 text-emerald-300" />}
+                        {answered && picked && !correct && <X className="h-4 w-4 text-red-300" />}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {selected !== null && (
+                  <div className="mt-6 flex justify-end">
                     <button
-                      onClick={reset}
-                      className="mt-6 inline-flex items-center gap-2 rounded-xl border border-white/10 bg-charcoal-850 px-4 py-2.5 text-xs font-medium text-warmWhite transition hover:border-cyan-400/40"
+                      onClick={next}
+                      className="rounded-full bg-cyan-300 px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] text-[#031014]"
                     >
-                      <RotateCcw className="h-4 w-4" />
-                      Run again
+                      Next patch →
                     </button>
                   </div>
-                ) : (
-                  <>
-                    <div className="mb-5 flex items-center justify-between font-mono text-[10px] text-mutedWhite">
-                      <span>PATCH {step + 1}/{challenges.length}</span>
-                      <span>SCORE {score}</span>
-                    </div>
-
-                    <p className="text-base font-semibold leading-relaxed text-warmWhite">{current.prompt}</p>
-
-                    <div className="mt-5 grid gap-3">
-                      {current.options.map((option, index) => {
-                        const answered = selected !== null;
-                        const correct = index === current.answer;
-                        const picked = selected === index;
-
-                        let stateClass = "border-white/10 bg-charcoal-900/70 hover:border-cyan-400/35";
-                        if (answered && correct) stateClass = "border-emerald-500/40 bg-emerald-500/10";
-                        if (answered && picked && !correct) stateClass = "border-red-500/40 bg-red-500/10";
-
-                        return (
-                          <button
-                            key={option}
-                            onClick={() => choose(index)}
-                            disabled={answered}
-                            className={`flex items-center justify-between rounded-xl border p-3 text-left text-sm text-neutral-200 transition ${stateClass}`}
-                          >
-                            <span>{option}</span>
-                            {answered && correct && <Check className="h-4 w-4 text-emerald-400" />}
-                            {answered && picked && !correct && <X className="h-4 w-4 text-red-400" />}
-                          </button>
-                        );
-                      })}
-                    </div>
-
-                    {selected !== null && (
-                      <div className="mt-5 flex justify-end">
-                        <button
-                          onClick={next}
-                          className="rounded-xl bg-gradient-to-r from-cyan-500 to-aqua-400 px-4 py-2.5 text-xs font-semibold text-charcoal-950"
-                        >
-                          Next patch →
-                        </button>
-                      </div>
-                    )}
-                  </>
                 )}
-              </div>
-            </div>
+              </>
+            )}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

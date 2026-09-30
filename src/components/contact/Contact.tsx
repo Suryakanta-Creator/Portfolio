@@ -181,9 +181,21 @@ export function Contact() {
               </button>
 
               {status && (
-                <p className="mt-4 rounded-lg border border-cyan-500/20 bg-cyan-500/[0.06] px-3 py-2 font-mono text-[10px] text-cyan-200">
-                  {status}
-                </p>
+                <div className="mt-4 rounded-xl border border-cyan-500/25 bg-cyan-500/10 p-3.5 font-mono text-xs text-cyan-200">
+                  <p>{status}</p>
+                  {!portfolioConfig.contact.email && (
+                    <a
+                      href={`https://github.com/${portfolioConfig.personal.githubUsername}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-warmWhite hover:text-cyan-300 underline underline-offset-2"
+                    >
+                      <Github className="h-3.5 w-3.5" />
+                      Contact via GitHub (@{portfolioConfig.personal.githubUsername})
+                      <ArrowUpRight className="h-3 w-3" />
+                    </a>
+                  )}
+                </div>
               )}
             </form>
           </div>

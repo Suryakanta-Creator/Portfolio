@@ -90,7 +90,7 @@ export function Projects() {
                     onClick={() => setSelectedProject(project)}
                     className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-aqua-400 px-4 py-2.5 text-xs font-semibold text-charcoal-950 transition hover:opacity-90"
                   >
-                    <Layers3 className="h-4 w-4" />
+                    <Layers className="h-4 w-4" />
                     Explore project
                   </button>
 

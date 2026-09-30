@@ -15,7 +15,7 @@ import { Footer } from "@/components/layout/Footer";
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen overflow-clip bg-[#02050a] text-warmWhite selection:bg-cyan-500/20 selection:text-white">
+    <div className="relative min-h-screen overflow-clip theme-page">
       <CinematicBackground />
       <Navbar />
       <CommandPalette />

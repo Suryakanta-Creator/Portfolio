@@ -29,20 +29,20 @@ function ProjectScene({
   const copyX = useTransform(
     progress,
     [start, start + 0.06, end],
-    reduceMotion ? [0, 0, 0] : [index % 2 === 0 ? -120 : 120, 0, index % 2 === 0 ? 55 : -55]
+    reduceMotion ? [0, 0, 0] : [index % 2 === 0 ? -92 : 92, 0, index % 2 === 0 ? 38 : -38]
   );
   const visualX = useTransform(
     progress,
     [start, start + 0.07, end],
-    reduceMotion ? [0, 0, 0] : [index % 2 === 0 ? 130 : -130, 0, index % 2 === 0 ? -80 : 80]
+    reduceMotion ? [0, 0, 0] : [index % 2 === 0 ? 105 : -105, 0, index % 2 === 0 ? -55 : 55]
   );
-  const visualY = useTransform(progress, [start, start + 0.08, end], reduceMotion ? [0, 0, 0] : [90, 0, -55]);
+  const visualY = useTransform(progress, [start, start + 0.08, end], reduceMotion ? [0, 0, 0] : [70, 0, -38]);
   const visualRotate = useTransform(
     progress,
     [start, start + 0.08, end],
-    reduceMotion ? [0, 0, 0] : [index % 2 === 0 ? 7 : -7, 0, index % 2 === 0 ? -4 : 4]
+    reduceMotion ? [0, 0, 0] : [index % 2 === 0 ? 5 : -5, 0, index % 2 === 0 ? -2.5 : 2.5]
   );
-  const scale = useTransform(progress, [start, start + 0.07, end], reduceMotion ? [1, 1, 1] : [0.84, 1, 0.94]);
+  const scale = useTransform(progress, [start, start + 0.07, end], reduceMotion ? [1, 1, 1] : [0.9, 1, 0.96]);
 
   const alignLeft = index % 2 === 0;
 
@@ -62,9 +62,7 @@ function ProjectScene({
           {project.title}
         </h3>
         <p className="mt-5 text-sm leading-6 text-white/70 sm:text-base">{project.tagline}</p>
-        <p className="mt-4 max-w-sm text-xs leading-6 text-white/52 sm:text-sm">
-          {project.description}
-        </p>
+        <p className="mt-4 max-w-sm text-xs leading-6 text-white/52 sm:text-sm">{project.description}</p>
 
         <div className={"mt-6 flex flex-wrap gap-2 " + (!alignLeft ? "lg:justify-end" : "")}>
           {project.expandedDetails.techStack.slice(0, 4).map((tech) => (
@@ -83,8 +81,7 @@ function ProjectScene({
             onClick={onOpen}
             className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-[10px] font-semibold text-[#5522c9] transition hover:scale-105"
           >
-            <Layers className="h-3.5 w-3.5" />
-            Case study
+            <Layers className="h-3.5 w-3.5" /> Case study
           </button>
           <a
             href={project.repositoryUrl}
@@ -92,8 +89,7 @@ function ProjectScene({
             rel="noreferrer"
             className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/10 px-4 py-2.5 text-[10px] font-semibold text-white backdrop-blur-md transition hover:bg-white/10"
           >
-            <Github className="h-3.5 w-3.5" />
-            Source
+            <Github className="h-3.5 w-3.5" /> Source
           </a>
         </div>
       </motion.div>
@@ -101,12 +97,12 @@ function ProjectScene({
       <motion.div
         style={{ x: visualX, y: visualY, rotate: visualRotate, scale }}
         className={
-          "absolute bottom-[9%] z-10 w-[52vw] max-w-[680px] min-w-[320px] " +
+          "absolute bottom-[9%] z-10 w-[52vw] max-w-[650px] min-w-[300px] " +
           (alignLeft ? "right-[5vw]" : "left-[5vw]")
         }
       >
-        <div className="rounded-[2rem] border border-white/20 bg-white/[0.11] p-2 shadow-[0_36px_90px_-42px_rgba(23,7,56,0.7)] backdrop-blur-xl">
-          <ProjectVisual type={project.placeholderType} reduceMotion={reduceMotion} />
+        <div className="rounded-[2rem] border border-white/20 bg-white/[0.11] p-2 shadow-[0_30px_70px_-38px_rgba(23,7,56,0.65)] backdrop-blur-xl">
+          <ProjectVisual type={project.placeholderType} reduceMotion={true} />
         </div>
       </motion.div>
     </motion.div>
@@ -118,27 +114,24 @@ export function Projects() {
   const { reduceMotion } = usePortfolioMotion();
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end end"],
-  });
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
 
   const introOpacity = useTransform(scrollYProgress, [0, 0.025, 0.10], [1, 1, 0]);
-  const introY = useTransform(scrollYProgress, [0, 0.10], reduceMotion ? [0, 0] : [0, -120]);
+  const introY = useTransform(scrollYProgress, [0, 0.10], reduceMotion ? [0, 0] : [0, -85]);
   const dashboardOpacity = useTransform(scrollYProgress, [0.67, 0.77, 1], [0, 1, 1]);
-  const dashboardY = useTransform(scrollYProgress, [0.67, 0.82], reduceMotion ? [0, 0] : [100, 0]);
+  const dashboardY = useTransform(scrollYProgress, [0.67, 0.82], reduceMotion ? [0, 0] : [65, 0]);
   const purpleOpacity = useTransform(scrollYProgress, [0.68, 0.80], [1, 0]);
 
   return (
-    <section ref={ref} id="projects" className="relative h-[540vh]" aria-label="Featured software projects">
+    <section ref={ref} id="projects" className="relative h-[430vh]" aria-label="Featured software projects">
       <div className="sticky top-0 h-screen overflow-hidden bg-[#6818e8]">
-        <motion.div style={{ opacity: purpleOpacity }} className="absolute inset-0 bg-[radial-gradient(circle_at_62%_48%,rgba(255,255,255,0.10),transparent_22%),linear-gradient(145deg,#7021f0,#5d12dc)]" />
-        <div className="grain absolute inset-0 opacity-[0.12]" />
-
         <motion.div
-          style={{ opacity: introOpacity, y: introY }}
-          className="absolute inset-x-0 top-[8%] z-30 text-center"
-        >
+          style={{ opacity: purpleOpacity }}
+          className="absolute inset-0 bg-[radial-gradient(circle_at_62%_48%,rgba(255,255,255,0.10),transparent_22%),linear-gradient(145deg,#7021f0,#5d12dc)]"
+        />
+        <div className="grain absolute inset-0 opacity-[0.08]" />
+
+        <motion.div style={{ opacity: introOpacity, y: introY }} className="absolute inset-x-0 top-[8%] z-30 text-center">
           <p className="font-mono text-[8px] uppercase tracking-[0.26em] text-white/55">Selected builds / real problems</p>
           <h2 className="mx-auto mt-3 max-w-5xl text-[8vw] font-semibold uppercase leading-[0.84] tracking-[-0.06em] text-white sm:text-[6.5vw] lg:text-[5.4vw]">
             Products built to
@@ -179,9 +172,7 @@ export function Projects() {
                     >
                       <span>
                         <span className="block text-xs font-medium text-white/85">{project.title}</span>
-                        <span className="mt-1 block font-mono text-[7px] uppercase tracking-[0.12em] text-white/35">
-                          {project.category}
-                        </span>
+                        <span className="mt-1 block font-mono text-[7px] uppercase tracking-[0.12em] text-white/35">{project.category}</span>
                       </span>
                       <span className="font-mono text-[8px] text-white/25">0{index + 1}</span>
                     </button>
@@ -191,29 +182,24 @@ export function Projects() {
 
               <div className="grid min-h-0 gap-3 sm:grid-cols-2">
                 {portfolioConfig.projects.map((project, index) => (
-                  <motion.button
+                  <button
                     key={project.id}
                     type="button"
                     onClick={() => setSelectedProject(project)}
-                    initial={reduceMotion ? false : { opacity: 0, y: 28 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, amount: 0.3 }}
-                    transition={{ duration: 0.45, delay: index * 0.05 }}
-                    className="group relative overflow-hidden rounded-[1.6rem] border border-white/10 bg-[#222223] p-3 text-left transition hover:-translate-y-1 hover:border-white/20"
+                    className="group relative overflow-hidden rounded-[1.6rem] border border-white/10 bg-[#222223] p-5 text-left transition hover:-translate-y-1 hover:border-white/20"
                   >
-                    <div className="h-[54%] overflow-hidden rounded-xl bg-black/25">
-                      <ProjectVisual type={project.placeholderType} reduceMotion={true} />
-                    </div>
-                    <div className="mt-3 flex items-end justify-between gap-3 px-1 pb-1">
+                    <div className="flex h-full flex-col justify-between">
                       <div>
-                        <p className="text-sm font-semibold text-white">{project.title}</p>
-                        <p className="mt-1 font-mono text-[7px] uppercase tracking-[0.12em] text-white/35">
-                          {project.expandedDetails.status}
-                        </p>
+                        <p className="font-mono text-[8px] uppercase tracking-[0.14em] text-white/32">0{index + 1} / {project.category}</p>
+                        <p className="mt-3 text-xl font-semibold text-white">{project.title}</p>
+                        <p className="mt-3 max-w-sm text-xs leading-5 text-white/46">{project.tagline}</p>
                       </div>
-                      <ArrowUpRight className="h-4 w-4 text-white/35 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white" />
+                      <div className="mt-5 flex items-end justify-between gap-3">
+                        <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-white/35">{project.expandedDetails.status}</span>
+                        <ArrowUpRight className="h-4 w-4 text-white/35 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white" />
+                      </div>
                     </div>
-                  </motion.button>
+                  </button>
                 ))}
               </div>
             </div>

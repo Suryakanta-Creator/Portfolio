@@ -47,11 +47,11 @@ function FloatingRepo({
       style={{ left: leftPct, top: topPct, rotate, scale, opacity }}
       className="absolute w-[150px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl border theme-border theme-panel editorial-shadow sm:w-[190px]"
     >
-      <div className={`relative h-24 overflow-hidden bg-gradient-to-br ${repoTones[index] ?? repoTones[0]} sm:h-30`}>
+      <div className={`relative h-24 overflow-hidden bg-gradient-to-br ${repoTones[index] ?? repoTones[0]} sm:h-32`}>
         <div className="soft-grid absolute inset-0 opacity-30" />
         <div className="absolute inset-x-3 bottom-3 flex items-end justify-between">
           <span className="font-mono text-[8px] uppercase tracking-[0.12em] theme-muted">repository</span>
-          <span className="text-3xl font-semibold theme-text/10">0{index + 1}</span>
+          <span className="text-3xl font-semibold text-black/10 dark:text-white/10">0{index + 1}</span>
         </div>
       </div>
       <div className="flex items-center justify-between gap-2 p-3">

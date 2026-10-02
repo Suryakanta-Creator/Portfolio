@@ -1,52 +1,45 @@
 "use client";
-
-import React, { createContext, useContext, useEffect, useState } from "react";
-
-interface MotionContextType {
-  reduceMotion: boolean;
-  toggleReduceMotion: () => void;
-}
-
-const MotionContext = createContext<MotionContextType>({
-  reduceMotion: false,
+import { createContext, useContext, useEffect, useState } from "react";
+const MotionContext = createContext({
+  reduceMotion: true,
   toggleReduceMotion: () => {},
 });
-
 export function MotionProvider({ children }: { children: React.ReactNode }) {
-  const [reduceMotion, setReduceMotion] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
+  const [manual, setManual] = useState(false);
+  const [system, setSystem] = useState(true);
   useEffect(() => {
-    setMounted(true);
-    // Check localStorage or system prefers-reduced-motion
-    const stored = localStorage.getItem("sb_portfolio_reduce_motion");
-    if (stored !== null) {
-      setReduceMotion(stored === "true");
-    } else {
-      const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-      setReduceMotion(mediaQuery.matches);
-
-      const handleChange = (e: MediaQueryListEvent) => {
-        setReduceMotion(e.matches);
-      };
-      mediaQuery.addEventListener("change", handleChange);
-      return () => mediaQuery.removeEventListener("change", handleChange);
-    }
+    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setSystem(query.matches);
+    update();
+    try {
+      setManual(localStorage.getItem("sb_portfolio_reduce_motion") === "true");
+    } catch {}
+    query.addEventListener("change", update);
+    const visibility = () =>
+      document.documentElement.classList.toggle("tab-hidden", document.hidden);
+    document.addEventListener("visibilitychange", visibility);
+    return () => {
+      query.removeEventListener("change", update);
+      document.removeEventListener("visibilitychange", visibility);
+    };
   }, []);
-
+  const reduceMotion = system || manual;
+  useEffect(() => {
+    document.documentElement.dataset.reduceMotion = String(reduceMotion);
+  }, [reduceMotion]);
   const toggleReduceMotion = () => {
-    const nextVal = !reduceMotion;
-    setReduceMotion(nextVal);
-    localStorage.setItem("sb_portfolio_reduce_motion", String(nextVal));
+    setManual((value) => {
+      const next = !value;
+      try {
+        localStorage.setItem("sb_portfolio_reduce_motion", String(next));
+      } catch {}
+      return next;
+    });
   };
-
   return (
-    <MotionContext.Provider value={{ reduceMotion: mounted ? reduceMotion : false, toggleReduceMotion }}>
+    <MotionContext.Provider value={{ reduceMotion, toggleReduceMotion }}>
       {children}
     </MotionContext.Provider>
   );
 }
-
-export function usePortfolioMotion() {
-  return useContext(MotionContext);
-}
+export const usePortfolioMotion = () => useContext(MotionContext);

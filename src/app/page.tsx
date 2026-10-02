@@ -29,8 +29,8 @@ export default function Home() {
         <Journey />
         <Projects />
         <Skills />
-        <Contact />
         <MemoryGarden />
+        <Contact />
       </main>
 
       {/* Site Footer */}

@@ -2,6 +2,7 @@ import React from "react";
 import { MemoryGarden } from "@/components/game/MemoryGarden";
 import { SectionMotion } from "@/components/effects/SectionMotion";
 import { CursorEffect } from "@/components/effects/CursorEffect";
+import { SiteAtmosphere } from "@/components/effects/SiteAtmosphere";
 import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/hero/Hero";
 import { About } from "@/components/about/About";
@@ -10,6 +11,7 @@ import { Projects } from "@/components/projects/Projects";
 import { Skills } from "@/components/skills/Skills";
 import { Contact } from "@/components/contact/Contact";
 import { Footer } from "@/components/layout/Footer";
+import { TypingNote } from "@/components/effects/TypingNote";
 
 export default function Home() {
   return (
@@ -20,6 +22,7 @@ export default function Home() {
       {/* Fixed Sticky Header Navigation */}
       <Navbar />
       <CursorEffect />
+      <SiteAtmosphere />
       <SectionMotion />
 
       {/* Main Content Sections */}
@@ -31,6 +34,7 @@ export default function Home() {
         <Skills />
         <MemoryGarden />
         <Contact />
+        <TypingNote />
       </main>
 
       {/* Site Footer */}

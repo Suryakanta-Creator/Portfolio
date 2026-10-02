@@ -44,6 +44,26 @@ function ProjectCard({
         </span>
       </div>
       <p className="project-summary">{project.description}</p>
+      <div className="mt-4 flex flex-wrap gap-3">
+        <a
+          href={project.liveUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-2 rounded-full border border-[#173226]/20 bg-[#173226] px-4 py-2 text-[11px] font-medium tracking-[0.08em] text-[#e9f5ed] transition-transform duration-300 hover:-translate-y-1"
+          aria-label={`Open live ${project.title} project`}
+        >
+          LIVE PROJECT <ArrowUpRight size={15} />
+        </a>
+        <a
+          href={project.repositoryUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-2 rounded-full border border-[#173226]/20 px-4 py-2 text-[11px] font-medium tracking-[0.08em] text-[#173226] transition-transform duration-300 hover:-translate-y-1"
+          aria-label={`Open ${project.title} repository`}
+        >
+          SOURCE <ArrowUpRight size={15} />
+        </a>
+      </div>
     </motion.article>
   );
 }

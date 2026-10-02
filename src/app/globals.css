@@ -1380,3 +1380,46 @@ html[data-reduce-motion="true"] .cursor-bubble { display:none; }
 /* Reduced motion keeps game state changes instant, with the same gameplay. */
 html[data-reduce-motion="true"] .section-motion > * { transform:none!important; opacity:1!important; }
 @media(prefers-reduced-motion:reduce) { .section-motion > * { transform:none!important; opacity:1!important; } }
+
+
+/* Refined motion pass: interactive atmosphere without scroll-heavy effects. */
+.hero-hello { font-size:.42em; letter-spacing:-.035em; line-height:1.15; color:#dce9df; margin-bottom:.18em; }
+.hero-portrait-scene { transform:translateZ(0); animation:portrait-float 7s ease-in-out infinite; animation-play-state:paused; transition:transform .45s cubic-bezier(.2,.7,.2,1); }
+.is-visible .hero-portrait-scene { animation-play-state:running; }
+@media (hover:hover) and (pointer:fine) {
+  .hero-portrait-scene:hover { transform:translateY(-8px) rotate(-1deg) scale(1.018); }
+  .hero-portrait-scene:hover .portrait-frame { box-shadow:0 26px 70px #0007,0 0 35px #9cf4cc1c; }
+}
+.portrait-frame { transition:box-shadow .45s ease; }
+.bubble-field { pointer-events:none; z-index:0; }
+.ambient-bubble { pointer-events:auto; appearance:none; padding:0; cursor:pointer; z-index:1; }
+.ambient-bubble.is-popped { animation:none!important; transform:scale(1.8); opacity:0!important; transition:transform .28s ease,opacity .28s ease; }
+.ambient-diamond { position:absolute; width:22px; height:22px; border:1px solid #c9ffe13d; background:linear-gradient(135deg,#c9ffe11f,transparent 55%); transform:rotate(45deg); animation:ambient-diamond-float 12s ease-in-out infinite; animation-play-state:paused; }
+.diamond-one { left:12%; top:22%; }
+.diamond-two { right:9%; top:62%; width:34px; height:34px; animation-delay:-4s; }
+.diamond-three { left:48%; top:12%; width:15px; height:15px; animation-delay:-8s; }
+.is-visible .ambient-diamond { animation-play-state:running; }
+.hero-copy,.hero-topline,.hero-bottom,.hero-portrait-scene { z-index:2; }
+.journey-chapters { overflow:hidden; }
+.chapter-number { font-size:clamp(22px,3vw,42px); line-height:1; color:#b7d7c4; min-width:64px; }
+.skills-editorial article { grid-template-columns:42px 54px 1fr; }
+.tool-icon { width:44px; height:44px; display:grid; place-items:center; border:1px solid #a7ccb537; border-radius:14px; color:#bfe4ce; transition:transform .3s ease,background .3s ease; }
+.tool-copy { display:grid; grid-template-columns:.75fr 1.6fr; align-items:center; gap:25px; }
+@media (hover:hover) and (pointer:fine) {
+  .skills-editorial article:hover .tool-icon { transform:translateY(-4px) rotate(6deg); background:#bce8ce10; }
+}
+@keyframes portrait-float { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-10px); } }
+@keyframes ambient-diamond-float { 0%,100%{ transform:translateY(0) rotate(45deg); opacity:.45; } 50%{ transform:translateY(-22px) rotate(75deg); opacity:.85; } }
+@media (max-width:700px) {
+  .hero-hello { font-size:.48em; }
+  .skills-editorial article { grid-template-columns:28px 48px 1fr; }
+  .tool-copy { display:block; }
+  .tool-copy p { margin-top:7px; }
+  .chapter-number { min-width:48px; font-size:28px; }
+  .ambient-diamond:nth-of-type(n+3) { display:none; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .hero-portrait-scene,.ambient-diamond { animation:none!important; }
+}
+html[data-reduce-motion="true"] .hero-portrait-scene,
+html[data-reduce-motion="true"] .ambient-diamond { animation:none!important; }

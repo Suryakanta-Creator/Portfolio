@@ -1,6 +1,7 @@
 export interface ProjectItem {
   id: string;
   repositoryUrl: string;
+  liveUrl: string;
   number: string;
   title: string;
   category: string;
@@ -30,6 +31,7 @@ export const portfolioConfig: {
     {
       id: "krushi-seva",
       repositoryUrl: "https://github.com/Suryakanta-Creator/Krushi-seva",
+      liveUrl: "https://krushi-seva-nu.vercel.app",
       number: "/ 01 /",
       title: "Krushi Seva",
       category: "Crop health & AI",
@@ -53,6 +55,7 @@ export const portfolioConfig: {
     {
       id: "ai-study-assistant",
       repositoryUrl: "https://github.com/Suryakanta-Creator/AI-Study-Asistant",
+      liveUrl: "https://aistudyassistant-sigma.vercel.app",
       number: "/ 02 /",
       title: "AI Study Assistant",
       category: "Learning & AI",
@@ -76,6 +79,7 @@ export const portfolioConfig: {
     {
       id: "packcheck-ai",
       repositoryUrl: "https://github.com/Suryakanta-Creator/PackCheck-AI",
+      liveUrl: "https://pack-check-ai-eight.vercel.app",
       number: "/ 03 /",
       title: "PackCheck AI",
       category: "OCR & label assessment",
@@ -99,6 +103,7 @@ export const portfolioConfig: {
     {
       id: "cosmos-world",
       repositoryUrl: "https://github.com/Suryakanta-Creator/cosmic_world",
+      liveUrl: "https://cosmicworld.vercel.app",
       number: "/ 04 /",
       title: "Cosmos World",
       category: "Interactive exploration",

@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import { motion, MotionValue, useScroll, useTransform } from "framer-motion";
-import { ArrowUpRight, Github, Layers } from "lucide-react";
+import { Github, Layers } from "lucide-react";
 import { portfolioConfig, ProjectItem } from "@/data/portfolio.config";
 import { usePortfolioMotion } from "@/context/MotionContext";
 import { ProjectVisual } from "./ProjectVisuals";
@@ -21,28 +21,28 @@ function ProjectScene({
   reduceMotion: boolean;
   onOpen: () => void;
 }) {
-  const starts = [0.02, 0.18, 0.34, 0.50];
+  const starts = [0.04, 0.27, 0.50, 0.73];
   const start = starts[index] ?? 0;
-  const end = start + 0.20;
+  const end = Math.min(start + 0.23, 0.98);
 
   const opacity = useTransform(progress, [start, start + 0.035, end - 0.035, end], [0, 1, 1, 0]);
   const copyX = useTransform(
     progress,
     [start, start + 0.06, end],
-    reduceMotion ? [0, 0, 0] : [index % 2 === 0 ? -92 : 92, 0, index % 2 === 0 ? 38 : -38]
+    reduceMotion ? [0, 0, 0] : [index % 2 === 0 ? -92 : 92, 0, index % 2 === 0 ? 34 : -34]
   );
   const visualX = useTransform(
     progress,
     [start, start + 0.07, end],
-    reduceMotion ? [0, 0, 0] : [index % 2 === 0 ? 105 : -105, 0, index % 2 === 0 ? -55 : 55]
+    reduceMotion ? [0, 0, 0] : [index % 2 === 0 ? 105 : -105, 0, index % 2 === 0 ? -48 : 48]
   );
-  const visualY = useTransform(progress, [start, start + 0.08, end], reduceMotion ? [0, 0, 0] : [70, 0, -38]);
+  const visualY = useTransform(progress, [start, start + 0.08, end], reduceMotion ? [0, 0, 0] : [64, 0, -34]);
   const visualRotate = useTransform(
     progress,
     [start, start + 0.08, end],
-    reduceMotion ? [0, 0, 0] : [index % 2 === 0 ? 5 : -5, 0, index % 2 === 0 ? -2.5 : 2.5]
+    reduceMotion ? [0, 0, 0] : [index % 2 === 0 ? 4.5 : -4.5, 0, index % 2 === 0 ? -2 : 2]
   );
-  const scale = useTransform(progress, [start, start + 0.07, end], reduceMotion ? [1, 1, 1] : [0.9, 1, 0.96]);
+  const scale = useTransform(progress, [start, start + 0.07, end], reduceMotion ? [1, 1, 1] : [0.91, 1, 0.97]);
 
   const alignLeft = index % 2 === 0;
 
@@ -115,20 +115,13 @@ export function Projects() {
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
-
-  const introOpacity = useTransform(scrollYProgress, [0, 0.025, 0.10], [1, 1, 0]);
-  const introY = useTransform(scrollYProgress, [0, 0.10], reduceMotion ? [0, 0] : [0, -85]);
-  const dashboardOpacity = useTransform(scrollYProgress, [0.67, 0.77, 1], [0, 1, 1]);
-  const dashboardY = useTransform(scrollYProgress, [0.67, 0.82], reduceMotion ? [0, 0] : [65, 0]);
-  const purpleOpacity = useTransform(scrollYProgress, [0.68, 0.80], [1, 0]);
+  const introOpacity = useTransform(scrollYProgress, [0, 0.025, 0.09], [1, 1, 0]);
+  const introY = useTransform(scrollYProgress, [0, 0.09], reduceMotion ? [0, 0] : [0, -72]);
 
   return (
-    <section ref={ref} id="projects" className="relative h-[430vh]" aria-label="Featured software projects">
+    <section ref={ref} id="projects" className="relative h-[380vh]" aria-label="Featured software projects">
       <div className="sticky top-0 h-screen overflow-hidden bg-[#6818e8]">
-        <motion.div
-          style={{ opacity: purpleOpacity }}
-          className="absolute inset-0 bg-[radial-gradient(circle_at_62%_48%,rgba(255,255,255,0.10),transparent_22%),linear-gradient(145deg,#7021f0,#5d12dc)]"
-        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_62%_48%,rgba(255,255,255,0.10),transparent_22%),linear-gradient(145deg,#7021f0,#5d12dc)]" />
         <div className="grain absolute inset-0 opacity-[0.08]" />
 
         <motion.div style={{ opacity: introOpacity, y: introY }} className="absolute inset-x-0 top-[8%] z-30 text-center">
@@ -149,62 +142,6 @@ export function Projects() {
             onOpen={() => setSelectedProject(project)}
           />
         ))}
-
-        <motion.div
-          style={{ opacity: dashboardOpacity, y: dashboardY }}
-          className="absolute inset-0 z-40 bg-[#19191a] px-4 py-16 text-white sm:px-8 lg:px-12"
-        >
-          <div className="mx-auto flex h-full max-w-7xl flex-col">
-            <h3 className="text-center text-[12vw] font-serif italic leading-[0.76] tracking-[-0.06em] text-[#f3f0e8] sm:text-[9vw] lg:text-[7vw]">
-              PROJECTS
-            </h3>
-
-            <div className="mt-7 grid min-h-0 flex-1 gap-4 lg:grid-cols-[0.9fr_2.1fr]">
-              <div className="rounded-[1.8rem] border border-white/10 bg-[#202021] p-5">
-                <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-white/40">Portfolio index</p>
-                <div className="mt-5 space-y-2">
-                  {portfolioConfig.projects.map((project, index) => (
-                    <button
-                      key={project.id}
-                      type="button"
-                      onClick={() => setSelectedProject(project)}
-                      className="group flex w-full items-center justify-between rounded-xl border border-white/0 px-3 py-3 text-left transition hover:border-white/10 hover:bg-white/[0.04]"
-                    >
-                      <span>
-                        <span className="block text-xs font-medium text-white/85">{project.title}</span>
-                        <span className="mt-1 block font-mono text-[7px] uppercase tracking-[0.12em] text-white/35">{project.category}</span>
-                      </span>
-                      <span className="font-mono text-[8px] text-white/25">0{index + 1}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="grid min-h-0 gap-3 sm:grid-cols-2">
-                {portfolioConfig.projects.map((project, index) => (
-                  <button
-                    key={project.id}
-                    type="button"
-                    onClick={() => setSelectedProject(project)}
-                    className="group relative overflow-hidden rounded-[1.6rem] border border-white/10 bg-[#222223] p-5 text-left transition hover:-translate-y-1 hover:border-white/20"
-                  >
-                    <div className="flex h-full flex-col justify-between">
-                      <div>
-                        <p className="font-mono text-[8px] uppercase tracking-[0.14em] text-white/32">0{index + 1} / {project.category}</p>
-                        <p className="mt-3 text-xl font-semibold text-white">{project.title}</p>
-                        <p className="mt-3 max-w-sm text-xs leading-5 text-white/46">{project.tagline}</p>
-                      </div>
-                      <div className="mt-5 flex items-end justify-between gap-3">
-                        <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-white/35">{project.expandedDetails.status}</span>
-                        <ArrowUpRight className="h-4 w-4 text-white/35 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white" />
-                      </div>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </div>
 
       <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />

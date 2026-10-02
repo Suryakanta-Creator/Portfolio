@@ -1326,3 +1326,57 @@ html.tab-hidden * {
 }
 html[data-reduce-motion="true"] .cursor-bubble { display:none; }
 @media (prefers-reduced-motion:reduce) { .cursor-bubble { display:none; } }
+
+/* Progressive enhancement: content remains readable with JavaScript disabled. */
+.section-motion > :not(.garden-orbits) { transition:transform .7s cubic-bezier(.2,.7,.3,1),opacity .7s; }
+.section-motion:not(.section-entered) > :not(.garden-orbits) { transform:translateY(20px); opacity:.65; }
+.section-motion.section-entered > :not(.garden-orbits) { transform:none; opacity:1; }
+.about-portrait img { transition:transform .7s ease; }
+@media (hover:hover) and (pointer:fine) {
+ .about-portrait:hover img { transform:scale(1.035); }
+ .skills-editorial article { transition:transform .25s; }
+ .skills-editorial article:hover { transform:translateX(8px); }
+ .project-cover-button .art-object { transition:transform .5s ease; }
+ .project-cover-button:hover .art-object { transform:translateY(-8px) rotate(5deg); }
+}
+.memory-garden { position:relative; isolation:isolate; overflow:hidden; display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:9%; padding:100px 8%; background:#101d1b; color:#e9f0e7; }
+.garden-intro,.garden-panel { position:relative; z-index:1; min-width:0; }
+.garden-intro>.eyebrow { color:#9db7aa; }
+.garden-intro h2 { font-size:clamp(44px,5.2vw,80px); line-height:1.04; letter-spacing:-.055em; margin:28px 0; }
+.garden-intro h2 em { font-family:Georgia,serif; font-weight:400; color:var(--mint); }
+.garden-intro p { max-width:350px; font-size:14px; line-height:1.9; color:#acc4b6; }
+.garden-intro .garden-note { margin-top:18px; font-size:11px; color:#8cae9b; }
+.garden-panel { max-width:440px; width:100%; justify-self:center; border:1px solid #c9ffe126; padding:24px; border-radius:18px; background:#152720; }
+.garden-toolbar { display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; font:9px var(--font-mono),monospace; color:#b8cfbf; letter-spacing:.04em; margin-bottom:22px; }
+.garden-board { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+.garden-card { position:relative; aspect-ratio:1; border-radius:10px; border:0; background:transparent; perspective:600px; min-width:0; touch-action:manipulation; }
+.garden-card:disabled { opacity:.6; }
+.card-inner { display:block; width:100%; height:100%; position:relative; transform-style:preserve-3d; transition:transform .3s ease; }
+.is-flipped .card-inner { transform:rotateY(180deg); }
+.card-back,.card-face { display:flex; position:absolute; inset:0; justify-content:center; align-items:center; backface-visibility:hidden; border-radius:10px; border:1px solid #8bae9940; }
+.card-back { background:linear-gradient(145deg,#243c30,#1a2e25); color:#b6ddc7; font-size:32px; }
+.card-face { background:#d8f3df; color:#27513a; transform:rotateY(180deg); }
+.card-face svg { width:30px; height:30px; }
+.is-matched .card-face { background:#a9d8b8; border-color:#ddffe9; }
+.garden-card:not(:disabled):not([aria-disabled="true"]):hover .card-back { border-color:#cfffe1; }
+.garden-status { min-height:46px; margin:20px 0 14px; font-size:12px; line-height:1.7; color:#b4cbbb; }
+.game-won { color:#dcffdf; }
+.garden-start { display:inline-flex; gap:10px; align-items:center; padding:12px 18px; border-radius:30px; background:var(--mint); color:#143421; font-size:12px; transition:transform .2s; }
+.garden-start:hover { transform:translateY(-2px); }
+.garden-orbits { position:absolute; inset:0; pointer-events:none; z-index:0; overflow:hidden; contain:strict; }
+.garden-orbits span { position:absolute; width:280px; height:280px; left:-160px; top:30%; border:1px solid #9bf6c520; border-radius:48%; animation:garden-orbit 28s linear infinite; animation-play-state:paused; }
+.garden-orbits span:nth-child(2) { width:350px; height:350px; top:24%; left:-200px; animation-direction:reverse; }
+.garden-orbits span:nth-child(3) { width:90px; height:90px; left:43%; top:72%; border-radius:35%; animation-duration:35s; }
+.section-in-view .garden-orbits span { animation-play-state:running; }
+@keyframes garden-orbit { to { transform:rotate(360deg); } }
+.project-dialog .dialog-content { display:block; }
+@media(max-width:700px) {
+ .memory-garden { grid-template-columns:1fr; gap:35px; padding:70px 6%; }
+ .garden-panel { padding:18px; }
+ .garden-board { gap:8px; }
+ .garden-orbits span:nth-child(2) { display:none; }
+ .garden-intro h2 { font-size:48px; }
+}
+/* Reduced motion keeps game state changes instant, with the same gameplay. */
+html[data-reduce-motion="true"] .section-motion > * { transform:none!important; opacity:1!important; }
+@media(prefers-reduced-motion:reduce) { .section-motion > * { transform:none!important; opacity:1!important; } }

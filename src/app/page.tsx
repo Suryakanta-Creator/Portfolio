@@ -1,4 +1,6 @@
 import React from "react";
+import { MemoryGarden } from "@/components/game/MemoryGarden";
+import { SectionMotion } from "@/components/effects/SectionMotion";
 import { CursorEffect } from "@/components/effects/CursorEffect";
 import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/hero/Hero";
@@ -18,6 +20,7 @@ export default function Home() {
       {/* Fixed Sticky Header Navigation */}
       <Navbar />
       <CursorEffect />
+      <SectionMotion />
 
       {/* Main Content Sections */}
       <main className="flex-1" id="main-content">
@@ -27,6 +30,7 @@ export default function Home() {
         <Projects />
         <Skills />
         <Contact />
+        <MemoryGarden />
       </main>
 
       {/* Site Footer */}

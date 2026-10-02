@@ -2,7 +2,6 @@
 import { useEffect, useRef } from "react";
 import { ProjectItem } from "@/data/portfolio.config";
 import { X, ArrowUpRight } from "lucide-react";
-import { ProjectVisual } from "./ProjectVisuals";
 export function ProjectModal({
   project,
   onClose,
@@ -70,10 +69,6 @@ export function ProjectModal({
           >
             <X />
           </button>
-          <ProjectVisual
-            type={project.placeholderType}
-            reduceMotion={reduceMotion}
-          />
           <div className="dialog-copy">
             <span className="eyebrow">{project.category}</span>
             <h2 id="project-dialog-title">{project.title}</h2>

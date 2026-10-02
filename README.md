@@ -19,6 +19,12 @@ Production: `npm run build` then `npm start`.
 - Hero bubbles, drifting ambient light, floating social links, and a pointer ring. No React state updates on pointer movement or scroll; pointer writes are limited to one requestAnimationFrame. Effects pause when the hero is offscreen or the page is hidden. Touch devices omit the cursor and use fewer bubbles. System and manual reduced-motion settings are respected.
 - Contact form submits to FormSubmit for `myworldsurya912@gmail.com`, with required fields, length limits, a honeypot, and provider CAPTCHA. The direct email link remains available.
 
+## Memory Garden and motion polish
+
+The final section is a 12-card matching game with six pairs, move counting, a replay/reset control, keyboard-friendly buttons, and live result announcements. No timer, audio, tracking, or extra packages are used. Mismatch timers are cleaned up on restart and unmount. Game rules cover duplicate flips, rapid clicks, completed pairs, mismatches, wins, and resets.
+
+Section entrances run once; hover effects use transforms; the garden’s three decorative orbits pause offscreen. Project covers appear only in the single project showcase, not again inside the detail dialog.
+
 ## Remaining owner setup
 
 1. Set `socialLinks.instagram` in `src/data/portfolio.config.ts` to the owner's actual profile URL. Until provided, Instagram is omitted rather than linked to a guessed account.

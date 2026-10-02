@@ -25,12 +25,9 @@ function ProjectCard({
         onClick={(e) => onOpen(e.currentTarget)}
         aria-label={`View ${project.title} details`}
       >
-        <motion.div
-          className="project-cover-motion"
-          
-        >
+        <div className="project-cover-motion">
           <ProjectVisual type={project.placeholderType} />
-        </motion.div>
+        </div>
         <span className="project-open">
           <ArrowUpRight size={26} />
         </span>

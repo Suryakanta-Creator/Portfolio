@@ -1423,3 +1423,19 @@ html[data-reduce-motion="true"] .section-motion > * { transform:none!important; 
 }
 html[data-reduce-motion="true"] .hero-portrait-scene,
 html[data-reduce-motion="true"] .ambient-diamond { animation:none!important; }
+
+
+/* Site-wide restrained atmosphere. Colors inherit the mint/dark portfolio palette. */
+.site-atmosphere { position:fixed; inset:82px 0 0; z-index:25; pointer-events:none; overflow:hidden; }
+.site-bubble { position:absolute; pointer-events:auto; appearance:none; padding:0; border-radius:50%; border:1px solid color-mix(in srgb,var(--mint) 24%,transparent); background:radial-gradient(circle at 30% 25%,color-mix(in srgb,var(--mint) 12%,transparent),transparent 68%); opacity:.34; animation:site-breathe 9s ease-in-out var(--site-delay) infinite; }
+.site-bubble.is-popped { animation:none!important; transform:scale(1.7); opacity:0; transition:transform .24s ease,opacity .24s ease; }
+.site-diamond { position:absolute; width:18px; height:18px; border:1px solid #b8e6cd35; transform:rotate(45deg); opacity:.35; animation:site-diamond 13s ease-in-out infinite; }
+.site-diamond-a { left:8%; top:72%; } .site-diamond-b { right:8%; top:18%; width:28px; height:28px; animation-delay:-5s; } .site-diamond-c { right:35%; top:88%; width:13px; height:13px; animation-delay:-9s; }
+.typing-note { margin:0; padding:24px 8% 34px; background:#c9e4d4; color:#355745; text-align:center; font:10px var(--font-mono),monospace; letter-spacing:.09em; min-height:68px; }
+.typing-note span { animation:typing-caret .8s steps(1) infinite; }
+@keyframes site-breathe { 0%,100%{ transform:translate3d(0,0,0); } 50%{ transform:translate3d(0,-12px,0); } }
+@keyframes site-diamond { 0%,100%{ transform:translateY(0) rotate(45deg); } 50%{ transform:translateY(-18px) rotate(68deg); } }
+@keyframes typing-caret { 50%{ opacity:0; } }
+@media(max-width:700px){ .site-atmosphere{inset:82px 0 0}.site-bubble:nth-child(n+5){display:none}.site-diamond-c{display:none} }
+@media(prefers-reduced-motion:reduce){ .site-bubble,.site-diamond,.typing-note span{animation:none!important} }
+html[data-reduce-motion="true"] .site-bubble,html[data-reduce-motion="true"] .site-diamond,html[data-reduce-motion="true"] .typing-note span{animation:none!important}

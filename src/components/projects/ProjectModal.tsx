@@ -85,9 +85,24 @@ export function ProjectModal({
                 ))}
               </div>
             )}
-            <a href={project.repositoryUrl} target="_blank" rel="noreferrer">
-              Explore repository <ArrowUpRight size={18} />
-            </a>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-[#c9ffe1] px-5 py-3 text-[12px] font-medium text-[#10211a]"
+              >
+                Live Project <ArrowUpRight size={18} />
+              </a>
+              <a
+                href={project.repositoryUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-3 text-[12px]"
+              >
+                Explore repository <ArrowUpRight size={18} />
+              </a>
+            </div>
           </div>
         </div>
       )}

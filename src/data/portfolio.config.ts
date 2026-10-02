@@ -45,10 +45,7 @@ export interface PortfolioConfig {
     status: string;
     githubUsername: string;
   };
-  navigation: {
-    label: string;
-    href: string;
-  }[];
+  navigation: { label: string; href: string }[];
   about: {
     paragraphs: string[];
     quickStats: { label: string; value: string }[];
@@ -263,12 +260,12 @@ export const portfolioConfig: PortfolioConfig = {
     heading: "Let's build something useful.",
     subheading:
       "Open to internships, collaborations, hackathons, project discussions, and conversations about software and AI.",
-    email: "",
-    emailPlaceholder: "Email will be configured before launch",
-    isEmailVerified: false,
+    email: "myworldsurya912@gmail.com",
+    emailPlaceholder: "myworldsurya912@gmail.com",
+    isEmailVerified: true,
     location: "Odisha, India",
     statusNotice:
-      "The GitHub link is live. Direct email and LinkedIn should be configured with your verified details before the production launch.",
+      "Messages from this portfolio are forwarded to my inbox. First-time activation of the form forwarding service may require one confirmation email.",
     socials: [
       {
         platform: "GitHub",
@@ -278,8 +275,15 @@ export const portfolioConfig: PortfolioConfig = {
       },
       {
         platform: "LinkedIn",
-        label: "LinkedIn",
-        isConfigured: false,
+        label: "Suryakanta Bala",
+        url: "https://www.linkedin.com/in/suryakanta-bala-b820923aa/",
+        isConfigured: true,
+      },
+      {
+        platform: "Instagram",
+        label: "@ASHR_06",
+        url: "https://www.instagram.com/ASHR_06/",
+        isConfigured: true,
       },
     ],
   },

@@ -29,7 +29,7 @@ export function MemoryGarden() {
   return (
     <section id="play" className="memory-garden" aria-labelledby="garden-title">
       <div className="garden-orbits" aria-hidden="true"><span /><span /><span /></div>
-      <div className="garden-intro"><span className="eyebrow">06 / A LITTLE ROOM TO PLAY</span><h2 id="garden-title">Pause.<br /><em>Find a little joy.</em></h2><p>Give your scrolling finger a break. Turn over two cards and find the matching pairs.</p><p className="garden-note">Six pairs. No timer. No pressure.</p></div>
+      <div className="garden-intro"><span className="eyebrow">05 / A LITTLE ROOM TO PLAY</span><h2 id="garden-title">Pause.<br /><em>Find a little joy.</em></h2><p>Give your scrolling finger a break. Turn over two cards and find the matching pairs.</p><p className="garden-note">Six pairs. No timer. No pressure.</p></div>
       <div className="garden-panel">
         <div className="garden-toolbar"><span>MEMORY GARDEN</span><span>{game.matched.length / 2}/6 pairs · {game.moves} moves</span></div>
         <div ref={board} className={`garden-board ${started ? "is-playing" : ""}`} role="group" aria-label="Memory matching cards">

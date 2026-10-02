@@ -16,7 +16,7 @@ export function Hero() {
       <div className="hero-topline"><span>INDEPENDENT DEVELOPER</span><span>CUTTACK, INDIA ↗</span></div>
       <div className="hero-copy">
         <p className="eyebrow"><span className="status-dot" /> A LITTLE CURIOUS. ALWAYS BUILDING.</p>
-        <h1><span>Suryakanta</span><span className="hero-lastname">Bala<span className="hero-period">.</span></span></h1>
+        <h1><span className="hero-hello">Hi, I’m</span><span className="hero-lastname">Surya<span className="hero-period">.</span></span></h1>
         <div className="hero-intro"><p>I turn ideas into<br /><strong>experiences you can feel.</strong></p><a href="#projects" className="round-link" aria-label="Explore selected projects"><ArrowDown size={26} /></a></div>
         <a className="resume-button" href="/Suryakanta_Bala_Resume_Final.pdf" target="_blank" rel="noopener noreferrer"><FileText size={17} /> View my resume <ArrowUpRight size={17} /></a>
         <div className="hero-socials" aria-label="Connect with Surya">

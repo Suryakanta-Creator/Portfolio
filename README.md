@@ -1,72 +1,38 @@
-# 🪐 Suryakanta Bala — Personal Portfolio
+# Suryakanta Bala — Portfolio
 
-> Full-stack development · AI-powered applications · Interactive systems
+Next.js App Router, TypeScript, Tailwind CSS, and Framer Motion.
 
-A high-performance, accessible, and visually stunning personal portfolio built with **Next.js 14 (App Router)**, **TypeScript**, **Tailwind CSS**, and **Framer Motion**.
+## Run
 
----
-
-## ✨ Key Features
-
-- **Geometric 3D Hero Artwork:** Multifaceted polyhedron with interactive gyroscope orbit rings and mouse tilt effects.
-- **Accessibility & Motion Preference Control:** Dynamic reduced-motion toggle with WCAG conformance and system-level `prefers-reduced-motion` detection.
-- **Interactive Project Showcase:** Live simulated interfaces for:
-  - **Krushi Seva:** AgriTech platform with regional advisory, weather metrics, and soil analytics.
-  - **AI Study Assistant:** Cognitive active-recall flashcard interface and topic synthesis node.
-  - **PackCheck AI:** Computer vision baggage validation scanner with item detection tags.
-  - **Cosmos World:** Interactive astronomical orbital physics canvas with speed controls.
-- **Milestone Trajectory Timeline:** Interactive chronological journey with academic foundations at DRIEMS University and focus areas.
-- **Technical Skills Matrix:** Categorized capabilities with real-time live search filter.
-- **Direct Inquiry & Connect:** One-click email copy with instant feedback and validated contact form.
-
----
-
-## 🛠️ Tech Stack
-
-- **Framework:** [Next.js 14 (App Router)](https://nextjs.org/)
-- **Language:** [TypeScript](https://www.typescriptlang.org/)
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-- **Icons:** [Lucide React](https://lucide.dev/)
-- **Animations:** [Framer Motion](https://www.framer.com/motion/)
-
----
-
-## 🚀 Getting Started
-
-### 1. Clone the repository
-```bash
-git clone https://github.com/Suryakanta-Creator/Portfolio.git
-cd Portfolio
-```
-
-### 2. Install dependencies
-```bash
-npm install
-```
-
-### 3. Run development server
-```bash
+```sh
+npm ci
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### 4. Build for production
-```bash
-npm run build
-npm run start
-```
+Production: `npm run build` then `npm start`.
 
----
+## Included
 
-## 📄 Configuration
+- Original portrait and byte-identical `public/Suryakanta_Bala_Resume_Final.pdf`.
+- B.Tech currently pursuing at DRIEMS University, 12th Science at KBRC Higher Secondary School, and 10th at OAV Tangi.
+- Four projects displayed once in a sequential showcase, with accessible detail dialogs.
+- Hero bubbles, drifting ambient light, floating social links, and a pointer ring. No React state updates on pointer movement or scroll; pointer writes are limited to one requestAnimationFrame. Effects pause when the hero is offscreen or the page is hidden. Touch devices omit the cursor and use fewer bubbles. System and manual reduced-motion settings are respected.
+- Contact form submits to FormSubmit for `myworldsurya912@gmail.com`, with required fields, length limits, a honeypot, and provider CAPTCHA. The direct email link remains available.
 
-Personal details, projects, skills, and contact handles are centrally configured in [`src/data/portfolio.config.ts`](./src/data/portfolio.config.ts).
+## Memory Garden and motion polish
 
----
+The final section is a 12-card matching game with six pairs, move counting, a replay/reset control, keyboard-friendly buttons, and live result announcements. No timer, audio, tracking, or extra packages are used. Mismatch timers are cleaned up on restart and unmount. Game rules cover duplicate flips, rapid clicks, completed pairs, mismatches, wins, and resets.
 
-## 👤 Author
+Section entrances run once; hover effects use transforms; the garden’s three decorative orbits pause offscreen. Project covers appear only in the single project showcase, not again inside the detail dialog.
 
-**Suryakanta Bala**  
-- **Institution:** DRIEMS University, Odisha, India  
-- **Degree:** B.Tech in Engineering & Computing  
-- **GitHub:** [@Suryakanta-Creator](https://github.com/Suryakanta-Creator)
+## Remaining owner setup
+
+1. Set `socialLinks.instagram` in `src/data/portfolio.config.ts` to the owner's actual profile URL. Until provided, Instagram is omitted rather than linked to a guessed account.
+2. Submit the live contact form and confirm FormSubmit's activation email in `myworldsurya912@gmail.com`. Delivery is not verified until activation and a real end-to-end inbox test are complete.
+3. Import this repository into Vercel if not already connected. Use the Next.js preset, root directory, and default build settings. This site needs no environment secrets.
+
+## Verification
+
+Production build and TypeScript validation passed. Local HTTP checks confirmed the page, portrait and original PDF return 200; the PDF and portrait match the supplied files exactly. Served HTML contains the corrected education, resume link, and contact destination.
+
+Browser verification was blocked by the current preview environment. Mobile visual layout, measured frame rate, cursor behavior, and live email receipt are not claimed as verified. A production deployment has not been confirmed.

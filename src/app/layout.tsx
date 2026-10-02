@@ -1,17 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { MotionProvider } from "@/context/MotionContext";
 import { portfolioConfig } from "@/data/portfolio.config";
 
-const inter = Inter({
-  subsets: ["latin"],
+const inter = localFont({
+  src: "./fonts/inter-latin.woff2",
+  weight: "100 900",
   variable: "--font-inter",
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
+const jetbrainsMono = localFont({
+  src: "./fonts/jetbrains-mono-latin.woff2",
+  weight: "100 800",
   variable: "--font-mono",
   display: "swap",
 });
@@ -24,7 +26,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: `${portfolioConfig.personal.fullName} — ${portfolioConfig.personal.role}`,
-  description: `${portfolioConfig.personal.shortIntro} Explore projects in AgriTech, AI Study synthesis, Computer Vision verification, and Interactive Physics.`,
+  description: `${portfolioConfig.personal.shortIntro} Explore my software projects, learning journey, and experiments.`,
   keywords: [
     "Suryakanta Bala",
     "Surya Bala",
@@ -41,7 +43,6 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${portfolioConfig.personal.fullName} — Portfolio`,
     description: portfolioConfig.personal.shortIntro,
-    url: "https://suryakanta-portfolio.vercel.app",
     siteName: `${portfolioConfig.personal.fullName} Portfolio`,
     locale: "en_US",
     type: "website",
@@ -63,11 +64,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} dark scroll-smooth`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${jetbrainsMono.variable} dark scroll-smooth`}
+    >
       <body className="bg-charcoal-950 text-warmWhite font-sans antialiased min-h-screen flex flex-col selection:bg-aqua-400/20 selection:text-white">
-        <MotionProvider>
-          {children}
-        </MotionProvider>
+        <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
   );

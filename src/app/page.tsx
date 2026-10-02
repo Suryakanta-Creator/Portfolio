@@ -1,31 +1,39 @@
 import React from "react";
 import { Navbar } from "@/components/layout/Navbar";
+import { CommandPalette } from "@/components/layout/CommandPalette";
+import { CinematicBackground } from "@/components/scene/CinematicBackground";
+import { SceneSection } from "@/components/scene/SceneSection";
 import { Hero } from "@/components/hero/Hero";
 import { About } from "@/components/about/About";
 import { Journey } from "@/components/journey/Journey";
-import { Projects } from "@/components/projects/Projects";
 import { Skills } from "@/components/skills/Skills";
+import { Projects } from "@/components/projects/Projects";
+import { GitHubSection } from "@/components/github/GitHubSection";
+import { Playground } from "@/components/playground/Playground";
 import { Contact } from "@/components/contact/Contact";
 import { Footer } from "@/components/layout/Footer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-charcoal-950 text-warmWhite selection:bg-cyan-500/20 selection:text-white">
-      {/* Fixed Sticky Header Navigation */}
+    <div className="relative min-h-screen overflow-clip theme-page">
+      <CinematicBackground />
       <Navbar />
+      <CommandPalette />
 
-      {/* Main Content Sections */}
-      <main className="flex-1" id="main-content">
+      <main className="relative z-10" id="main-content">
         <Hero />
-        <About />
+        <SceneSection accent="cyan" index={0}><About /></SceneSection>
         <Journey />
+        <SceneSection accent="violet" index={1}><Skills /></SceneSection>
         <Projects />
-        <Skills />
+        <GitHubSection />
+        <SceneSection accent="amber" index={2}><Playground /></SceneSection>
         <Contact />
       </main>
 
-      {/* Site Footer */}
-      <Footer />
+      <div className="relative z-10">
+        <Footer />
+      </div>
     </div>
   );
 }

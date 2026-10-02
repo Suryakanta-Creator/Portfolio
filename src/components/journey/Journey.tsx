@@ -1,125 +1,78 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
+import { ArrowUpRight, MapPin } from "lucide-react";
 import { portfolioConfig } from "@/data/portfolio.config";
-import { Milestone, Calendar, MapPin, Sparkles, CheckCircle, ArrowRight } from "lucide-react";
+import { usePortfolioMotion } from "@/context/MotionContext";
 
 export function Journey() {
-  return (
-    <section id="journey" className="py-24 relative overflow-hidden" aria-label="Academic and Technical Journey">
-      {/* Background ambient lighting */}
-      <div
-        className="absolute top-1/3 right-0 w-96 h-96 bg-violet-600/5 rounded-full blur-3xl pointer-events-none -z-10"
-        aria-hidden="true"
-      />
+  const { reduceMotion } = usePortfolioMotion();
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="flex flex-col items-start space-y-2 mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-charcoal-850 border border-white/10 text-xs font-mono text-violet-400">
-            <span>/ 02 /</span>
-            <span>TRAJECTORY & MILESTONES</span>
+  return (
+    <section id="journey" className="relative mx-3 my-20 overflow-hidden rounded-[2.8rem] bg-[#181819] py-28 text-white sm:mx-6 sm:rounded-[4rem] lg:mx-8 lg:py-36" aria-label="Academic journey">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_22%,rgba(164,255,98,0.08),transparent_24%),radial-gradient(circle_at_18%_78%,rgba(111,54,231,0.13),transparent_28%)]" />
+
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+        <div className="mb-20 grid gap-10 lg:grid-cols-12 lg:items-end">
+          <div className="lg:col-span-8">
+            <p className="font-mono text-[9px] uppercase tracking-[0.26em] text-[#b8ff6b]">
+              / 02 / academic journey
+            </p>
+            <h2 className="mt-5 text-[13vw] font-semibold uppercase leading-[0.8] tracking-[-0.065em] sm:text-[9vw] lg:text-[7vw]">
+              From school
+              <span className="block text-[#b8ff6b]">to engineering.</span>
+            </h2>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-warmWhite tracking-tight">
-            The learning arc & technical progression.
-          </h2>
-          <p className="text-mutedWhite text-sm sm:text-base max-w-xl">
-            A chronological timeline of academic milestones, self-driven research, and future technical objectives.
+          <p className="max-w-sm text-sm leading-6 text-white/52 lg:col-span-4">
+            My education so far: currently pursuing B.Tech at DRIEMS University, after completing Class XII and Class X in Odisha.
           </p>
         </div>
 
-        {/* Timeline Container */}
-        <div className="relative">
-          {/* Vertical Glowing Connector Line (Desktop) */}
-          <div
-            className="hidden md:block absolute left-8 top-4 bottom-4 w-0.5 bg-gradient-to-b from-cyan-500 via-violet-500 to-emerald-500 opacity-30"
-            aria-hidden="true"
-          />
+        <div className="space-y-5">
+          {portfolioConfig.journey.map((item, index) => (
+            <motion.article
+              key={item.number}
+              initial={reduceMotion ? { opacity: 1 } : { opacity: 0, y: 56, scale: 0.98 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: false, amount: 0.32 }}
+              transition={{ duration: 0.62, delay: index * 0.04, ease: [0.16, 1, 0.3, 1] }}
+              className="grid gap-5 rounded-[1.8rem] border border-white/10 bg-white/[0.035] p-5 sm:p-7 md:grid-cols-12 md:items-center"
+            >
+              <div className="md:col-span-1">
+                <span className="font-mono text-[9px] text-white/30">/{String(index + 1).padStart(2, "0")}/</span>
+              </div>
 
-          <div className="space-y-8 md:space-y-12">
-            {portfolioConfig.journey.map((item, index) => {
-              const isCurrent = item.period === "Current";
-              const isOngoing = item.period === "Ongoing";
-              const isNext = item.period === "Next";
-
-              const badgeColor = isCurrent
-                ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/30"
-                : isOngoing
-                ? "bg-violet-500/10 text-violet-400 border-violet-500/30"
-                : "bg-emerald-500/10 text-emerald-400 border-emerald-500/30";
-
-              const nodeColor = isCurrent
-                ? "border-cyan-400 bg-cyan-950 text-cyan-300 ring-cyan-500/20"
-                : isOngoing
-                ? "border-violet-400 bg-violet-950 text-violet-300 ring-violet-500/20"
-                : "border-emerald-400 bg-emerald-950 text-emerald-300 ring-emerald-500/20";
-
-              return (
-                <div
-                  key={item.number}
-                  className="relative md:pl-20 group"
-                >
-                  {/* Timeline Node on the connector line (Desktop) */}
-                  <div
-                    className={`hidden md:flex absolute left-5 top-6 -translate-x-1/2 w-6 h-6 rounded-full border-2 items-center justify-center text-[10px] font-mono font-bold shadow-lg ring-4 transition-all duration-300 group-hover:scale-110 ${nodeColor}`}
-                    aria-hidden="true"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-current" />
-                  </div>
-
-                  {/* Card Body */}
-                  <div className="p-6 sm:p-8 rounded-2xl bg-charcoal-900/80 border border-white/10 backdrop-blur-md hover:border-white/20 transition-all duration-300 hover:shadow-2xl hover:shadow-black/40 group-hover:-translate-y-0.5">
-                    {/* Card Header */}
-                    <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-4 border-b border-white/10">
-                      <div className="flex items-center gap-3">
-                        <span className="font-mono text-sm font-bold text-mutedWhite/80 group-hover:text-cyan-400 transition-colors">
-                          {item.number}
-                        </span>
-                        <h3 className="text-lg sm:text-xl font-bold text-warmWhite">
-                          {item.title}
-                        </h3>
-                      </div>
-
-                      <div className="flex items-center gap-2">
-                        <span className={`px-2.5 py-1 rounded-full text-xs font-mono font-medium border ${badgeColor}`}>
-                          {item.period}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Institution tag */}
-                    <div className="flex items-center gap-2 text-xs font-mono text-mutedWhite mb-3">
-                      <MapPin className="w-3.5 h-3.5 text-cyan-400" />
-                      <span>{item.institution}</span>
-                    </div>
-
-                    {/* Description narrative */}
-                    <p className="text-sm sm:text-base text-neutral-300 leading-relaxed mb-6">
-                      {item.description}
-                    </p>
-
-                    {/* Focus Areas Chips */}
-                    <div className="space-y-2">
-                      <span className="text-xs font-mono uppercase tracking-wider text-mutedWhite block">
-                        Core Competencies &amp; Focus:
-                      </span>
-                      <div className="flex flex-wrap gap-2">
-                        {item.focusAreas.map((area) => (
-                          <span
-                            key={area}
-                            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-charcoal-800/90 border border-white/10 text-xs font-mono text-neutral-200 group-hover:border-white/20 transition-colors"
-                          >
-                            <span className="w-1 h-1 rounded-full bg-cyan-400" />
-                            {area}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+              <div className="md:col-span-4">
+                <p className="font-mono text-[8px] uppercase tracking-[0.17em] text-[#b8ff6b]/70">{item.period}</p>
+                <h3 className="mt-2 text-2xl font-semibold tracking-[-0.035em] text-white">{item.title}</h3>
+                <div className="mt-3 flex items-center gap-2 text-xs text-white/38">
+                  <MapPin className="h-3.5 w-3.5 text-violet-300" />
+                  {item.institution}
                 </div>
-              );
-            })}
-          </div>
+              </div>
+
+              <div className="md:col-span-5">
+                <p className="text-sm leading-6 text-white/55">{item.description}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {item.focusAreas.map((area) => (
+                    <span
+                      key={area}
+                      className="rounded-full border border-white/10 bg-black/10 px-3 py-1.5 font-mono text-[8px] uppercase tracking-[0.11em] text-white/48"
+                    >
+                      {area}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="md:col-span-2 md:text-right">
+                <span className="inline-flex items-center gap-2 font-mono text-[8px] uppercase tracking-[0.14em] text-white/35">
+                  next chapter <ArrowUpRight className="h-3.5 w-3.5" />
+                </span>
+              </div>
+            </motion.article>
+          ))}
         </div>
       </div>
     </section>

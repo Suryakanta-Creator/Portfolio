@@ -1,321 +1,192 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useRef } from "react";
+import Image from "next/image";
+import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  ArrowDownRight,
+  ArrowUpRight,
+  FileText,
+  Github,
+  Instagram,
+  Linkedin,
+  Mail,
+} from "lucide-react";
 import { portfolioConfig } from "@/data/portfolio.config";
 import { usePortfolioMotion } from "@/context/MotionContext";
-import { ArrowDownRight, Compass, Sparkles } from "lucide-react";
+
+const socialLinks = [
+  {
+    label: "LinkedIn",
+    sublabel: "Professional network",
+    href: "https://www.linkedin.com/in/suryakanta-bala-b820923aa/",
+    icon: Linkedin,
+  },
+  {
+    label: "Instagram",
+    sublabel: "@ASHR_06",
+    href: "https://www.instagram.com/ASHR_06/",
+    icon: Instagram,
+  },
+  {
+    label: "Connect",
+    sublabel: "Send a message",
+    href: "#contact",
+    icon: Mail,
+  },
+];
 
 export function Hero() {
+  const ref = useRef<HTMLElement>(null);
   const { reduceMotion } = usePortfolioMotion();
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [scrollY, setScrollY] = useState(0);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end end"],
+  });
 
-  // Pointer tilt tracking for fine pointers
-  useEffect(() => {
-    if (reduceMotion) return;
-
-    const handlePointerMove = (e: PointerEvent) => {
-      // Normalize between -1 and 1
-      const x = (e.clientX / window.innerWidth) * 2 - 1;
-      const y = (e.clientY / window.innerHeight) * 2 - 1;
-      setMousePos({ x, y });
-    };
-
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener("pointermove", handlePointerMove, { passive: true });
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("pointermove", handlePointerMove);
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [reduceMotion]);
-
-  // Compute transform matrices based on tilt and scroll
-  const diamondTransform = reduceMotion
-    ? "none"
-    : `perspective(1000px) rotateX(${mousePos.y * -14}deg) rotateY(${mousePos.x * 16}deg) translateY(${scrollY * 0.15}px)`;
-
-  const ringTransform = reduceMotion
-    ? "none"
-    : `perspective(1000px) rotateX(${mousePos.y * 12 + 60}deg) rotateY(${mousePos.x * -10}deg) translateY(${scrollY * 0.08}px)`;
-
-  const secondaryShapeTransform = reduceMotion
-    ? "none"
-    : `perspective(1000px) rotateX(${mousePos.y * -8}deg) rotateY(${mousePos.x * 12}deg) translateY(${scrollY * 0.2}px)`;
+  const frameScale = useTransform(scrollYProgress, [0, 0.72], reduceMotion ? [1, 1] : [1, 0.97]);
+  const frameY = useTransform(scrollYProgress, [0, 0.72], reduceMotion ? [0, 0] : [0, 44]);
+  const copyY = useTransform(scrollYProgress, [0, 0.7], reduceMotion ? [0, 0] : [0, -34]);
+  const portraitY = useTransform(scrollYProgress, [0, 0.75], reduceMotion ? [0, 0] : [0, 28]);
+  const portraitRotate = useTransform(scrollYProgress, [0, 0.75], reduceMotion ? [0, 0] : [-0.7, 1.2]);
 
   return (
-    <section
-      id="hero"
-      className="relative min-h-[92vh] flex items-center justify-center pt-24 pb-16 overflow-hidden"
-      aria-label="Introduction and Overview"
-    >
-      {/* Background ambient lighting */}
-      <div
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none -z-10"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute bottom-10 right-10 w-[380px] h-[380px] bg-violet-600/10 rounded-full blur-[100px] pointer-events-none -z-10"
-        aria-hidden="true"
-      />
+    <section ref={ref} id="hero" className="relative h-[140vh] pt-3 sm:pt-4" aria-label="Introduction and about">
+      <div className="sticky top-0 flex h-screen items-center overflow-hidden px-3 pt-16 sm:px-5 sm:pt-20">
+        <motion.div
+          style={{ scale: frameScale, y: frameY }}
+          className="relative mx-auto h-[84vh] w-full max-w-[1500px] overflow-hidden rounded-[2rem] border theme-border editorial-shadow sm:rounded-[2.8rem]"
+        >
+          <div className="absolute inset-0 bg-[linear-gradient(135deg,var(--hero-sky),var(--hero-sky-2))]" />
+          <div className="grain pointer-events-none absolute inset-0 opacity-[0.08]" />
 
-      {/* Subtle grid pattern */}
-      <div
-        className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)] pointer-events-none -z-10"
-        aria-hidden="true"
-      />
+          <motion.div
+            aria-hidden="true"
+            animate={reduceMotion ? undefined : { x: [0, 26, -10, 0], y: [0, -18, 14, 0], rotate: [0, 10, -6, 0] }}
+            transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+            className="pointer-events-none absolute -right-[5%] top-[10%] h-64 w-64 rounded-[4rem] bg-gradient-to-br from-violet-300/45 to-cyan-200/20 blur-[1px] sm:h-80 sm:w-80"
+          />
+          <motion.div
+            aria-hidden="true"
+            animate={reduceMotion ? undefined : { x: [0, -22, 14, 0], y: [0, 20, -12, 0], rotate: [0, -14, 8, 0] }}
+            transition={{ duration: 19, repeat: Infinity, ease: "easeInOut", delay: 0.7 }}
+            className="pointer-events-none absolute right-[28%] top-[14%] h-28 w-28 rounded-full border border-white/45 bg-white/20 backdrop-blur-xl sm:h-36 sm:w-36"
+          />
+          <motion.div
+            aria-hidden="true"
+            animate={reduceMotion ? undefined : { y: [0, -16, 10, 0], rotate: [8, -6, 11, 8] }}
+            transition={{ duration: 13, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
+            className="pointer-events-none absolute bottom-[14%] left-[46%] hidden h-24 w-40 rounded-[2rem] bg-gradient-to-br from-emerald-200/35 to-sky-200/20 sm:block"
+          />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          {/* Left Column: Text & CTAs */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left space-y-6">
-            {/* Supporting Role Badge */}
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-charcoal-850/80 border border-white/10 text-xs font-mono text-cyan-300 shadow-sm backdrop-blur-md">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500" />
-              </span>
-              <span>{portfolioConfig.personal.role}</span>
+          <div className="absolute inset-x-0 top-0 z-30 flex h-12 items-center justify-between border-b border-black/10 px-4 text-[#1b2430]/70 dark:border-white/10 dark:text-white/70 sm:px-6">
+            <div className="flex items-center gap-2 font-mono text-[8px] uppercase tracking-[0.16em] sm:text-[9px]">
+              <span className="flex h-5 w-5 items-center justify-center rounded-full border border-current/20 font-black">SB</span>
+              <span>Suryakanta / Portfolio</span>
             </div>
-
-            {/* Name and Monolithic Headline */}
-            <div className="space-y-2">
-              <h2 className="text-sm uppercase tracking-widest text-mutedWhite font-mono font-medium">
-                {portfolioConfig.personal.fullName}
-              </h2>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-warmWhite leading-[1.08]">
-                Turning ideas into{" "}
-                <span className="bg-gradient-to-r from-cyan-300 via-aqua-400 to-violet-400 bg-clip-text text-transparent">
-                  interactive experiences.
-                </span>
-              </h1>
+            <div className="hidden gap-4 font-mono text-[8px] uppercase tracking-[0.14em] md:flex">
+              <span>Full-stack</span>
+              <span>AI</span>
+              <span>Open source</span>
+              <span>Available</span>
             </div>
+          </div>
 
-            {/* Short Intro */}
-            <p className="text-base sm:text-lg text-neutral-300 max-w-2xl leading-relaxed font-normal">
-              {portfolioConfig.personal.shortIntro}
+          <motion.div
+            style={{ y: copyY }}
+            className="absolute left-5 top-[14%] z-30 max-w-[58%] sm:left-10 sm:top-[18%] sm:max-w-xl lg:left-[5.2vw] lg:top-[19%]"
+          >
+            <p className="font-mono text-[8px] uppercase tracking-[0.22em] text-[#283847]/65 dark:text-white/55 sm:text-[9px]">
+              Full-stack developer · AI builder · B.Tech student
             </p>
 
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-2 w-full sm:w-auto">
+            <h1 className="balance-text mt-4 text-[12vw] font-semibold leading-[0.86] tracking-[-0.065em] text-[#182029] sm:mt-5 sm:text-[8.5vw] lg:text-[5.5vw] dark:text-white">
+              Building useful
+              <span className="block">digital products.</span>
+            </h1>
+
+            <p className="mt-5 max-w-md text-xs leading-5 text-[#25313d]/72 dark:text-white/65 sm:mt-6 sm:text-base sm:leading-6">
+              I&apos;m {portfolioConfig.personal.fullName}, currently pursuing B.Tech at DRIEMS University while building full-stack and AI-powered products.
+            </p>
+
+            <div className="mt-6 flex flex-wrap gap-2.5 sm:mt-7 sm:gap-3">
               <a
                 href="#projects"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-aqua-400 text-charcoal-950 font-semibold text-sm hover:opacity-95 transition-all shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 focus:outline-none focus:ring-2 focus:ring-aqua-400"
+                className="group inline-flex items-center gap-2 rounded-full bg-[#15202a] px-4 py-2.5 text-[10px] font-semibold text-white transition hover:scale-[1.03] sm:px-5 sm:py-3 sm:text-[11px] dark:bg-white dark:text-[#15161a]"
               >
-                <span>Explore Projects</span>
-                <ArrowDownRight className="w-4 h-4" />
+                Explore projects
+                <ArrowDownRight className="h-4 w-4 transition group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
               </a>
 
               <a
-                href="#about"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-charcoal-850/90 text-warmWhite border border-white/15 font-medium text-sm hover:bg-white/10 hover:border-white/25 transition-all backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-aqua-400"
+                href="/Suryakanta_Bala_Resume_Final.pdf"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-[#1c2833]/15 bg-white/50 px-4 py-2.5 text-[10px] font-semibold text-[#1a2530] backdrop-blur-md transition hover:bg-white/70 sm:px-5 sm:py-3 sm:text-[11px] dark:border-white/15 dark:bg-black/15 dark:text-white"
               >
-                <span>About Me</span>
-                <Compass className="w-4 h-4 text-mutedWhite" />
+                <FileText className="h-4 w-4" />
+                View resume
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </a>
+
+              <a
+                href={"https://github.com/" + portfolioConfig.personal.githubUsername}
+                target="_blank"
+                rel="noreferrer"
+                className="hidden items-center gap-2 rounded-full border border-[#1c2833]/15 bg-white/35 px-5 py-3 text-[11px] font-semibold text-[#1a2530] backdrop-blur-md transition hover:bg-white/55 sm:inline-flex dark:border-white/15 dark:bg-black/15 dark:text-white"
+              >
+                <Github className="h-4 w-4" /> GitHub
               </a>
             </div>
 
-            {/* Micro Metadata tags */}
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-4 text-xs font-mono text-mutedWhite border-t border-white/10 w-full">
-              <div className="flex items-center gap-1.5">
-                <span className="text-cyan-400">❖</span>
-                <span>{portfolioConfig.personal.university}</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <span className="text-violet-400">❖</span>
-                <span>{portfolioConfig.personal.degree}</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <span className="text-emerald-400">●</span>
-                <span>{portfolioConfig.personal.status}</span>
-              </div>
+            <div className="mt-6 hidden max-w-xl grid-cols-3 gap-2.5 sm:grid">
+              {socialLinks.map(({ label, sublabel, href, icon: Icon }, index) => (
+                <motion.a
+                  key={label}
+                  href={href}
+                  target={href.startsWith("http") ? "_blank" : undefined}
+                  rel={href.startsWith("http") ? "noreferrer" : undefined}
+                  initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.55, delay: 0.28 + index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                  whileHover={reduceMotion ? undefined : { y: -5, scale: 1.02 }}
+                  className="group rounded-[1.1rem] border border-white/45 bg-white/34 p-3 backdrop-blur-md transition-colors hover:bg-white/52 dark:border-white/10 dark:bg-black/15 dark:hover:bg-black/25"
+                >
+                  <div className="flex items-center justify-between">
+                    <Icon className="h-4 w-4 text-[#1f2b36] dark:text-white/80" />
+                    <ArrowUpRight className="h-3.5 w-3.5 text-[#1f2b36]/45 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 dark:text-white/35" />
+                  </div>
+                  <p className="mt-3 text-[10px] font-semibold text-[#1e2933] dark:text-white/85">{label}</p>
+                  <p className="mt-1 font-mono text-[7px] uppercase tracking-[0.1em] text-[#344555]/50 dark:text-white/40">{sublabel}</p>
+                </motion.a>
+              ))}
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right Column: Original 3D Floating Geometry Composition */}
-          <div className="lg:col-span-5 flex items-center justify-center relative min-h-[360px] sm:min-h-[440px] select-none">
-            {/* Ambient Core Glow */}
-            <div
-              className="absolute w-64 h-64 bg-cyan-500/20 rounded-full blur-3xl pointer-events-none"
-              aria-hidden="true"
+          <motion.div
+            style={{ y: portraitY, rotate: portraitRotate }}
+            className="absolute bottom-[7%] right-[4%] z-40 h-[48%] w-[40%] min-w-[148px] overflow-hidden rounded-[1.6rem] border border-white/60 bg-white/20 shadow-[0_34px_80px_-36px_rgba(31,43,55,0.45)] sm:h-[64%] sm:w-[35%] sm:min-w-[300px] sm:rounded-[2rem]"
+          >
+            <Image
+              src="/surya-portrait.jpg"
+              alt="Portrait of Suryakanta Bala"
+              fill
+              priority
+              unoptimized
+              sizes="(min-width: 1024px) 35vw, (min-width: 640px) 38vw, 42vw"
+              className="object-cover object-center"
             />
-
-            {/* Container with dynamic tilt transform */}
-            <div
-              className="relative w-72 h-72 sm:w-88 sm:h-88 flex items-center justify-center transition-transform duration-200 ease-out"
-              style={{ transform: diamondTransform }}
-            >
-              {/* Layer 1: Orbital Elliptical Gyro Ring */}
-              <div
-                className={`absolute inset-0 flex items-center justify-center ${
-                  reduceMotion ? "" : "animate-spin-slow"
-                }`}
-                style={{ transform: ringTransform }}
-              >
-                <svg
-                  viewBox="0 0 320 320"
-                  className="w-full h-full drop-shadow-[0_0_15px_rgba(6,182,212,0.35)]"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <ellipse
-                    cx="160"
-                    cy="160"
-                    rx="140"
-                    ry="60"
-                    stroke="url(#ringGrad)"
-                    strokeWidth="2.5"
-                    strokeDasharray="6 8"
-                  />
-                  {/* Orbiting celestial bead */}
-                  <circle cx="300" cy="160" r="5" fill="#38e1ff" filter="url(#glow)" />
-                  <circle cx="20" cy="160" r="4" fill="#a855f7" />
-                  <defs>
-                    <linearGradient id="ringGrad" x1="20" y1="160" x2="300" y2="160" gradientUnits="userSpaceOnUse">
-                      <stop stopColor="#06b6d4" stopOpacity="0.8" />
-                      <stop offset="0.5" stopColor="#a855f7" stopOpacity="0.6" />
-                      <stop offset="1" stopColor="#06b6d4" stopOpacity="0.2" />
-                    </linearGradient>
-                    <filter id="glow" x="290" y="150" width="20" height="20" filterUnits="userSpaceOnUse">
-                      <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor="#38e1ff" />
-                    </filter>
-                  </defs>
-                </svg>
-              </div>
-
-              {/* Layer 2: Main Faceted Polyhedral Diamond (Central SVG Artwork) */}
-              <div
-                className={`relative w-48 h-48 sm:w-56 sm:h-56 z-20 ${
-                  reduceMotion ? "" : "animate-float-slow"
-                }`}
-              >
-                <svg
-                  viewBox="0 0 200 200"
-                  className="w-full h-full drop-shadow-[0_12px_32px_rgba(0,0,0,0.6)]"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <defs>
-                    {/* Gradients for multifaceted dimensional polyhedron */}
-                    <linearGradient id="facetTopLeft" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#38e1ff" stopOpacity="0.95" />
-                      <stop offset="100%" stopColor="#0891b2" stopOpacity="0.7" />
-                    </linearGradient>
-
-                    <linearGradient id="facetTopRight" x1="100%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="#a855f7" stopOpacity="0.95" />
-                      <stop offset="100%" stopColor="#7c3aed" stopOpacity="0.75" />
-                    </linearGradient>
-
-                    <linearGradient id="facetBottomLeft" x1="0%" y1="100%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#0e7490" stopOpacity="0.85" />
-                      <stop offset="100%" stopColor="#155e75" stopOpacity="0.95" />
-                    </linearGradient>
-
-                    <linearGradient id="facetBottomRight" x1="100%" y1="100%" x2="0%" y2="0%">
-                      <stop offset="0%" stopColor="#6b21a8" stopOpacity="0.85" />
-                      <stop offset="100%" stopColor="#3b0764" stopOpacity="0.95" />
-                    </linearGradient>
-
-                    <linearGradient id="facetCore" x1="50%" y1="0%" x2="50%" y2="100%">
-                      <stop offset="0%" stopColor="#ffffff" stopOpacity="0.9" />
-                      <stop offset="50%" stopColor="#38e1ff" stopOpacity="0.8" />
-                      <stop offset="100%" stopColor="#a855f7" stopOpacity="0.8" />
-                    </linearGradient>
-
-                    <filter id="diamondGlow" x="-20%" y="-20%" width="140%" height="140%">
-                      <feGaussianBlur stdDeviation="8" result="blur" />
-                      <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                    </filter>
-                  </defs>
-
-                  {/* Backdrop glowing silhouette */}
-                  <polygon
-                    points="100,15 185,100 100,185 15,100"
-                    fill="url(#facetCore)"
-                    opacity="0.15"
-                    filter="url(#diamondGlow)"
-                  />
-
-                  {/* Top Crown Facet */}
-                  <polygon
-                    points="100,20 145,75 100,100 55,75"
-                    fill="url(#facetCore)"
-                    stroke="#ffffff"
-                    strokeWidth="1"
-                    strokeOpacity="0.6"
-                  />
-
-                  {/* Top-Left Facet */}
-                  <polygon
-                    points="100,20 55,75 20,100"
-                    fill="url(#facetTopLeft)"
-                    stroke="#38e1ff"
-                    strokeWidth="1"
-                    strokeOpacity="0.4"
-                  />
-
-                  {/* Top-Right Facet */}
-                  <polygon
-                    points="100,20 145,75 180,100"
-                    fill="url(#facetTopRight)"
-                    stroke="#c084fc"
-                    strokeWidth="1"
-                    strokeOpacity="0.4"
-                  />
-
-                  {/* Bottom-Left Facet */}
-                  <polygon
-                    points="55,75 100,100 100,180 20,100"
-                    fill="url(#facetBottomLeft)"
-                    stroke="#06b6d4"
-                    strokeWidth="1"
-                    strokeOpacity="0.5"
-                  />
-
-                  {/* Bottom-Right Facet */}
-                  <polygon
-                    points="145,75 100,100 100,180 180,100"
-                    fill="url(#facetBottomRight)"
-                    stroke="#9333ea"
-                    strokeWidth="1"
-                    strokeOpacity="0.5"
-                  />
-
-                  {/* Specular Edge Highlights */}
-                  <line x1="100" y1="20" x2="100" y2="180" stroke="#ffffff" strokeWidth="1.5" strokeOpacity="0.5" />
-                  <line x1="20" y1="100" x2="180" y2="100" stroke="#ffffff" strokeWidth="1" strokeOpacity="0.4" />
-                </svg>
-              </div>
-
-              {/* Layer 3: Supporting Floating Geometric Shard 1 (Top Right) */}
-              <div
-                className={`absolute -top-3 -right-2 w-14 h-14 z-30 ${
-                  reduceMotion ? "" : "animate-float-reverse"
-                }`}
-                style={{ transform: secondaryShapeTransform }}
-              >
-                <div className="w-full h-full rounded-2xl bg-gradient-to-tr from-violet-600/60 to-violet-400/20 border border-violet-400/40 backdrop-blur-md rotate-12 shadow-lg shadow-violet-900/30 flex items-center justify-center">
-                  <Sparkles className="w-5 h-5 text-violet-300" />
-                </div>
-              </div>
-
-              {/* Layer 4: Supporting Floating Geometric Shard 2 (Bottom Left) */}
-              <div
-                className={`absolute -bottom-4 -left-4 w-16 h-10 z-10 ${
-                  reduceMotion ? "" : "animate-float-medium"
-                }`}
-              >
-                <div className="w-full h-full rounded-xl bg-gradient-to-br from-cyan-900/60 to-charcoal-900/80 border border-cyan-500/30 backdrop-blur-md -rotate-6 shadow-lg shadow-black/40 flex items-center justify-center">
-                  <div className="w-6 h-1 rounded-full bg-cyan-400/60" />
-                </div>
-              </div>
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#182029]/74 via-[#182029]/12 to-transparent px-4 pb-4 pt-14 text-white sm:px-5 sm:pb-5 sm:pt-16">
+              <p className="font-mono text-[7px] uppercase tracking-[0.18em] text-white/65 sm:text-[8px]">Currently</p>
+              <p className="mt-1 text-[10px] font-medium sm:text-sm">B.Tech · DRIEMS University</p>
             </div>
+          </motion.div>
+
+          <div className="absolute bottom-0 left-0 right-0 z-30 flex items-center justify-between border-t border-black/10 px-5 py-3 font-mono text-[7px] uppercase tracking-[0.16em] text-[#25313d]/55 dark:border-white/10 dark:text-white/40 sm:px-7">
+            <span>Code · AI · Product engineering</span>
+            <span>Scroll to explore ↓</span>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

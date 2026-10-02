@@ -3,7 +3,7 @@ import { socialLinks } from "@/data/portfolio.config";
 export function Contact() {
   return (
     <section id="contact" className="contact-editorial">
-      <span className="eyebrow">05 / THE NEXT GOOD IDEA STARTS WITH A CONVERSATION</span>
+      <span className="eyebrow">06 / THE NEXT GOOD IDEA STARTS WITH A CONVERSATION</span>
       <h2>Let’s make<br /><em>something matter.</em></h2>
       <div className="contact-layout">
         <div className="contact-intro"><p>Have an idea, an opportunity, or just a hello?<br />I’d love to hear from you.</p><a href={`mailto:${socialLinks.email}`}>{socialLinks.email} <ArrowUpRight size={18} /></a><p className="contact-note">Prefer your own email app? Use the address above.</p></div>

@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { usePortfolioMotion } from "@/context/MotionContext";
-const links = ["About", "Journey", "Projects", "Skills", "Contact"];
+const links = ["About", "Journey", "Projects", "Skills", "Play", "Contact"];
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const { reduceMotion, toggleReduceMotion } = usePortfolioMotion();

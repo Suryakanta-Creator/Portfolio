@@ -1,28 +1,48 @@
 "use client";
 
-import { Braces, Code2, Database, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
+import { Braces, Code2, Database, Sparkles, GitBranch, Cpu, Layers3, TerminalSquare } from "lucide-react";
 import { usePortfolioMotion } from "@/context/MotionContext";
 
-const groups = [
-  { name: "Languages", items: "Java / TypeScript / JavaScript / SQL", Icon: Braces },
-  { name: "Interfaces", items: "React / Next.js / HTML / CSS / Tailwind", Icon: Code2 },
-  { name: "Data & tools", items: "Supabase / Git / GitHub / REST APIs", Icon: Database },
-  { name: "Exploring", items: "AI integrations / Motion / Accessible interfaces", Icon: Sparkles },
+const tools = [
+  { label: "Java", mark: "J", Icon: Braces },
+  { label: "TypeScript", mark: "TS", Icon: Code2 },
+  { label: "React", mark: "R", Icon: Layers3 },
+  { label: "Next.js", mark: "N", Icon: TerminalSquare },
+  { label: "Supabase", mark: "S", Icon: Database },
+  { label: "GitHub", mark: "G", Icon: GitBranch },
+  { label: "AI / Gemini", mark: "AI", Icon: Sparkles },
+  { label: "APIs", mark: "API", Icon: Cpu },
 ];
 
 export function Skills() {
   const { reduceMotion } = usePortfolioMotion();
+
   return (
-    <section id="skills" className="skills-editorial">
-      <span className="eyebrow">04 / MY TOOLBOX</span>
-      <h2>The tools change.<br />The <em>curiosity</em> stays.</h2>
-      <div>
-        {groups.map((g, i) => (
-          <motion.article key={g.name} initial={reduceMotion ? false : { opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.45 }} transition={{ duration: 0.45, delay: i * 0.06 }}>
-            <span className="eyebrow">0{i + 1}</span>
-            <span className="tool-icon" aria-hidden="true"><g.Icon size={24} strokeWidth={1.5} /></span>
-            <div className="tool-copy"><h3>{g.name}</h3><p>{g.items}</p></div>
+    <section id="skills" className="skills-editorial toolbox-stage">
+      <div className="toolbox-heading">
+        <span className="eyebrow">04 / MY TOOLBOX</span>
+        <h2>Things I use to turn<br /><em>ideas into interfaces.</em></h2>
+        <p>Languages, frameworks, data tools and AI—kept close, mixed often.</p>
+      </div>
+
+      <div className="tool-orbit" aria-label="Technology toolbox">
+        <div className="tool-orbit-core" aria-hidden="true">
+          <span>BUILD</span><strong>+</strong><span>LEARN</span>
+        </div>
+        {tools.map((tool, index) => (
+          <motion.article
+            className="tool-tile"
+            key={tool.label}
+            initial={reduceMotion ? false : { opacity: 0, scale: .72, y: 32, rotate: index % 2 ? 5 : -5 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0, rotate: 0 }}
+            viewport={{ once: true, amount: .35 }}
+            transition={{ duration: .58, delay: index * .055, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={reduceMotion ? undefined : { y: -8, scale: 1.035, rotate: index % 2 ? 1 : -1 }}
+          >
+            <span className="tool-glyph" aria-hidden="true"><tool.Icon size={23} strokeWidth={1.45} /></span>
+            <strong>{tool.mark}</strong>
+            <span>{tool.label}</span>
           </motion.article>
         ))}
       </div>

@@ -6,6 +6,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/hero/Hero";
 import { ProjectTunnel } from "@/components/hero/ProjectTunnel";
 import { KineticMarquee, ScrollStory, WhatIDo } from "@/components/sections/ScrollStory";
+import { ScrollGallery } from "@/components/sections/ScrollGallery";
 import { About } from "@/components/about/About";
 import { Journey } from "@/components/journey/Journey";
 import { Projects } from "@/components/projects/Projects";
@@ -30,6 +31,7 @@ export default function Home() {
         <Hero />
         <KineticMarquee />
         <ScrollStory />
+        <ScrollGallery />
         <ProjectTunnel />
         <WhatIDo />
         <About />

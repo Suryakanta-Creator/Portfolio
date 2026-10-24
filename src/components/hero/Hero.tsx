@@ -26,7 +26,7 @@ export function Hero() {
   return (
     <section ref={ref} id="hero" className="lenis-inspired-hero" aria-label="Surya creative developer introduction">
       <div className="lenis-hero-grid" aria-hidden="true" />
-      <div className="lenis-art-field" aria-hidden="true">
+      <div className="lenis-art-field">
         <SculptureHero
           src="/portrait.png"
           darkSrc="/portrait.png"

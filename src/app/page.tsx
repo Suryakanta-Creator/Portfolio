@@ -2,10 +2,10 @@ import React from "react";
 import { MemoryGarden } from "@/components/game/MemoryGarden";
 import { SectionMotion } from "@/components/effects/SectionMotion";
 import { CursorEffect } from "@/components/effects/CursorEffect";
-import { SiteAtmosphere } from "@/components/effects/SiteAtmosphere";
 import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/hero/Hero";
 import { ProjectTunnel } from "@/components/hero/ProjectTunnel";
+import { KineticMarquee, ScrollStory, WhatIDo } from "@/components/sections/ScrollStory";
 import { About } from "@/components/about/About";
 import { Journey } from "@/components/journey/Journey";
 import { Projects } from "@/components/projects/Projects";
@@ -23,16 +23,18 @@ export default function Home() {
       {/* Fixed Sticky Header Navigation */}
       <Navbar />
       <CursorEffect />
-      <SiteAtmosphere />
       <SectionMotion />
 
       {/* Main Content Sections */}
       <main className="flex-1" id="main-content">
         <Hero />
+        <KineticMarquee />
+        <ScrollStory />
         <ProjectTunnel />
+        <WhatIDo />
         <About />
-        <Journey />
         <Projects />
+        <Journey />
         <Skills />
         <MemoryGarden />
         <Contact />

@@ -1,0 +1,77 @@
+/* Motion direction: the scrolling feel is borrowed from Lenis, not its palette. */
+html,
+html.lenis,
+html.lenis body {
+  scroll-behavior: auto !important;
+}
+
+html {
+  scroll-padding-top: 82px;
+}
+
+#hero .sh-root {
+  background-image: radial-gradient(circle at 54% 35%, rgba(51, 130, 116, 0.12), transparent 46%);
+}
+
+#hero .sh-backdrop {
+  letter-spacing: -0.095em;
+  font-weight: 800;
+  opacity: 0.75;
+}
+
+#hero .sh-content {
+  padding-bottom: clamp(66px, 7vh, 96px);
+}
+
+#hero .sh-h1 {
+  text-shadow: 0 12px 68px rgba(0, 0, 0, 0.35);
+}
+
+#hero .sh-eyebrow {
+  color: #a4dcca;
+}
+
+#hero .sh-ctas .sh-btn {
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.2);
+}
+
+#explore {
+  contain: paint;
+}
+
+@media (max-width: 767px) {
+  #hero .sh-content {
+    padding-bottom: 118px;
+  }
+  #hero .sh-h1 {
+    font-size: clamp(32px, 8.8vw, 57px);
+  }
+  #hero .sh-body {
+    max-width: 42ch;
+    font-size: 14px;
+  }
+  #hero .sh-eyebrow {
+    max-width: 85vw;
+    font-size: 9px;
+    letter-spacing: 0.07em;
+  }
+  #hero .sh-credit {
+    left: auto;
+    right: 16px;
+    bottom: 7px;
+    transform: none;
+    font-size: 8px;
+  }
+  #hero .sh-ctas {
+    gap: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html, html.lenis, html.lenis body {
+    scroll-behavior: auto !important;
+  }
+  #explore * {
+    scroll-behavior: auto;
+  }
+}

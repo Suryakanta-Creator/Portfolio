@@ -5,6 +5,7 @@ import { CursorEffect } from "@/components/effects/CursorEffect";
 import { SiteAtmosphere } from "@/components/effects/SiteAtmosphere";
 import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/hero/Hero";
+import { ProjectTunnel } from "@/components/hero/ProjectTunnel";
 import { About } from "@/components/about/About";
 import { Journey } from "@/components/journey/Journey";
 import { Projects } from "@/components/projects/Projects";
@@ -28,6 +29,7 @@ export default function Home() {
       {/* Main Content Sections */}
       <main className="flex-1" id="main-content">
         <Hero />
+        <ProjectTunnel />
         <About />
         <Journey />
         <Projects />

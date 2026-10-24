@@ -1,7 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import "lenis/dist/lenis.css";
+import "./immersive.css";
 import { MotionProvider } from "@/context/MotionContext";
+import { SmoothScroll } from "@/components/effects/SmoothScroll";
 import { portfolioConfig } from "@/data/portfolio.config";
 
 const inter = localFont({
@@ -66,10 +69,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} dark scroll-smooth`}
+      className={`${inter.variable} ${jetbrainsMono.variable} dark`}
     >
       <body className="bg-charcoal-950 text-warmWhite font-sans antialiased min-h-screen flex flex-col selection:bg-aqua-400/20 selection:text-white">
-        <MotionProvider>{children}</MotionProvider>
+        <MotionProvider><SmoothScroll />{children}</MotionProvider>
       </body>
     </html>
   );

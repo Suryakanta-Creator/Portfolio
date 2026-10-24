@@ -381,3 +381,23 @@ a:focus-visible,button:focus-visible { outline:2px solid var(--pulse); outline-o
 }
 html[data-reduce-motion="true"] .kinetic-marquee-track,
 html[data-reduce-motion="true"] .lenis-title-star { animation:none !important; }
+
+/* Small high-contrast action in the fixed rail */
+.editorial-nav-contact {
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  min-height: 38px; padding: 0 14px; border-radius: 999px;
+  color: #10251c; background: var(--pulse);
+  font: 700 9px var(--font-mono),monospace; letter-spacing: .1em;
+  transition: background .2s, transform .2s;
+}
+.editorial-nav-contact:hover,.editorial-nav-contact:focus-visible {
+  color: #10251c; background: #f0fff5; transform: translateY(-1px);
+}
+@media(max-width:900px) {
+  .desktop-links { gap: 14px; }
+  .desktop-links a { font-size: 9px; }
+  .editorial-nav-contact { padding: 0 12px; }
+}
+@media(max-width:700px) {
+  .editorial-nav-contact { display:none; }
+}

@@ -1,77 +1,383 @@
-/* Motion direction: the scrolling feel is borrowed from Lenis, not its palette. */
-html,
-html.lenis,
-html.lenis body {
-  scroll-behavior: auto !important;
+/* SURYA / IN MOTION — Lenis-inspired art direction, not a replica.
+   Original graphite / mineral green palette; all text stays selectable and accessible. */
+:root {
+  --ink: #0a1113;
+  --ink-soft: #12201d;
+  --paper: #e6eee8;
+  --fog: #aac3b6;
+  --pulse: #a3e4c3;
 }
 
-html {
-  scroll-padding-top: 82px;
-}
+html, html.lenis, html.lenis body { scroll-behavior: auto !important; }
+html { scroll-padding-top: 80px; }
+body { overflow-x: clip; }
+::selection { color: #0a1613; background: #a3e4c3; }
+.lenis-section-index { font: 500 10px/1.5 var(--font-mono),monospace; letter-spacing: .16em; text-transform: uppercase; }
+#explore { contain: paint; }
 
-#hero .sh-root {
-  background-image: radial-gradient(circle at 54% 35%, rgba(51, 130, 116, 0.12), transparent 46%);
+/* Navigation: editorial rail rather than a conventional glass navbar. */
+.future-nav {
+  height: 76px;
+  padding: 0 clamp(18px, 3.3vw, 62px);
+  background: rgba(9, 17, 19, .88);
+  border-bottom: 1px solid rgba(226, 247, 235, .12);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  color: #f4f8f3;
 }
+.wordmark {
+  font: 800 31px/.9 var(--font-inter),Arial,sans-serif;
+  letter-spacing: -.12em;
+  font-style: normal;
+  text-transform: uppercase;
+}
+.wordmark > span { color: var(--pulse); font-size: 17px; letter-spacing: 0; }
+.desktop-links { gap: clamp(14px, 2.2vw, 38px); }
+.desktop-links a {
+  font: 600 10px var(--font-mono),monospace;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: #f2f8f4b8;
+}
+.desktop-links a:hover,.desktop-links a:focus-visible { color: #f6fff9; }
+.desktop-links a::after { background: var(--pulse); }
+.motion-control {
+  color: #e0eee6;
+  border-color: rgba(223, 250, 235, .25);
+  font-size: 10px;
+}
+.motion-control:hover,.motion-control:focus-visible { background: #a3e4c3; color: #0e1916; }
+.mobile-links { background: #0d1b1a; border-color: #a3e4c344; }
+.mobile-links a { color: #eaf4ed; }
 
-#hero .sh-backdrop {
-  letter-spacing: -0.095em;
-  font-weight: 800;
-  opacity: 0.75;
+/* Oversized title, architectural grid, interactive material floating beneath the typography. */
+.lenis-inspired-hero {
+  position: relative;
+  height: 100svh;
+  min-height: 700px;
+  color: #eef3ee;
+  background: var(--ink);
+  overflow: hidden;
+  isolation: isolate;
 }
+.lenis-hero-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: .36;
+  background:
+    linear-gradient(to right, transparent calc(50% - .5px), #a3e4c31c 50%, transparent calc(50% + .5px)),
+    repeating-linear-gradient(90deg, transparent 0, transparent calc(25% - 1px), #a3e4c30b calc(25% - 1px), #a3e4c30b 25%),
+    radial-gradient(ellipse 62% 50% at 59% 47%, #21493e66, transparent);
+}
+.lenis-art-field {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: .82;
+}
+.lenis-art-field .sh-root {
+  height: 100%;
+  background: transparent !important;
+  background-image: none !important;
+  contain: layout paint;
+}
+.lenis-art-field .sh-content {
+  visibility: hidden; /* Preserve its geometry for GPU image placement. */
+  padding: 0;
+  margin: 0;
+  height: 48px;
+  min-height: 48px;
+  grid-template-columns: 1fr;
+}
+.lenis-art-field .sh-spacer { min-height: 0; }
+.lenis-art-field .sh-backdrop,
+.lenis-art-field .sh-nav,
+.lenis-art-field .sh-hint { display: none; }
+.lenis-art-field .sh-credit {
+  position: absolute; bottom: 7px; right: 12px;
+  z-index: 6;
+  font-size: 9px;
+  opacity: .55;
+  color: #e9f7ed;
+}
+.lenis-hero-top {
+  position: absolute;
+  top: 109px;
+  left: clamp(20px,3.5vw,64px);
+  right: clamp(20px,3.5vw,64px);
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  font: 500 10px var(--font-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: .11em;
+  color: #e4f1e6bb;
+  pointer-events: none;
+}
+.lenis-hero-top > span:first-child { display: flex; align-items: center; gap: 12px; }
+.lenis-separator { padding: 0 8px; color: var(--pulse); }
+.lenis-live-dot { display: block; width: 7px; height: 7px; background: var(--pulse); border-radius: 50%; box-shadow: 0 0 0 5px #a3e4c316; }
+.lenis-hero-center {
+  position: absolute;
+  z-index: 3;
+  left: 0; right: 0;
+  top: clamp(180px, 23vh, 260px);
+  pointer-events: none;
+}
+.lenis-hero-kicker {
+  display: block;
+  padding-left: clamp(20px,3.5vw,64px);
+  margin-bottom: clamp(22px,4vh,50px);
+  font: 600 10px var(--font-mono),monospace;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--pulse);
+}
+.lenis-hero-title {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-inter),Arial,sans-serif;
+  font-weight: 850;
+  letter-spacing: -.103em;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+.lenis-hero-line { display: block; position: relative; width: max-content; line-height: .8; will-change: transform; }
+.lenis-solid { margin-left: 2vw; font-size: clamp(112px, 25vw, 480px); color: #f1f6ef; text-shadow: 0 15px 65px #0002; }
+.lenis-outline {
+  align-self: flex-end;
+  padding-right: 3.5vw;
+  margin-top: clamp(5px, 1.5vh, 25px);
+  font-size: clamp(68px, 12.85vw, 245px);
+  letter-spacing: -.095em;
+  color: #ecf4ee;
+  -webkit-text-stroke: 1px #ecf4ee;
+  text-shadow: 0 12px 42px rgba(0,0,0,.25);
+}
+.lenis-title-star {
+  position: absolute;
+  right: -.23em;
+  top: -.08em;
+  color: var(--pulse);
+  font-size: .23em;
+  letter-spacing: 0;
+  text-shadow: none;
+  animation: lenis-asterisk-turn 25s linear infinite;
+}
+@keyframes lenis-asterisk-turn { to { transform: rotate(360deg); } }
+.lenis-hero-bottom {
+  position: absolute; z-index: 5;
+  left: clamp(20px,3.5vw,64px);
+  right: clamp(20px,3.5vw,64px);
+  bottom: clamp(55px, 8vh, 95px);
+  display: flex; align-items: end; justify-content: space-between; gap: 36px;
+  pointer-events: none;
+}
+.lenis-hero-intro { max-width: 440px; }
+.lenis-mini-label {
+  font: 500 10px/1.6 var(--font-mono),monospace;
+  color: var(--pulse);
+  letter-spacing: .15em;
+}
+.lenis-hero-intro p {
+  margin: 14px 0 0;
+  max-width: 23ch;
+  font: 500 clamp(21px, 2.2vw, 33px)/1.15 var(--font-inter),sans-serif;
+  letter-spacing: -.05em;
+  color: #eaf2ec;
+}
+.lenis-hero-intro em { color: var(--pulse); font: italic 1.12em Georgia,serif; }
+.lenis-hero-actions { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 12px; pointer-events: auto; }
+.lenis-round-cta {
+  width: 74px; height: 74px; flex: 0 0 auto;
+  display: grid; place-items: center; border-radius: 50%;
+  border: 1px solid #a3e4c3;
+  color: #0a1916; background: var(--pulse);
+  transition: transform .5s cubic-bezier(.16,1,.3,1), background .3s;
+}
+.lenis-round-cta:hover { transform: rotate(-38deg) scale(1.04); background: #eaf7ef; }
+.lenis-hero-action {
+  min-height: 43px;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 0 16px; border-radius: 999px;
+  color: #e7f4eb; border: 1px solid #e1f2e540; background: #0c1b1ac2;
+  font: 500 11px var(--font-mono),monospace;
+  text-decoration: none;
+  transition: border-color .3s, background .3s, transform .3s;
+}
+.lenis-hero-action:hover { background: #203c32; border-color: var(--pulse); transform: translateY(-3px); }
+.lenis-edge-scroll {
+  position: absolute; z-index: 5; right: clamp(20px,3.5vw,64px); bottom: 22px;
+  display: inline-flex; align-items: center; gap: 12px;
+  color: #d2e9da; font: 500 9px var(--font-mono),monospace;
+  letter-spacing: .15em; text-decoration: none;
+}
+.lenis-edge-scroll:hover { color: var(--pulse); }
 
-#hero .sh-content {
-  padding-bottom: clamp(66px, 7vh, 96px);
+/* Quiet-but-bold moving belt between hero and the scroll story. */
+.kinetic-marquee { position: relative; overflow: hidden; z-index: 2; height: clamp(106px, 13vw, 190px); background: var(--pulse); color: #10201b; display:flex; align-items:center; }
+.kinetic-marquee-track {
+  display: flex; align-items:center; width: max-content;
+  white-space:nowrap; animation: kinetic-slide 48s linear infinite;
+  will-change: transform;
 }
+.kinetic-marquee-track span {
+  flex:0 0 auto;
+  display:inline-flex; align-items:center; gap: clamp(30px,4vw,80px);
+  padding-right: clamp(30px,4vw,80px);
+  font: 800 clamp(52px,8.3vw,145px)/1 var(--font-inter),sans-serif;
+  letter-spacing:-.095em;
+}
+.kinetic-marquee-track b { font: 400 .5em Georgia,serif; }
+@keyframes kinetic-slide { to { transform: translateX(-50%); } }
+.kinetic-marquee:hover .kinetic-marquee-track { animation-play-state: paused; }
+.kinetic-paused .kinetic-marquee-track { animation: none !important; }
 
-#hero .sh-h1 {
-  text-shadow: 0 12px 68px rgba(0, 0, 0, 0.35);
+/* Scroll-choreographed typographic manifesto and high-contrast chapter change. */
+.lenis-story {
+  position: relative; height: 245svh;
+  background: var(--paper); color: #101e1a;
 }
+.lenis-story-sticky {
+  position: sticky; top: 0; height: 100svh; min-height: 590px;
+  isolation: isolate;
+  overflow:hidden;
+  display:flex; flex-direction: column;
+  justify-content:space-between;
+  padding: clamp(105px, 12vh, 145px) clamp(20px,3.5vw,64px) clamp(38px,6vh,72px);
+}
+.lenis-story-ambient { position:absolute; inset:0; overflow:hidden; z-index:-1; pointer-events:none; }
+.lenis-story-ellipse {
+  position:absolute; width: min(68vw,1000px); height: min(68vw,1000px);
+  border-radius:50%; top: 35%; left:48%; transform:translate(-50%,-50%);
+  background: radial-gradient(circle,#a7d3b94d 0,#b4d6c21b 46%, transparent 69%);
+  border:1px solid #3a685215;
+}
+.lenis-story-heading-top { display:flex; justify-content:space-between; gap:24px; align-items:center; font: 500 10px var(--font-mono),monospace; letter-spacing:.13em; text-transform:uppercase; }
+.lenis-story-heading-top span:last-child { opacity:.55; }
+.lenis-story-main { display:flex; flex:1; align-items:center; width:100%; justify-content:center; }
+.lenis-story-headline { font: 830 clamp(60px,11.4vw,216px)/.85 var(--font-inter),sans-serif; letter-spacing:-.092em; text-transform:uppercase; margin:0; text-align:center; width:100%; }
+.lenis-story-line { position:relative; display:block; white-space:nowrap; }
+.lenis-story-line-secondary { color:#386852; }
+.lenis-story-line i { font-family:Georgia,serif; font-weight:400; letter-spacing:-.08em; }
+.lenis-asterisk { font-size:.32em; color:#3b735b; vertical-align:top; margin-left:.06em; }
+.lenis-story-foot { display:flex; align-items:end; justify-content:space-between; gap:28px; }
+.lenis-story-foot p { max-width:380px; font: 400 clamp(17px,2vw,25px)/1.28 var(--font-inter),sans-serif; letter-spacing:-.045em; }
+.lenis-story-foot p strong { color:#356f56; font-weight:600; }
+.lenis-text-link,.lenis-end-link {
+  display: inline-flex; align-items: center; gap: 24px;
+  border-bottom:1px solid currentColor; padding-bottom:12px;
+  text-decoration:none; color:inherit;
+  font: 600 11px var(--font-mono),monospace; letter-spacing:.1em; white-space:nowrap;
+}
+.lenis-text-link:hover,.lenis-end-link:hover { color:#2a6b50; }
+.lenis-story-progress { position:absolute; left:0; right:0; bottom:0; height:4px; background:#becdc3; }
+.lenis-story-progress > div { height:100%; width:100%; transform-origin:left; background:#306b54; }
 
-#hero .sh-eyebrow {
-  color: #a4dcca;
+/* Capabilities are designed like a type-led editorial index, not generic rounded feature cards. */
+.lenis-capabilities {
+  position:relative; background:#e8eee7; color:#13241c;
+  padding: clamp(95px,12vw,180px) clamp(20px,5vw,96px) clamp(80px,10vw,150px);
 }
+.lenis-cap-intro { display:grid; grid-template-columns:minmax(0,1.65fr) minmax(0,.55fr); gap:48px; align-items:end; padding-bottom:clamp(62px,8vw,130px); }
+.lenis-cap-intro h2 { margin:22px 0 0; font: 830 clamp(60px,9vw,166px)/.84 var(--font-inter),sans-serif; letter-spacing:-.09em; }
+.lenis-cap-intro h2 em { font:italic .92em Georgia,serif; letter-spacing:-.07em; color:#386b52; }
+.lenis-cap-intro p { max-width:360px; font: 400 clamp(15px,1.38vw,20px)/1.55 var(--font-inter),sans-serif; letter-spacing:-.02em; }
+.lenis-cap-list { border-top: 1px solid #182c225b; }
+.lenis-cap-row {
+  min-height: clamp(210px,23vw,300px);
+  display: grid; grid-template-columns: .13fr 1.55fr .72fr 65px;
+  align-items:center; gap: clamp(16px,3vw,60px);
+  padding:24px 0; border-bottom:1px solid #182c225b;
+  transition: padding .4s cubic-bezier(.16,1,.3,1), background .3s;
+}
+.lenis-cap-row:hover { padding-left: 18px; padding-right: 18px; background:#b3d7bf33; }
+.lenis-cap-number { align-self:start; padding-top:26px; font:600 12px var(--font-mono),monospace; }
+.lenis-cap-copy h3 { margin:0; font: 780 clamp(33px,5.7vw,104px)/.9 var(--font-inter),sans-serif; letter-spacing:-.075em; }
+.lenis-cap-caption { display:block; margin-top:20px; font:italic clamp(17px,1.5vw,24px) Georgia,serif; color:#397353; }
+.lenis-cap-detail p { max-width:240px; font:400 15px/1.6 var(--font-inter),sans-serif; }
+.lenis-cap-detail span { display:block; margin-top:24px; font:600 9px var(--font-mono),monospace; letter-spacing:.13em; opacity:.6; }
+.lenis-cap-icon { width:58px; height:58px; display:grid; place-items:center; border:1px solid #13241c50; border-radius:50%; transition:transform .5s cubic-bezier(.16,1,.3,1),background .3s; }
+.lenis-cap-row:hover .lenis-cap-icon { background:#183c2a; color:#e5f9e8; transform:rotate(-35deg); }
+.lenis-end-link { margin-top:60px; float:right; }
 
-#hero .sh-ctas .sh-btn {
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.2);
-}
+/* Rest of the portfolio follows the same visual rhythm while preserving its content. */
+.about-editorial,.journey-editorial,.selected-work,.skills-editorial,.contact-editorial { scroll-margin-top:76px; }
+.about-editorial { border-top: 1px solid #cfe8d122; }
+.selected-work { border-top: 1px solid #2f5c4430; }
+.editorial-project { transition: transform .4s ease; }
+.project-cover-motion { transition: transform .8s cubic-bezier(.16,1,.3,1); }
+.editorial-project:hover .project-cover-motion { transform: scale(1.025); }
+a:focus-visible,button:focus-visible { outline:2px solid var(--pulse); outline-offset:5px; }
 
-#explore {
-  contain: paint;
+/* Responsive art direction — retain real scroll, readable copy, and functional CTAs. */
+@media (max-width:1024px) {
+  .lenis-hero-center { top:26vh; }
+  .lenis-hero-title .lenis-solid { font-size:26vw; }
+  .lenis-outline { font-size:12.8vw; }
+  .lenis-hero-actions { gap:8px; }
+  .lenis-round-cta { width:62px; height:62px; }
+  .lenis-cap-intro { grid-template-columns:1fr; gap:24px; }
+  .lenis-cap-intro p { max-width:590px; }
+  .lenis-cap-row { grid-template-columns:50px minmax(0,1.5fr) minmax(0,1fr) 54px; }
 }
-
-@media (max-width: 767px) {
-  #hero .sh-content {
-    padding-bottom: 118px;
-  }
-  #hero .sh-h1 {
-    font-size: clamp(32px, 8.8vw, 57px);
-  }
-  #hero .sh-body {
-    max-width: 42ch;
-    font-size: 14px;
-  }
-  #hero .sh-eyebrow {
-    max-width: 85vw;
-    font-size: 9px;
-    letter-spacing: 0.07em;
-  }
-  #hero .sh-credit {
-    left: auto;
-    right: 16px;
-    bottom: 7px;
-    transform: none;
-    font-size: 8px;
-  }
-  #hero .sh-ctas {
-    gap: 14px;
-  }
+@media (max-width:767px) {
+  .future-nav { height:68px; padding:0 20px; }
+  .mobile-links { top:68px; }
+  .lenis-inspired-hero { min-height:700px; }
+  .lenis-art-field { opacity:.6; }
+  .lenis-art-field .sh-credit { bottom:5px; right:8px; font-size:8px; }
+  .lenis-hero-top { top:96px; left:20px; right:20px; font-size:8px; }
+  .lenis-hero-top > span:last-child { display:none; }
+  .lenis-hero-center { top:clamp(190px,27vh,270px); }
+  .lenis-hero-kicker { padding-left:20px; font-size:8px; margin-bottom:25px; }
+  .lenis-hero-title .lenis-solid { font-size:26.4vw; margin-left:1vw; }
+  .lenis-outline { font-size:13vw; margin-top:22px; padding-right:4vw; }
+  .lenis-hero-bottom { flex-direction:column; align-items:flex-start; bottom:54px; left:20px; right:20px; gap:20px; }
+  .lenis-hero-intro p { font-size:clamp(21px,5vw,30px); max-width:280px; }
+  .lenis-mini-label { font-size:8px; }
+  .lenis-hero-actions { width:100%; justify-content:flex-start; }
+  .lenis-hero-action { padding:0 10px; min-height:38px; font-size:10px; }
+  .lenis-round-cta { width:48px; height:48px; }
+  .lenis-edge-scroll { bottom:13px; right:20px; font-size:8px; }
+  .kinetic-marquee { height:100px; }
+  .kinetic-marquee-track span { font-size:58px; gap:30px; padding-right:30px; }
+  .lenis-story { height:190svh; }
+  .lenis-story-sticky { padding:100px 20px 50px; min-height:600px; }
+  .lenis-story-heading-top { font-size:8px; }
+  .lenis-story-heading-top span:last-child { display:none; }
+  .lenis-story-headline { font-size:clamp(46px,10.8vw,90px); line-height:.94; letter-spacing:-.08em; }
+  .lenis-story-foot { flex-direction:column; align-items:flex-start; gap:22px; }
+  .lenis-story-foot p { font-size:18px; }
+  .lenis-text-link { font-size:10px; padding-bottom:9px; }
+  .lenis-capabilities { padding:90px 20px; }
+  .lenis-cap-intro { padding-bottom:62px; }
+  .lenis-cap-intro h2 { font-size:clamp(47px,10vw,88px); }
+  .lenis-cap-row { grid-template-columns: 45px 1fr 42px; gap:12px; min-height:190px; }
+  .lenis-cap-copy h3 { font-size:clamp(31px,7vw,58px); }
+  .lenis-cap-detail { grid-column:2/4; padding:0 0 14px; }
+  .lenis-cap-detail p { max-width:100%; font-size:13px; }
+  .lenis-cap-detail span { margin-top:12px; font-size:8px; }
+  .lenis-cap-icon { width:42px; height:42px; }
+  .lenis-cap-row:hover { padding-left:0; padding-right:0; }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  html, html.lenis, html.lenis body {
-    scroll-behavior: auto !important;
-  }
-  #explore * {
-    scroll-behavior: auto;
-  }
+@media (max-width:420px) {
+  .lenis-hero-center { top:29vh; }
+  .lenis-hero-kicker { font-size:7px; }
+  .lenis-hero-intro p { font-size:21px; }
+  .lenis-hero-action { font-size:9px; }
+  .lenis-story-headline { font-size:10.4vw; }
+  .lenis-cap-row { grid-template-columns: 35px 1fr 40px; }
+  .lenis-cap-copy h3 { font-size:8vw; }
 }
+@media (prefers-reduced-motion:reduce) {
+  .lenis-title-star, .kinetic-marquee-track { animation:none !important; }
+  .lenis-hero-line,.lenis-hero-center,.lenis-story-line { transform:none !important; }
+  .lenis-cap-row,.lenis-cap-icon,.lenis-round-cta { transition:none !important; }
+}
+html[data-reduce-motion="true"] .kinetic-marquee-track,
+html[data-reduce-motion="true"] .lenis-title-star { animation:none !important; }

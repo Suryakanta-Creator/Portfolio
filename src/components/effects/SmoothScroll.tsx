@@ -16,6 +16,8 @@ export function SmoothScroll() {
       wheelMultiplier: 0.95,
       smoothWheel: true,
       syncTouch: false,
+      allowNestedScroll: true,
+      respectReducedMotion: true,
     });
     return () => lenis.destroy();
   }, [reduceMotion]);
